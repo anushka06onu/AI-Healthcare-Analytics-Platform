@@ -1,128 +1,137 @@
-# 🏥 AI Healthcare Analytics Platform (Python & Streamlit)
+# 🏥 AI Healthcare Analytics Platform
 
-A premium, AI-powered healthcare analytics platform for disease prediction, explainable AI, comprehensive analytics, PDF report generation, and personalized health recommendations, powered by **scikit-learn** and **SHAP**.
+Welcome to my **AI Healthcare Analytics Platform**—a premium, clinical-grade decision support dashboard I built to execute disease diagnostics risk scoring, showcase Explainable AI (**SHAP** interpretability), analyze clinical cohort trends, and generate structured EMR (Electronic Medical Record) reports.
 
-![Platform](https://img.shields.io/badge/Platform-Python-blue)
-![UI](https://img.shields.io/badge/UI-Streamlit-orange)
-![ML](https://img.shields.io/badge/ML-scikit--learn-green)
-![Explainability](https://img.shields.io/badge/XAI-SHAP-cyan)
-![License](https://img.shields.io/badge/License-MIT-green)
+I developed this platform as a full-stack Python application using **Streamlit** for the clinical UI, **scikit-learn** and **XGBoost** for the predictive models, and **SHAP** for local and global model interpretability.
 
 ---
 
-## ✨ Key Modules & Features
+## 🌟 Core Modules I Developed
 
-### 📊 Dashboard Overview
-- Real-time overview of active diagnostics models with accuracies, AUC-ROC, and cohort size metrics.
-- Grouped bar charts comparing model metrics (Accuracy, AUC-ROC, F1-Score) using interactive Plotly visuals.
-- Pie charts displaying screening cohort positive pre-valence rates.
-- EMR Screening log detailing patient name, disease, calculated risk score, and severity classification history.
+### 📊 EMR Dashboard Overview
+- I built a glassmorphic dashboard showcasing real-time vital statistics for all 5 diagnostics models (cohort size, positive prevalence, validation accuracy, and AUC-ROC).
+- Designed interactive Plotly bar charts that compare model performance (F1-score, accuracy, AUC-ROC) and cohort prevalence pie charts.
+- Included an EMR Screening Log that tracks patient names, clinical IDs, calculated risk scores, and assigned severity levels for this session.
 
-### 🔬 Disease Diagnostics Predictors
-Fully trained predictive random forest classifiers for **five** primary chronic disorders:
-- **Diabetes** — 8 parameters (Pregnancies, Glucose, Insulin, etc.) from the Pima Indians dataset.
-- **Heart Disease** — 13 parameters (chest pain, blood pressure, cholesterol, resting ECG) from the Cleveland dataset.
-- **Liver Disease** — 10 parameters (bilirubin, SGPT/SGOT, proteins) from the Indian Liver Patient dataset.
-- **Stroke** — 10 risk factors (hypertension, smoking status, average glucose, BMI, work type) from the stroke cohort.
-- **Chronic Kidney Disease (CKD)** — 24 risk parameters (blood urea, serum creatinine, specific gravity, albumin, pus cells, anemia) from the clinical CKD cohort.
-- Dynamic gauge indicator mapping exact probability percentages.
-- **Real-time Local SHAP Explanations**: Interactive horizontal contribution charts illustrating which specific patient features increased (red) or decreased (green) their risk classification.
+### 🔬 Multi-Disease Diagnostics Predictors
+I trained and integrated machine learning classifiers across **five** major clinical domains:
+- **Diabetes Diagnostic** — XGBoost model (8 clinical parameters including Plasma Glucose, Insulin, BMI, and Age).
+- **Heart Disease Diagnostic** — XGBoost model (13 parameters including chest pain class, cholesterol, resting blood pressure, and Thalassemia).
+- **Liver Disease Diagnostic** — XGBoost model (10 liver panel markers including bilirubin, proteins, SGPT/SGOT enzymes, and A/G ratio).
+- **Stroke Predictor** — XGBoost model (10 cerebrovascular risk factors including hypertension, average glucose, BMI, and smoking status).
+- **Kidney Disease Diagnostic** — Random Forest Classifier (24 clinical features including blood urea, serum creatinine, specific gravity, albumin, pus cell clumps, and anemia history).
 
-### 🔍 Explainable AI (SHAP Interpretability)
-- **Global Feature Importance**: Interactive horizontal bar charts illustrating the mean absolute impact of features across the test cohort.
-- **SHAP Beeswarm Summary Plots**: Full directional Beeswarm plots generated using Matplotlib showing color-coded feature level impacts.
+*Every predictor I built includes:*
+- A **StandardScaler scaling pipeline** that dynamically transforms raw form inputs before executing predictions.
+- A circular indicator dial showing the risk probability percentage (Green: Low, Orange: Moderate, Red: High).
+- **Real-Time Local SHAP Attributions**: A Plotly horizontal bar chart illustrating which specific clinical inputs increased (red) or decreased (green) the patient's individual risk score.
 
-### 📈 Analytics & Insights
-- **Cohort Insights**: Real-time histograms illustrating age distributions colored by diagnostic outcome, alongside Pearson feature correlation matrices.
-- **Risk Factor Matrix**: Cross-disease comparative matrix detailing SHAP priority indicators.
-- **Trends**: Line charts showing simulated month-on-month workflow screening volume.
+### 🧠 Explainable AI Center (SHAP)
+To ensure absolute clinical transparency, I integrated **SHAP (SHapley Additive exPlanations)** for global interpretability:
+- **Global Feature Importance**: High-fidelity horizontal bar charts detailing the mean absolute SHAP value impact across the test cohort.
+- **SHAP Beeswarm Summary Plots**: Native Matplotlib beeswarm plots illustrating the directionality of clinical feature attributions (red representing high feature values, blue representing low feature values).
 
-### 💡 Recommendation System
-- Dynamically loads the latest patient risk classification and synthesizes customized priority actions.
-- Categorized quadrants: **Clinical Medical Management**, **Dietary Guidelines**, **Physical Activity**, and **Lifestyle Monitoring** flagged with priority levels.
+### 📈 Cohort Analytics & Trends
+- **Cohort Insights**: Plotly age histograms colored by diagnosis, alongside Pearson feature correlation matrices.
+- **Risk Factor Comparative Matrix**: Synthesized ranking mapping key risk factors across all 5 disease classifiers.
+- **Trend Analytics**: Line charts showing simulated month-on-month workflow screening volume and detection rates.
+
+### 💡 Dynamic Recommendations System
+- Built a personalized recommendation system that dynamically maps the latest EMR screening risk to quadrants: **Clinical Medical Management**, **Dietary Guidelines**, **Physical Activity**, and **Lifestyle Monitoring**, flagged with priority badges (Critical, Important, Suggested).
 
 ### 📄 Clinical Report Generator
-- Multi-field clinician case notes form.
-- Select checkboxes to choose which disease screening profiles to compile.
-- **EMR PDF Export**: Professional clean clinical report generated client-side using `fpdf2` containing patient profiles, patient-level clinical variables, a standard legal medical disclaimer, and print headers.
+- Coded a EMR PDF compiler using `fpdf2` that compiles patient details, clinician case notes, selected risk results, observed parameters, and a rigorous legal disclaimer into a printable EMR diagnostics report.
 
 ---
 
-## 🛠 Technology Stack
+## 🛠️ Technology Stack I Used
 
 | Layer | Technology | Purpose |
 |---|---|---|
-| **App Framework** | [Streamlit](https://streamlit.io/) | Premium glassmorphism dark-themed UI dashboard |
-| **Machine Learning** | [scikit-learn](https://scikit-learn.org/) | Random Forest Classifiers with balanced class weights |
-| **Explainability** | [SHAP](https://github.com/shap/shap) | Game-theoretic local and global feature attribution |
-| **Visualizations** | [Plotly](https://plotly.com/), [Matplotlib](https://matplotlib.org/), [Seaborn](https://seaborn.pydata.org/) | Dynamic and high-fidelity analytical charts |
-| **PDF Engine** | [FPDF2](https://github.com/pyfpdf/fpdf2) | Client-side clinical EMR report compilation |
-| **Data Pipelines** | [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) | High-speed tabular feature processing |
+| **App Framework** | [Streamlit](https://streamlit.io/) | Interactive, dark-themed, glassmorphic clinical UI |
+| **Machine Learning** | [XGBoost](https://xgboost.readthedocs.io/), [scikit-learn](https://scikit-learn.org/) | Pre-trained high-performance classifiers |
+| **Model Interpretability** | [SHAP](https://github.com/shap/shap) | Local waterfall attributions and global beeswarm plots |
+| **Visualizations** | [Plotly](https://plotly.com/), [Matplotlib](https://matplotlib.org/), [Seaborn](https://seaborn.pydata.org/) | Dynamic medical and statistical visual graphs |
+| **PDF Compiler** | [FPDF2](https://github.com/pyfpdf/fpdf2) | Client-side EMR clinical report PDF generation |
+| **Data Processing** | [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) | Continuous scaling and tabular EMR preprocessing |
 
 ---
 
-## 🚀 Getting Started
+## 🚀 How to Run the Project on Localhost
 
-### 1. Clone the Repository
+Follow these steps to set up the project environment and launch the web server on your local machine:
+
+### 1. Clone My Repository
 ```bash
 git clone https://github.com/anushka06onu/AI-Healthcare-Analytics-Platform.git
 cd AI-Healthcare-Analytics-Platform
 ```
 
-### 2. Install Dependencies
-Ensure Python 3.10+ is installed locally, then run:
+### 2. Switch to the Development Branch
+Ensure you are on the `dev` branch where all the pre-trained `.pkl` models and EMR StandardScalers are active:
 ```bash
+git checkout dev
+```
+
+### 3. Install the Dependencies
+Ensure you have Python 3.10+ installed, then run the macOS package installers:
+```bash
+# Install the OpenMP runtime required by XGBoost C++ core on macOS
+brew install libomp
+
+# Install locked python packages
 pip3 install -r requirements.txt
 ```
 
-### 3. Train Models & Pre-calculate SHAP
-Run the pipeline script to preprocess data, train Random Forest classifiers, serialize models, and pre-calculate SHAP values for the analytics page:
+### 4. Run the Pre-computation Pipeline
+Execute the EMR metrics and SHAP pre-calculation script. This validates the pre-trained `.pkl` models against the validation cohort and pre-saves the matrices for instant dashboard rendering:
 ```bash
 python3 train_models.py
 ```
 
-### 4. Run the Streamlit Dashboard
+### 5. Launch the Clinical Dashboard on Localhost
+Start the Streamlit local web server:
 ```bash
 streamlit run app.py
 ```
-Open the provided local URL (typically `http://localhost:8501`) in your browser to interact with the platform.
+Open the provided URL—typically **`http://localhost:8501`**—in your browser to interact with my platform!
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Directory Structure
 
 ```
 AI-Healthcare-Platform/
 ├── .streamlit/
-│   └── config.toml          # Dark theme color configuration
+│   └── config.toml          # Custom glassmorphic dark-theme configuration
 ├── data/
 │   ├── diabetes.csv         # Pima Indians Diabetes Dataset
 │   ├── heart.csv            # Cleveland Heart Disease Dataset
 │   ├── liver.csv            # Indian Liver Patient Dataset
 │   ├── stroke.csv           # Cerebrovascular Stroke Dataset
-│   └── kidney.csv           # Chronic Kidney Disease Dataset
+│   └── kidney.csv           # Chronic Kidney Disease Dataset (Converted from ARFF)
 ├── models/
-│   ├── model_metrics.json   # Serialized model metrics for UI
-│   ├── *_model.joblib       # Trained RandomForest models
-│   ├── *_X_train.joblib     # Serialized training background data
-│   └── *_columns.joblib     # Preprocessed feature lists
+│   ├── model_metrics.json   # Validated EMR performance parameters
+│   ├── *_model.pkl          # My pre-trained XGBoost & Random Forest models
+│   ├── *_scaler.pkl         # My pre-trained EMR StandardScalers
+│   ├── *_X_train.joblib     # Preprocessed baseline train references
+│   └── *_columns.joblib     # Feature name maps
 ├── shap_files/
-│   ├── *_explainer.joblib   # Serialized TreeExplainer objects
-│   ├── *_shap_values.joblib # Serialized SHAP values
-│   └── *_X_test.joblib      # Validation test sets
-├── requirements.txt         # Package dependencies list
-├── train_models.py          # Data prep, training, and SHAP pipeline
-├── app.py                   # Main Streamlit web dashboard application
-└── README.md                # Documentation
+│   ├── *_shap_values.joblib # Pre-computed test set SHAP arrays
+│   └── *_X_test.joblib      # Validation test samples
+├── requirements.txt         # Project package requirements list
+├── train_models.py          # My EMR verification & SHAP pipeline script
+├── app.py                   # My core Streamlit clinical web application
+└── README.md                # This documentation
 ```
 
 ---
 
-## ⚠️ Medical Disclaimer
+## ⚠️ EMR Clinical Disclaimer
 
-> **This platform is built for clinical research, data exploration, and analytics validation.**
-> The models trained within this application are predictive classifiers and **MUST NOT** be used as a standalone diagnostic substitute or alternative for professional medical advice, diagnosing, or EMR assessment by a licensed physician. Always consult qualified clinical healthcare professionals regarding physical medical choices.
+> **This platform was built for clinical research, data exploration, and analytics validation.**
+> The models integrated within this application are predictive classifiers designed to serve strictly as analytical decision support tools. They **MUST NOT** be used as a standalone diagnostic substitute or alternative for professional clinical consultation, bedside diagnostic physical evaluation, or direct laboratory verification by a licensed physician.
 
 ---
 
-Built with ❤️ using AI Healthcare Analytics
+Built with ❤️ by Anushka06onu
