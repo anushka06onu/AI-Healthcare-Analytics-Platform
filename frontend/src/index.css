@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@theme {
+  --color-health-lightBg: #F8FAFC;
+  --color-health-darkBg: #0F172A;
+  --color-health-primary: #2563EB;
+  --color-health-accent: #10B981;
+  --color-health-warning: #F59E0B;
+  --color-health-danger: #EF4444;
+  --color-health-lightCard: #FFFFFF;
+  --color-health-darkCard: #1E293B;
+  --color-health-darkText: #E2E8F0;
+  
+  --font-sans: 'Outfit', sans-serif;
+}
+
+body {
+  @apply transition-colors duration-300 text-slate-800 dark:text-health-darkText bg-slate-50 dark:bg-health-darkBg;
+}
+
+/* Premium Scrollbars styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-100 dark:bg-slate-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-health-primary;
+}
+
+/* Glassmorphic preset elements */
+.glass-panel {
+  @apply bg-white/75 dark:bg-health-darkCard/75 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50;
+}
+
+/* glowing pulse animation */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
+  }
+}
+.pulse-glow {
+  animation: glow-pulse 2s infinite;
+}
