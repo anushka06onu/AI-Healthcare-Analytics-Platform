@@ -24,14 +24,13 @@ Developed as a highly polished, dual-theme clinical portal, **Clini-SHAP** serve
 8. [Cross-Validation & Generalizability](#-cross-validation--generalizability)
 9. [Transparent Explainable AI (SHAP)](#-transparent-explainable-ai-shap)
 10. [📸 Interface & Screenshot Showcase](#-interface--screenshot-case)
-11. [🎓 Professional Data Science Certification](#-professional-data-science-certification)
-12. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
-13. [🚀 Usage Instructions](#-usage-instructions)
-14. [📁 Repository Directory Tree](#-repository-directory-tree)
-15. [🔮 Future Research Directions](#-future-research-directions)
-16. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
-17. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
-18. [✍️ Author Profile](#%EF%B8%8F-author-profile)
+11. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
+12. [🚀 Usage Instructions](#-usage-instructions)
+13. [📁 Repository Directory Tree](#-repository-directory-tree)
+14. [🔮 Future Research Directions](#-future-research-directions)
+15. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
+16. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
+17. [✍️ Author Profile](#%EF%B8%8F-author-profile)
 
 ---
 
@@ -279,16 +278,7 @@ A clean, light-themed responsive landing page prioritizing readability and sleek
 
 ---
 
-## 🎓 Professional Data Science Certification
 
-The mathematical models, EMR data engineering workflows, and Explainable AI (SHAP) attributions implemented in this platform are backed by certified professional data science expertise:
-
-*   **IBM Data Science Professional Certificate**: Completed a rigorous, 12-course certification curriculum covering Data Science Methodology, Python for Data Science, Databases and SQL with Python, Data Analysis, Data Visualization, Machine Learning with Python, and Applied Data Science Capstone.
-*   **Credential Verification ID**: Verified at [Coursera Verification Endpoint](https://coursera.org/verify/professional-cert/WWJZILGDM7FR).
-
-![IBM Data Science Professional Certificate](screenshots/8_ibm_data_science_certificate.png)
-
----
 
 ## 🛠️ Installation & Setup
 
@@ -359,15 +349,14 @@ The Streamlit application contains the global beeswarm plots and cohort analytic
 AI-Healthcare-Platform/
 ├── .streamlit/
 │   └── config.toml          # Streamlit configuration parameters
-├── screenshots/             # Interface and Certificate screenshots folder
+├── screenshots/             # Interface screenshots folder
 │   ├── 1_diagnostics_focus_dropdown.png
 │   ├── 2_wellness_score_contributors.png
 │   ├── 3_pdf_print_preview.png
 │   ├── 4_full_width_wellness_dashboard.png
 │   ├── 5_typable_sliders_inputs.png
 │   ├── 6_landing_page_dark_mode.png
-│   ├── 7_landing_page_light_mode.png
-│   └── 8_ibm_data_science_certificate.png
+│   └── 7_landing_page_light_mode.png
 ├── notebooks/               # Jupyter model training notebooks
 │   ├── 01_diabetes_training.ipynb       # Your clinical Diabetes training notebook
 │   ├── 02_heart_training.ipynb          # Your clinical Cardio training notebook
@@ -431,4 +420,4 @@ AI-Healthcare-Platform/
 
 ---
 
-Built with ❤️ by Anushka06onu
+Built by Fateha Hossain Anushka
