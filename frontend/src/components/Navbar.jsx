@@ -14,8 +14,17 @@ function Navbar({ activePage, setPage, darkMode, setDarkMode }) {
   ]
 
   const handleNavClick = (pageId) => {
-    setPage(pageId)
-    setMobileMenuOpen(false)
+    if (pageId === 'contact') {
+      const contactSection = document.getElementById('contact-section')
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+      setMobileMenuOpen(false)
+    } else {
+      setPage(pageId)
+      setMobileMenuOpen(false)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   return (

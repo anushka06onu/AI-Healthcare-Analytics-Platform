@@ -4,7 +4,7 @@ import Home from './pages/Home'
 import Predict from './pages/Predict'
 import History from './pages/History'
 import About from './pages/About'
-import Contact from './pages/Contact'
+import FooterContactForm from './components/FooterContactForm'
 
 function App() {
   const [page, setPage] = useState('home')
@@ -89,7 +89,6 @@ function App() {
         )}
         {page === 'history' && <History predictions={predictions} />}
         {page === 'about' && <About />}
-        {page === 'contact' && <Contact />}
       </main>
 
       {/* Dynamic Health Tips Ticker Banner */}
@@ -101,23 +100,29 @@ function App() {
       </div>
 
       {/* Premium Spacious Multi-Column Footer */}
-      <footer className="bg-[var(--card-bg)] border-t border-[var(--card-border)] py-12 transition-colors shadow-inner mt-auto">
+      <footer id="contact-section" className="bg-[var(--card-bg)] border-t border-[var(--card-border)] py-12 transition-colors shadow-inner mt-auto scroll-mt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 pb-8 border-b border-[var(--card-border)]">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-8 pb-8 border-b border-[var(--card-border)] items-start">
             
             {/* Column 1: Brand details */}
-            <div className="md:col-span-5 space-y-3">
+            <div className="md:col-span-4 space-y-4">
               <span className="font-extrabold text-lg sm:text-xl tracking-tight text-[var(--text-color)] block">
                 Health<span className="text-blue-600">AI</span>
               </span>
               <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed font-semibold max-w-sm">
                 Empowering proactive health risk awareness with transparent and explainable AI metric attributions. Accessible to everyone, everywhere.
               </p>
+              <div className="space-y-1 pt-1">
+                <p className="text-xs text-[var(--text-muted)] font-bold">Office: Dhaka, Bangladesh</p>
+                <p className="text-xs text-[var(--text-muted)] font-bold">
+                  Email: <a href="mailto:anushkaonu@gmail.com" className="text-blue-600 dark:text-blue-400 hover:underline">anushkaonu@gmail.com</a>
+                </p>
+              </div>
             </div>
 
-            {/* Column 2: Quick Links */}
-            <div className="md:col-span-3 space-y-3">
-              <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-wider">Quick Navigation</h4>
+            {/* Column 2: Quick Links & Notice */}
+            <div className="md:col-span-3 space-y-4">
+              <h4 className="text-[11px] font-black text-[var(--text-muted)] uppercase tracking-wider">Quick Navigation</h4>
               <div className="flex flex-col gap-2">
                 {[
                   { id: 'home', label: 'Dashboard' },
@@ -127,28 +132,28 @@ function App() {
                 ].map((link) => (
                   <button
                     key={link.id}
-                    onClick={() => setPage(link.id)}
+                    onClick={() => {
+                      setPage(link.id)
+                      window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }}
                     className="text-left text-xs sm:text-sm text-[var(--text-muted)] hover:text-blue-600 dark:hover:text-blue-400 font-extrabold transition-all cursor-pointer w-fit"
                   >
                     {link.label}
                   </button>
                 ))}
               </div>
+
+              <div className="space-y-1.5 pt-2 border-t border-[var(--card-border)]/50">
+                <span className="text-[10px] text-amber-500 font-black uppercase tracking-wider block">⚠️ Urgent Support Notice</span>
+                <p className="text-[10px] text-[var(--text-muted)] leading-relaxed font-semibold">
+                  This channel is strictly for technical issues or portal feedback. For active, acute clinical emergencies, contact your local medical dispatch (911/112/999) immediately.
+                </p>
+              </div>
             </div>
 
-            {/* Column 3: Contact Us on the Right Side */}
-            <div className="md:col-span-4 space-y-3 md:text-right">
-              <h4 className="text-[10px] font-black text-[var(--text-muted)] uppercase tracking-wider md:text-right">Contact Support</h4>
-              <div className="flex flex-col gap-1.5 text-xs sm:text-sm text-[var(--text-muted)] font-semibold">
-                <p>Location: Dhaka, Bangladesh</p>
-                <p>Email: <a href="mailto:anushkaonu@gmail.com" className="hover:underline font-extrabold text-blue-600 dark:text-blue-400">anushkaonu@gmail.com</a></p>
-                <button 
-                  onClick={() => setPage('contact')} 
-                  className="text-left md:text-right text-blue-600 dark:text-blue-400 font-black hover:underline cursor-pointer focus:outline-none w-fit md:ml-auto"
-                >
-                  ✉️ Access Contact Form
-                </button>
-              </div>
+            {/* Column 3: Contact Form Embedded directly */}
+            <div className="md:col-span-5 bg-[var(--bg-color)] border border-[var(--card-border)] p-5.5 rounded-2xl shadow-xs">
+              <FooterContactForm />
             </div>
 
           </div>

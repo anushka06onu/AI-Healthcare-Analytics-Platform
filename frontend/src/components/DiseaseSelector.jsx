@@ -34,7 +34,7 @@ function DiseaseSelector({ selectedDisease, setSelectedDisease }) {
 
   return (
     <div className="space-y-2" ref={dropdownRef}>
-      <label className="block text-xs sm:text-sm font-bold text-[var(--text-muted)] uppercase tracking-wider">
+      <label className="block text-sm font-black text-[var(--text-muted)] uppercase tracking-wider">
         🎯 Choose Diagnostics Focus
       </label>
       
@@ -77,10 +77,10 @@ function DiseaseSelector({ selectedDisease, setSelectedDisease }) {
                   
                   <div className="flex-grow space-y-0.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-xs sm:text-sm font-extrabold tracking-tight">{d.label}</span>
+                      <span className="text-sm font-extrabold tracking-tight">{d.label}</span>
                       {isSelected && <Check className="h-4 w-4 text-blue-600 dark:text-blue-400" />}
                     </div>
-                    <p className="text-xxs sm:text-xs text-[var(--text-muted)] leading-relaxed font-semibold">
+                    <p className="text-xs text-[var(--text-muted)] leading-relaxed font-semibold">
                       {d.desc}
                     </p>
                   </div>
@@ -91,7 +91,7 @@ function DiseaseSelector({ selectedDisease, setSelectedDisease }) {
         )}
       </div>
       
-      <p className="text-xxs sm:text-xs text-[var(--text-muted)] italic mt-1 pl-1">
+      <p className="text-xs text-[var(--text-muted)] italic mt-1.5 pl-1">
         Currently Evaluating: {activeDiseaseObj.desc}
       </p>
     </div>

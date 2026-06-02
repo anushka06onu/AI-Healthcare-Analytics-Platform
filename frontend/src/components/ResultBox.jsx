@@ -17,11 +17,11 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
     return (
       <div className="flex flex-col items-center justify-center py-16 px-6 bg-[var(--card-bg)] border border-dashed border-[var(--card-border)] rounded-3xl shadow-sm animate-pulse">
         <Loader className="h-10 w-10 text-blue-600 animate-spin mb-4" />
-        <h4 className="font-extrabold text-sm sm:text-base text-[var(--text-color)] tracking-wide">
-          Calculating Wellness Risk Score...
+        <h4 className="font-extrabold text-base sm:text-lg text-[var(--text-color)] tracking-wide">
+          Analyzing Your Wellness Profile...
         </h4>
-        <p className="text-xs text-[var(--text-muted)] text-center mt-1.5 max-w-[280px] font-medium leading-relaxed">
-          Running statistical model and compiling Explainable AI (XAI) SHAP contributors in layman's terms...
+        <p className="text-sm text-[var(--text-muted)] text-center mt-2 max-w-[320px] font-semibold leading-relaxed">
+          Reviewing your vitals and daily habits to build your personalized health action plan...
         </p>
       </div>
     )
@@ -257,10 +257,10 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
       {/* 2. Main 3-Column Dashboard Section (Fully responsive!) */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         
-        {/* COLUMN 1: Risk Overview Dial & Layman Explanation */}
+        {/* COLUMN 1: Risk Overview Dial & Interpretation */}
         <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <h4 className="text-xs font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
+            <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
               <Activity className="h-4 w-4 text-blue-600" />
               <span>Wellness Risk Level</span>
             </h4>
@@ -294,11 +294,11 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                 </svg>
                 <div className="absolute text-center">
                   <div className="text-3xl font-black text-[var(--text-color)] leading-none">{riskScore}%</div>
-                  <div className="text-[10px] text-[var(--text-muted)] font-black uppercase tracking-wider mt-1">Est. Risk</div>
+                  <div className="text-xs text-[var(--text-muted)] font-black uppercase tracking-wider mt-1">Est. Risk</div>
                 </div>
               </div>
 
-              <div className={`mt-3 text-sm sm:text-base font-black flex items-center gap-1.5 ${theme.color}`}>
+              <div className={`mt-4 text-base sm:text-lg font-black flex items-center gap-1.5 ${theme.color}`}>
                 <IconComponent className="h-5 w-5" />
                 <span>{riskLevel} Risk Zone</span>
               </div>
@@ -306,29 +306,29 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
           </div>
 
           <div className={`${theme.bg} ${theme.border} border p-4.5 rounded-2xl`}>
-            <h5 className={`text-[11px] font-black uppercase tracking-wider mb-1 ${theme.color} flex items-center gap-1`}>
+            <h5 className={`text-xs sm:text-sm font-black uppercase tracking-wider mb-1.5 ${theme.color} flex items-center gap-1`}>
               <Smile className="h-3.5 w-3.5" />
-              <span>Layman Understanding</span>
+              <span>Assessment Interpretation</span>
             </h5>
-            <p className="text-xs text-[var(--text-color)] font-medium leading-relaxed">
+            <p className="text-xs sm:text-sm text-[var(--text-color)] font-semibold leading-relaxed">
               {theme.desc}
             </p>
           </div>
         </div>
 
-        {/* COLUMN 2: Visual XAI SHAP Plot & Descriptive Explanations */}
+        {/* COLUMN 2: Wellness Score Contributors & Descriptive Explanations */}
         <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-6 lg:col-span-1">
           <div className="space-y-4">
             <div className="flex justify-between items-center border-b border-[var(--card-border)] pb-2">
-              <h4 className="text-xs font-black text-[var(--text-color)] uppercase tracking-wider flex items-center gap-1.5">
+              <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider flex items-center gap-1.5">
                 <Sparkles className="h-4 w-4 text-emerald-500" />
-                <span>Explainable AI (XAI) SHAP Plot</span>
+                <span>📊 Wellness Score Contributors</span>
               </h4>
-              <span className="text-[9px] bg-emerald-500/10 text-emerald-600 border border-emerald-500/10 px-2 py-0.5 rounded font-extrabold tracking-wider uppercase">Active</span>
+              <span className="text-xxs sm:text-xs bg-emerald-500/10 text-emerald-600 border border-emerald-500/10 px-2 py-0.5 rounded font-extrabold tracking-wider uppercase">Active</span>
             </div>
 
-            <p className="text-[11px] text-[var(--text-muted)] leading-relaxed font-semibold">
-              This chart explains exactly which of your wellness markers push the risk score <strong className="text-rose-500">UP (+)</strong> or pull it <strong className="text-emerald-500">DOWN (-)</strong> relative to average baselines.
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed font-semibold">
+              This chart displays how your specific body measurements and daily habits influence your health score. Factors on the <strong className="text-rose-500">red side (+)</strong> add to your overall risk, while positive habits on the <strong className="text-emerald-500">green side (-)</strong> protect your health and pull your risk down.
             </p>
 
             {/* Side-by-Side visual columns */}
@@ -337,14 +337,14 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
               {/* Wellness Protectors (Down indicators) */}
               {shapProtectors.length > 0 && (
                 <div className="space-y-2">
-                  <div className="text-[10px] text-emerald-600 dark:text-emerald-400 font-extrabold uppercase tracking-wide flex items-center gap-1">
+                  <div className="text-xs text-emerald-600 dark:text-emerald-400 font-extrabold uppercase tracking-wide flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
                     <span>Wellness Protectors (Pulling Risk Down)</span>
                   </div>
                   <div className="space-y-2">
                     {shapProtectors.slice(0, 3).map((attr, idx) => (
                       <div key={idx} className="space-y-1">
-                        <div className="flex justify-between text-[11px] font-bold">
+                        <div className="flex justify-between text-xs sm:text-sm font-bold">
                           <span className="text-[var(--text-color)]">{attr.label}</span>
                           <span className="text-emerald-600 font-extrabold">{attr.value}%</span>
                         </div>
@@ -354,7 +354,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                             style={{ width: `${Math.min(Math.abs(attr.value) * 3, 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-[9px] text-[var(--text-muted)] italic leading-tight">{attr.desc}</p>
+                        <p className="text-xxs sm:text-xs text-[var(--text-muted)] italic leading-tight">{attr.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -364,14 +364,14 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
               {/* Risk Drivers (Up indicators) */}
               {shapDrivers.length > 0 && (
                 <div className="space-y-2 pt-2 border-t border-[var(--card-border)]">
-                  <div className="text-[10px] text-rose-500 font-extrabold uppercase tracking-wide flex items-center gap-1">
+                  <div className="text-xs text-rose-500 font-extrabold uppercase tracking-wide flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                     <span>Risk Drivers (Pushing Risk Up)</span>
                   </div>
                   <div className="space-y-2">
                     {shapDrivers.slice(0, 3).map((attr, idx) => (
                       <div key={idx} className="space-y-1">
-                        <div className="flex justify-between text-[11px] font-bold">
+                        <div className="flex justify-between text-xs sm:text-sm font-bold">
                           <span className="text-[var(--text-color)]">{attr.label}</span>
                           <span className="text-rose-500 font-extrabold">+{attr.value}%</span>
                         </div>
@@ -381,7 +381,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                             style={{ width: `${Math.min(attr.value * 3, 100)}%` }}
                           ></div>
                         </div>
-                        <p className="text-[9px] text-[var(--text-muted)] italic leading-tight">{attr.desc}</p>
+                        <p className="text-xxs sm:text-xs text-[var(--text-muted)] italic leading-tight">{attr.desc}</p>
                       </div>
                     ))}
                   </div>
@@ -395,18 +395,18 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
         {/* COLUMN 3: Metrics Dashboard & Slider Visualizers */}
         <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
-            <h4 className="text-xs font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
+            <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
               <Activity className="h-4 w-4 text-emerald-500" />
               <span>Vitals & Metrics Dashboard</span>
             </h4>
 
             {/* Segmented BMI scale visualizer */}
-            <div className="space-y-1.5">
-              <div className="flex justify-between text-[11px] font-bold">
+            <div className="space-y-2">
+              <div className="flex justify-between text-xs sm:text-sm font-bold">
                 <span className="text-[var(--text-muted)]">Body Mass Index (BMI):</span>
                 <span className="text-blue-600 font-black">{metrics.bmi} BMI</span>
               </div>
-              <div className="relative h-2 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
+              <div className="relative h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
                 <div className="absolute inset-0 flex">
                   <div className="w-[14%] bg-sky-400" title="Underweight (<18.5)"></div>
                   <div className="w-[26%] bg-emerald-500" title="Healthy (18.5-24.9)"></div>
@@ -419,7 +419,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                   style={{ left: `${Math.min(Math.max((metrics.bmi / 45) * 100, 5), 95)}%` }}
                 ></div>
               </div>
-              <div className="flex justify-between text-[9px] text-[var(--text-muted)] font-extrabold uppercase">
+              <div className="flex justify-between text-xxs sm:text-xs text-[var(--text-muted)] font-extrabold uppercase">
                 <span>Underweight</span>
                 <span>Healthy</span>
                 <span>Overweight</span>
@@ -428,73 +428,73 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
             </div>
 
             {/* Habits tracker bar */}
-            <div className="space-y-1.5 pt-2 border-t border-[var(--card-border)]">
-              <div className="flex justify-between text-[11px] font-bold">
+            <div className="space-y-2 pt-3 border-t border-[var(--card-border)]">
+              <div className="flex justify-between text-xs sm:text-sm font-bold">
                 <span className="text-[var(--text-muted)]">Lifestyle Habits Quality:</span>
                 <span className="text-emerald-500 font-black">{habitPct}% Score</span>
               </div>
-              <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-[var(--card-border)]">
+              <div className="h-2.5 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-[var(--card-border)]">
                 <div 
                   className="h-full bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full"
                   style={{ width: `${habitPct}%` }}
                 ></div>
               </div>
-              <p className="text-[10px] text-[var(--text-muted)] font-semibold leading-normal">
+              <p className="text-xs text-[var(--text-muted)] font-semibold leading-normal">
                 Reflects smoking, regular exercise workouts, and balanced meals choices.
               </p>
             </div>
           </div>
 
           {/* Vitals quick indicators dots */}
-          <div className="bg-[var(--bg-color)] border border-[var(--card-border)] p-3 rounded-2xl grid grid-cols-3 gap-2 text-center">
+          <div className="bg-[var(--bg-color)] border border-[var(--card-border)] p-3.5 rounded-2xl grid grid-cols-3 gap-2 text-center">
             <div className="flex flex-col items-center justify-center">
               <span className={`w-2.5 h-2.5 rounded-full mb-1 ${metrics.bloodSugar === 'high' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
-              <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase">Sugar</span>
-              <span className="text-[8px] font-black text-[var(--text-color)] truncate max-w-[60px]">{metrics.bloodSugar === 'high' ? 'High' : 'Normal'}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Sugar</span>
+              <span className="text-xs font-extrabold text-[var(--text-color)] truncate max-w-[65px]">{metrics.bloodSugar === 'high' ? 'High' : 'Normal'}</span>
             </div>
             <div className="flex flex-col items-center justify-center border-x border-[var(--card-border)]">
               <span className={`w-2.5 h-2.5 rounded-full mb-1 ${
                 metrics.bloodPressure === 'high' ? 'bg-red-500 animate-pulse' : metrics.bloodPressure === 'low' ? 'bg-amber-400' : 'bg-emerald-500'
               }`}></span>
-              <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase">Pressure</span>
-              <span className="text-[8px] font-black text-[var(--text-color)] truncate max-w-[60px]">{metrics.bloodPressure === 'high' ? 'High' : metrics.bloodPressure === 'low' ? 'Low' : 'Normal'}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Pressure</span>
+              <span className="text-xs font-extrabold text-[var(--text-color)] truncate max-w-[65px]">{metrics.bloodPressure === 'high' ? 'High' : metrics.bloodPressure === 'low' ? 'Low' : 'Normal'}</span>
             </div>
             <div className="flex flex-col items-center justify-center">
               <span className={`w-2.5 h-2.5 rounded-full mb-1 ${metrics.cholesterol === 'high' ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
-              <span className="text-[9px] font-bold text-[var(--text-muted)] uppercase">Lipids</span>
-              <span className="text-[8px] font-black text-[var(--text-color)] truncate max-w-[60px]">{metrics.cholesterol === 'high' ? 'High' : 'Normal'}</span>
+              <span className="text-xs font-bold text-[var(--text-muted)] uppercase">Lipids</span>
+              <span className="text-xs font-extrabold text-[var(--text-color)] truncate max-w-[65px]">{metrics.cholesterol === 'high' ? 'High' : 'Normal'}</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      {/* 3. "Why this Risk Score?" Detailed Layman Reasons (TAKES THE WHOLE WIDTH - BOLD, COMPREHENSIVE TEXT) */}
+      {/* 3. Risk Contributor Analysis (TAKES THE WHOLE WIDTH - BOLD, COMPREHENSIVE TEXT) */}
       <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm space-y-4">
-        <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
+        <h4 className="text-base sm:text-lg font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
           <HelpCircle className="h-5 w-5 text-blue-600" />
-          <span>🔍 Why this Risk Score? (Detailed Explanation)</span>
+          <span>🔍 Risk Contributor Analysis</span>
         </h4>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed font-semibold">
           <div className="space-y-4">
-            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
               Your wellness risk score of <strong className="text-blue-600">{riskScore}%</strong> is a statistical estimation calculated based on your personal health indicators and daily routine habits. It is designed to raise wellness awareness by comparing your parameters against chronic healthcare baseline research.
             </p>
-            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+            <p className="text-sm text-[var(--text-muted)] leading-relaxed">
               Below are the specific physiological and lifestyle drivers behind your report. Each indicator outlines exactly how it interacts with your body's cells, heart, and metabolic filter systems in simple, everyday words.
             </p>
           </div>
           <div className="space-y-3">
             {reasons && reasons.length > 0 ? (
               reasons.map((reason, idx) => (
-                <div key={idx} className="flex items-start gap-2.5 text-xs text-[var(--text-color)] bg-[var(--bg-color)] border border-[var(--card-border)] p-3.5 rounded-2xl shadow-xxs">
+                <div key={idx} className="flex items-start gap-2.5 text-sm text-[var(--text-color)] bg-[var(--bg-color)] border border-[var(--card-border)] p-4 rounded-2xl shadow-xxs">
                   <span className="text-rose-500 font-extrabold text-sm leading-none mt-0.5">•</span>
-                  <span className="leading-relaxed font-bold text-[11px] sm:text-xs">{reason}</span>
+                  <span className="leading-relaxed font-bold text-xs sm:text-sm">{reason}</span>
                 </div>
               ))
             ) : (
-              <div className="text-xs text-[var(--text-muted)] italic p-4 text-center">
+              <div className="text-sm text-[var(--text-muted)] italic p-4 text-center">
                 No adverse risk factors found. Your profile indicators are fully in standard healthy bounds!
               </div>
             )}
@@ -502,11 +502,11 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
         </div>
       </div>
 
-      {/* 4. Personalized Layman Wellness Action Plan (Takes the whole section!) */}
+      {/* 4. Personalized Health Action Plan (Takes the whole section!) */}
       <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm space-y-4">
-        <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
+        <h4 className="text-base sm:text-lg font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
           <Flame className="h-5 w-5 text-amber-500 animate-pulse" />
-          <span>💡 Personalized Action Plan (Your Layman Steps)</span>
+          <span>💡 Recommended Wellness Action Plan</span>
         </h4>
 
         {advice && advice.length > 0 ? (
@@ -532,11 +532,11 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                     <Icon className="h-5 w-5" />
                   </div>
                   <div>
-                    <h5 className="text-[11px] font-black text-[var(--text-color)] uppercase tracking-wider mb-1 flex items-center gap-1">
+                    <h5 className="text-xs sm:text-sm font-black text-[var(--text-color)] uppercase tracking-wider mb-1 flex items-center gap-1">
                       <span>Step {idx + 1}</span>
                       <span className="text-emerald-500">✓</span>
                     </h5>
-                    <p className="text-[11px] sm:text-xs text-[var(--text-muted)] leading-relaxed font-bold">
+                    <p className="text-xs sm:text-sm text-[var(--text-muted)] leading-relaxed font-bold">
                       {adv}
                     </p>
                   </div>
@@ -545,7 +545,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
             })}
           </div>
         ) : (
-          <p className="text-xs text-[var(--text-muted)] italic font-semibold text-center py-6">
+          <p className="text-sm text-[var(--text-muted)] italic font-semibold text-center py-6">
             Keep maintaining your excellent daily fitness routines and balanced nutrient profiles!
           </p>
         )}
