@@ -4,39 +4,26 @@ Welcome to **Clini-SHAP**—a premium, clinical-grade decision support dashboard
 
 I developed this platform as a full-stack Python application using **Streamlit** for the clinical UI, **scikit-learn** and **XGBoost** for the predictive models, and **SHAP** for local and global model interpretability.
 
-To make the platform highly professional and accessible to everyone, I overhauled the user interface with a custom modern layout and fully translated all complex medical parameters into layman-friendly everyday terms.
+To make the platform highly professional, production-ready, and accessible to everyone, I overhauled the user interface with a custom modern layout, fully translated all complex medical parameters into layman-friendly everyday terms, and integrated a **Unified Patient Diagnostic Suite** that eliminates dummy data.
 
 ---
 
 ## 🌟 Core Features I Developed
 
+### 🔬 Coordinated Patient Diagnostic Suite (New EMR Standard)
+- **Unified Patient Vitals Form**: Clinicians enter patient baseline vitals (Age, Sex, Diastolic/Systolic Blood Pressure, BMI, Fasting Glucose) **exactly once** in a single consolidated panel. Shared inputs are dynamically mapped and fed into all active diagnostic models simultaneously behind the scenes.
+- **Dynamic Active Diagnostics Toggles**: In the left sidebar drawer, clinicians can turn **ON or OFF** specific disease diagnostic evaluations on the fly.
+- **Conditional Lab Panels**: Specific lab tests (e.g. bilirubin, creatinine, specific gravity, pus cells, insulin) automatically render **only** for diseases that are turned "ON" in the active diagnostics list, keeping the workspace completely clean and targeted.
+- **Parallel Diagnostics Cards**: Clicking a single run button executes scaling pipelines, ML predictions, and SHAP waterfall chart attributions for **all active diseases side-by-side** in a beautiful, parallel responsive grid.
+- **Strict Production Validations (Purged Dummy Data)**: Purged all placeholder text (such as "Jane Doe"). Patient Name and EMR Registry fields are empty by default, and strict EMR alerts prevent calculations unless proper clinical metadata is provided.
+- **customizable Clinician Profile**: Clinicians can dynamically input their own names in the sidebar panel. The system displays this active Clinician Name in the main EMR header and prints it cleanly in compiled PDF reports.
+
 ### 🎨 Premium UI & Dual Theme Engine
-- **Stand-alone Web Shell**: Custom-designed a glassmorphic **Top Header Navbar** with the clinic logo, active session indicators, and a glowing connection heartbeat. Hidden all default Streamlit menus to deliver a clean standalone portal experience.
-- **Bespoke Sidebar Drawer Menu**: Sidebar navigation items styled as vertical interactive tabs featuring clean focus borders, shadows, hover transitions, and diagnostic icons.
+- **Stand-alone Web Shell**: Custom-designed a glassmorphic **Top Header Navbar** with the clinic logo, active clinician session, and a glowing connection heartbeat.
+- **Restored Drawer Toggles**: Re-exposed and visually styled Streamlit's native sidebar expand/collapse button (arrow toggle) so that users can slide the navigation drawer open or closed.
+- **Bespoke Sidebar Drawer Menu**: Sidebar pages styled as vertical interactive tabs featuring clean focus borders, shadows, hover transitions, and diagnostic icons.
 - **Interactive Light & Dark Modes**: Overhauled all styles and text elements to support a beautiful **☀️ Light Mode** and a robust **🌙 Dark Mode** toggle that dynamically swaps the entire canvas styling on the fly.
 - **Theme-Synchronized Visualizations**: All Plotly gauges, histograms, and SHAP Beeswarm summary charts automatically swap background templates, font colors, and gridline scales when toggling themes.
-- **Clinical Grid Layouts**: Inputs grouped elegantly into side-by-side multi-column container cards (e.g. Demographics, Urinalysis, Blood Panels) using responsive structures to avoid vertical clutter.
-
-### 🍬 100% Layman-Friendly Medical Translation
-To ensure non-medical users can understand clinical data, I translated all **24+ medical variables** into clear everyday terms with detailed tooltips and ideal normal reference ranges:
-- **Diabetes**: *Fasting Blood Sugar level* (Glucose), *Diastolic Blood Pressure* (Lower Number), *Triceps Skin Fold Thickness* (Arm Fat), *2-Hour Blood Insulin level*, *Obesity Ratio* (BMI), and *Family History Risk score* (DiabetesPedigreeFunction).
-- **Heart Health**: *Resting Upper Blood Pressure* (Systolic BP), *Total Blood Cholesterol level*, *Maximum Heart Rate Achieved*, *ECG Heart Strain level* (Oldpeak), and *Blocked Coronary Blood Vessels Count* (Blocked vessels count).
-- **Liver Efficacy**: *Total Bilirubin* (Yellow Bile Pigment), *Direct Bilirubin* (Processed Bile), *Liver Alkaline Enzyme* (ALP), *Liver Cell Irritation Enzyme* (ALT/SGPT), *Liver/Heart Activity Enzyme* (AST/SGOT), and *Albumin Protein level*.
-- **Stroke Risk**: *Average Blood Sugar level*, *High Blood Pressure Diagnosis History*, *Heart Disease History*, and *Obesity Ratio* (BMI).
-- **Kidney Function**: *Urine Concentration Density* (Specific Gravity), *Urine Protein Level* (Albumin Leakage), *Urine Sugar Level* (Glucose Leakage), *Kidney Filter Nitrogen Waste* (Blood Urea), *Kidney Filtration Decline Waste* (Serum Creatinine), *Hemoglobin Level* (Blood Oxygen carrier), and *Hematocrit / Packed Cell Volume* (PCV).
-
-### 🔬 Multi-Disease Diagnostics Predictors
-I integrated pre-trained ML classifiers across **five** major clinical domains:
-- **Diabetes Diagnostic** — XGBoost model
-- **Heart Disease Diagnostic** — XGBoost model
-- **Liver Disease Diagnostic** — XGBoost model
-- **Stroke Predictor** — XGBoost model
-- **Kidney Disease Diagnostic** — Random Forest Classifier (Refitted for sk-learn compatibilities)
-
-*Every diagnostic screen I built features:*
-- A **StandardScaler scaling pipeline** that dynamically scales raw inputs before running model predictions.
-- A beautiful, circular indicator dial showing EMR calculated risk scores (Green: Low, Orange: Moderate, Red: High).
-- **Real-Time Local SHAP Attributions**: A Plotly horizontal bar chart illustrating exactly which patient values increased (red) or decreased (green) the patient's individual risk score.
 
 ### 🧠 Explainable AI Center (SHAP)
 To guarantee complete diagnostic accountability, I integrated **SHAP (SHapley Additive exPlanations)**:
@@ -48,8 +35,8 @@ To guarantee complete diagnostic accountability, I integrated **SHAP (SHapley Ad
 - **Risk Factor Comparative Matrix**: Synthesized ranking mapping key risk factors across all 5 disease classifiers.
 - **Trend Analytics**: Line charts showing simulated month-on-month workflow screening volume and detection rates.
 
-### 💡 Dynamic Care Advisor
-- Built a personalized recommendation system that dynamically maps the latest EMR screening risk to quadrants: **Clinical Medical Management**, **Dietary Guidelines**, **Physical Activity**, and **Lifestyle Monitoring**, flagged with priority badges (Critical, Important, Suggested).
+### 💡 Dynamic Care Advisor (Multi-Disease Tracking)
+- Built a personalized recommendation system that dynamically maps the latest EMR screening risk to quadrants: **Clinical Medical Management**, **Dietary Guidelines**, **Physical Activity**, and **Lifestyle Monitoring**, flagged with priority badges (Critical, Important, Suggested). Renders tabs for **all** high-risk active findings identified during active screenings.
 
 ### 📄 EMR Report Generator
 - Coded a EMR PDF compiler using `fpdf2` that compiles patient details, clinician case notes, selected risk results, observed parameters, and a rigorous legal disclaimer into a printable EMR diagnostics report.
