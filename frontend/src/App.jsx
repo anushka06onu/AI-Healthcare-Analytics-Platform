@@ -4,6 +4,7 @@ import Home from './pages/Home'
 import Predict from './pages/Predict'
 import History from './pages/History'
 import About from './pages/About'
+import Contact from './pages/Contact'
 
 function App() {
   const [page, setPage] = useState('home')
@@ -88,6 +89,7 @@ function App() {
         )}
         {page === 'history' && <History predictions={predictions} />}
         {page === 'about' && <About />}
+        {page === 'contact' && <Contact />}
       </main>
 
       {/* Dynamic Health Tips Ticker Banner */}
@@ -100,8 +102,19 @@ function App() {
 
       {/* Premium Clinical styled Footer */}
       <footer className="bg-[var(--card-bg)] border-t border-[var(--card-border)] py-6 text-center transition-colors shadow-inner">
-        <div className="max-w-7xl mx-auto px-4 text-xs sm:text-sm text-[var(--text-muted)]">
+        <div className="max-w-7xl mx-auto px-4 text-xs sm:text-sm text-[var(--text-muted)] space-y-1.5">
           <p className="font-medium">© 2026 HealthAI Platform | Dynamic Awareness & Health Risk Estimation</p>
+          <p className="font-semibold text-xs text-[var(--text-muted)]">
+            Developed by{' '}
+            <a 
+              href="https://fatehahossainanushka.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-600 dark:text-blue-400 font-extrabold hover:underline"
+            >
+              Fateha Hossain Anushka
+            </a>
+          </p>
           <p className="text-xxs sm:text-xs mt-1 text-[var(--text-muted)] opacity-80">
             Intended strictly for health awareness and educational reference. Not a substitute for professional medical diagnostics.
           </p>

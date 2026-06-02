@@ -227,16 +227,310 @@ function Predict({ predictions, setPredictions, setPage }) {
     }, 1200)
   }
 
-  // Simulated wellness report compiler PDF download
+  // Real printable PDF generation wellness report
   const handleDownload = () => {
     if (!result) return
-    alert(`💾 Wellness PDF Saved Successfully!\n\n` +
-          `File: health_risk_report_${result.patientId}.pdf\n` +
-          `User: ${result.patientName}\n` +
-          `Assessor: HealthAI Proactive Assistant\n` +
-          `Focus: ${result.disease} Assessment\n` +
-          `Est. Risk: ${result.riskScore}% (${result.riskLevel} Risk)\n\n` +
-          `This printable report details your personalized wellness tips.`);
+    
+    const printWindow = window.open('', '_blank', 'width=800,height=900')
+    if (!printWindow) {
+      alert("⚠️ Pop-up blocked! Please allow pop-ups for this site to view and save your wellness report.")
+      return
+    }
+
+    const levelColors = {
+      Low: { text: '#10B981', bg: '#ECFDF5', border: '#A7F3D0' },
+      Medium: { text: '#F59E0B', bg: '#FEF3C7', border: '#FDE68A' },
+      High: { text: '#EF4444', bg: '#FEE2E2', border: '#FCA5A5' }
+    }[result.riskLevel] || { text: '#2563EB', bg: '#EFF6FF', border: '#BFDBFE' }
+
+    printWindow.document.write(`
+      <html>
+        <head>
+          <title>HealthAI_Wellness_Report_${result.patientId}</title>
+          <style>
+            @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
+            body {
+              font-family: 'Outfit', sans-serif;
+              color: #0F172A;
+              background-color: #FFFFFF;
+              padding: 40px;
+              margin: 0;
+              line-height: 1.5;
+            }
+            .header {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 2px solid #E2E8F0;
+              padding-bottom: 20px;
+              margin-bottom: 30px;
+            }
+            .brand {
+              display: flex;
+              align-items: center;
+              gap: 8px;
+            }
+            .brand-logo {
+              background: #2563EB;
+              color: white;
+              padding: 6px 12px;
+              font-weight: 900;
+              border-radius: 8px;
+              font-size: 16px;
+            }
+            .brand-name {
+              font-size: 22px;
+              font-weight: 900;
+              letter-spacing: -0.5px;
+            }
+            .brand-name span {
+              color: #2563EB;
+            }
+            .doc-id {
+              text-align: right;
+              font-size: 11px;
+              color: #64748B;
+              font-weight: 600;
+            }
+            .doc-id strong {
+              color: #0F172A;
+            }
+            .report-title {
+              font-size: 20px;
+              font-weight: 800;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              color: #1E293B;
+              margin-bottom: 25px;
+            }
+            .section-grid {
+              display: grid;
+              grid-template-cols: 1fr 1fr;
+              gap: 20px;
+              margin-bottom: 30px;
+            }
+            .card {
+              border: 1px solid #E2E8F0;
+              border-radius: 16px;
+              padding: 20px;
+              background: #F8FAFC;
+            }
+            .card-title {
+              font-size: 12px;
+              font-weight: 800;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              color: #64748B;
+              border-bottom: 1px solid #E2E8F0;
+              padding-bottom: 8px;
+              margin-bottom: 15px;
+            }
+            .vital-row {
+              display: flex;
+              justify-content: space-between;
+              font-size: 13px;
+              margin-bottom: 10px;
+            }
+            .vital-label {
+              font-weight: 600;
+              color: #475569;
+            }
+            .vital-value {
+              font-weight: 800;
+              color: #0F172A;
+            }
+            .score-card {
+              text-align: center;
+              border-radius: 16px;
+              padding: 24px;
+              border: 1px solid ${levelColors.border};
+              background: ${levelColors.bg};
+              margin-bottom: 30px;
+            }
+            .score-label {
+              font-size: 11px;
+              font-weight: 800;
+              text-transform: uppercase;
+              letter-spacing: 1px;
+              color: #475569;
+              display: block;
+              margin-bottom: 8px;
+            }
+            .score-badge {
+              font-size: 32px;
+              font-weight: 900;
+              color: ${levelColors.text};
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              gap: 10px;
+            }
+            .score-circle {
+              font-size: 40px;
+              margin-top: 15px;
+              display: inline-block;
+              font-weight: 900;
+              background: #FFFFFF;
+              border: 1px solid #E2E8F0;
+              padding: 10px 25px;
+              border-radius: 99px;
+              color: #0F172A;
+              box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            }
+            .reasons-list {
+              margin-bottom: 30px;
+            }
+            .reason-item {
+              font-size: 13px;
+              color: #334155;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: flex-start;
+              gap: 8px;
+              font-weight: 500;
+            }
+            .reason-bullet {
+              color: #2563EB;
+              font-weight: 800;
+            }
+            .advice-list {
+              margin-bottom: 40px;
+            }
+            .advice-item {
+              font-size: 13px;
+              color: #334155;
+              margin-bottom: 10px;
+              display: flex;
+              align-items: flex-start;
+              gap: 8px;
+              font-weight: 500;
+            }
+            .advice-bullet {
+              color: #10B981;
+              font-weight: 800;
+            }
+            .disclaimer {
+              border-top: 1px solid #E2E8F0;
+              padding-top: 20px;
+              font-size: 11px;
+              color: #64748B;
+              text-align: center;
+              line-height: 1.6;
+              font-weight: 500;
+            }
+            @media print {
+              body {
+                padding: 20px;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <div class="brand">
+              <div class="brand-logo">H</div>
+              <div class="brand-name">Health<span>AI</span></div>
+            </div>
+            <div class="doc-id">
+              Report ID: <strong>${result.patientId}</strong><br />
+              Screening Date: <strong>${result.date}</strong><br />
+              Type: <strong>Self-Screening Assessment Report</strong>
+            </div>
+          </div>
+
+          <div class="report-title">${result.disease} Wellness Risk Assessment Report</div>
+
+          <div class="section-grid">
+            <div class="card">
+              <div class="card-title">👤 User Profile</div>
+              <div class="vital-row">
+                <div class="vital-label">Full Name:</div>
+                <div class="vital-value">${result.patientName}</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">Biological Sex:</div>
+                <div class="vital-value">${sex.toUpperCase()}</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">User Age:</div>
+                <div class="vital-value">${age} years</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">Height / Weight:</div>
+                <div class="vital-value">${height} cm / ${weight} kg</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">🏃 Lifestyle Habits</div>
+              <div class="vital-row">
+                <div class="vital-label">Tobacco Smoker:</div>
+                <div class="vital-value">${smoke.toUpperCase()}</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">Regular Exercise:</div>
+                <div class="vital-value">${exercise.toUpperCase()}</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">Balanced Diet:</div>
+                <div class="vital-value">${balancedDiet.toUpperCase()}</div>
+              </div>
+              <div class="vital-row">
+                <div class="vital-label">Stress level:</div>
+                <div class="vital-value">${stressLevel.toUpperCase()}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="score-card">
+            <span class="score-label">Estimated Risk Classification</span>
+            <div class="score-badge">
+              <span>${result.riskLevel} RISK ZONE</span>
+            </div>
+            <div class="score-circle">
+              ${result.riskScore}%
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 30px;">
+            <div class="card-title">🔍 Why this risk score?</div>
+            <div class="reasons-list">
+              ${result.reasons.map(r => `
+                <div class="reason-item">
+                  <span class="reason-bullet">•</span>
+                  <span>${r}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="card" style="margin-bottom: 40px;">
+            <div class="card-title">💡 Recommended Wellness Actions</div>
+            <div class="advice-list">
+              ${result.advice.map(a => `
+                <div class="advice-item">
+                  <span class="advice-bullet">✓</span>
+                  <span>${a}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="disclaimer">
+            <strong>MANDATORY WELLNESS DISCLAIMER:</strong><br />
+            This system is not a medical diagnostic tool. It provides health risk awareness using AI models trained on medical datasets. Always consult a doctor for medical decisions. Calculations are statistical risk awareness estimations designed strictly for educational reference and baseline trend tracking.
+          </div>
+
+          <script>
+            window.onload = function() {
+              window.print();
+            }
+          </script>
+        </body>
+      </html>
+    `)
+
+    printWindow.document.close()
   }
 
   return (

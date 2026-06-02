@@ -7,9 +7,10 @@ function Navbar({ activePage, setPage, darkMode, setDarkMode }) {
   // Layperson friendly tab navigation list
   const navItems = [
     { id: 'home', label: 'Dashboard' },
-    { id: 'predict', label: 'Predict' },
+    { id: 'predict', label: 'Risk Checker' },
     { id: 'history', label: 'History' },
     { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact Us' },
   ]
 
   const handleNavClick = (pageId) => {
