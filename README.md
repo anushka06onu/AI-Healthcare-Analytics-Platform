@@ -11,7 +11,6 @@
 
 An explainable AI platform that combines machine learning, predictive analytics, visualization, and interpretable insights to support early health risk awareness. This system operates as a Research Decision Support Tool, leveraging predictive algorithms calibrated on diverse clinical cohorts to forecast multi-disease risk profiles while providing transparent, layperson-friendly feature attribution charts.
 
-Developed as a highly polished, dual-theme dashboard portal, **Clini-SHAP** serves as a robust prototype for graduate admissions (e.g. Erasmus Mundus applications), machine learning research portfolios, and healthcare AI showcases.
 
 ---
 
