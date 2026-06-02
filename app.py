@@ -783,7 +783,7 @@ if st.session_state.page == "🔬 Patient Diagnostic Suite":
                     'gender': inputs_sex,
                     'age': float(inputs_age),
                     'hypertension': 1 if hist_htn == "Yes" else 0,
-                    'heart_disease': 1 if hist_heart := (hist_cad == "Yes" or hist_pe == "Yes") else 0,
+                    'heart_disease': 1 if (hist_cad == "Yes" or hist_pe == "Yes") else 0,
                     'ever_married': 1 if hist_married == "Yes" else 0,
                     'work_type': hist_work,
                     'Residence_type': hist_residence_val,
