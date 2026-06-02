@@ -42,6 +42,32 @@ I developed this platform as a modern, dual-architecture system featuring:
 
 ---
 
+## 📸 Interface Showcase
+
+Here are the visual representations of the Clini-SHAP Intelligent CDSS platform interfaces:
+
+### 1. Unified Risk Predictor Step-Wizard & Typable Sliders
+Clinicians can interactively slide or click-to-type numerical vitals inputs, with a customizable clinical dropdown selector.
+![Step Wizard & Sliders](screenshots/5_typable_sliders_inputs.png)
+
+### 2. Custom Themed Select Dropdown Menu
+A premium custom-styled popover dropdown replaces native browser dropdown lists.
+![Themed Select Dropdown](screenshots/1_diagnostics_focus_dropdown.png)
+
+### 3. Full-Width Visual Wellness Dashboard & Risk Indicators
+A comprehensive visual health evaluation featuring circular dials, BMI trackers, and lifestyle score indicators.
+![Full-Width Wellness Dashboard](screenshots/4_full_width_wellness_dashboard.png)
+
+### 4. Layperson-Friendly Wellness Contributors & SHAP Attributions
+Complex SHAP attributions translated into clear, comforting wellness score protector (-) and driver (+) matrices.
+![Wellness Score Contributors](screenshots/2_wellness_score_contributors.png)
+
+### 5. High-Fidelity PDF Clinical Report Compilation
+Client-side PDF report compilation detailing patient metadata, diagnostics focus, and wellness indicators.
+![PDF Print Preview](screenshots/3_pdf_print_preview.png)
+
+---
+
 ## 🔬 Deep-Dive: Clinical Classifiers & Datasets Used
 
 The platform coordinates **5 specialized machine learning models** trained on diverse, validated medical cohorts. Below are the details and official repository links for each dataset:
