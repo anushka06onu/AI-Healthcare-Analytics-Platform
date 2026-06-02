@@ -127,10 +127,125 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
         )}
       </div>
 
+      {/* 📊 Wellness Metrics Comparison Charts */}
+      {prediction.metrics && (
+        <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-2xl p-5 shadow-xs space-y-4">
+          <h4 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] flex items-center gap-1.5 border-b border-[var(--card-border)] pb-2 mb-1">
+            <span>📊 Wellness Metrics Comparison</span>
+          </h4>
+
+          {/* Metric 1: BMI Slider comparison */}
+          <div className="space-y-1.5">
+            <div className="flex justify-between items-center text-xs font-bold">
+              <span className="text-[var(--text-muted)]">Body Mass Index (BMI):</span>
+              <span className="text-blue-600 dark:text-blue-400 font-extrabold">{prediction.metrics.bmi} BMI</span>
+            </div>
+            <div className="relative h-2.5 w-full bg-slate-200 dark:bg-slate-700 rounded-full">
+              {/* BMI Track segments colored */}
+              <div className="absolute inset-0 flex rounded-full overflow-hidden">
+                <div className="w-[14%] bg-sky-400" title="Underweight"></div>
+                <div className="w-[26%] bg-emerald-500" title="Healthy"></div>
+                <div className="w-[20%] bg-amber-400" title="Overweight"></div>
+                <div className="w-[40%] bg-red-500" title="Obese"></div>
+              </div>
+              {/* User indicator marker pin */}
+              <div 
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-white border-2 border-blue-600 dark:border-blue-400 shadow-md transition-all duration-500"
+                style={{ left: `${Math.min(Math.max(((prediction.metrics.bmi - 15) / 25) * 100, 2), 98)}%` }}
+              ></div>
+            </div>
+            <div className="flex justify-between text-[9px] text-[var(--text-muted)] font-bold px-0.5">
+              <span>Underweight</span>
+              <span className="text-emerald-600 font-extrabold">Healthy (18.5-25)</span>
+              <span>Overweight</span>
+              <span>Obese (30+)</span>
+            </div>
+          </div>
+
+          {/* Metric 2: Lifestyle Quality index */}
+          <div className="space-y-1.5">
+            <div className="flex justify-between items-center text-xs font-bold">
+              <span className="text-[var(--text-muted)]">Lifestyle Quality Score:</span>
+              <span className={`font-extrabold ${
+                (() => {
+                  let habits = 0;
+                  if (prediction.metrics.smoke === 'no') habits++;
+                  if (prediction.metrics.exercise === 'yes') habits++;
+                  if (prediction.metrics.balancedDiet === 'yes') habits++;
+                  const pct = Math.round((habits / 3) * 100);
+                  return pct >= 100 ? 'text-emerald-500' : pct >= 66 ? 'text-amber-500' : 'text-red-500';
+                })()
+              }`}>
+                {(() => {
+                  let habits = 0;
+                  if (prediction.metrics.smoke === 'no') habits++;
+                  if (prediction.metrics.exercise === 'yes') habits++;
+                  if (prediction.metrics.balancedDiet === 'yes') habits++;
+                  const pct = Math.round((habits / 3) * 100);
+                  return `${pct}% (${habits}/3 Healthy Habits)`;
+                })()}
+              </span>
+            </div>
+            <div className="h-2 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden border border-[var(--card-border)]">
+              <div 
+                className={`h-full rounded-full transition-all duration-500 ${
+                  (() => {
+                    let habits = 0;
+                    if (prediction.metrics.smoke === 'no') habits++;
+                    if (prediction.metrics.exercise === 'yes') habits++;
+                    if (prediction.metrics.balancedDiet === 'yes') habits++;
+                    const pct = Math.round((habits / 3) * 100);
+                    return pct >= 100 ? 'bg-emerald-500' : pct >= 66 ? 'bg-amber-400' : 'bg-red-500';
+                  })()
+                }`}
+                style={{ 
+                  width: `${(() => {
+                    let habits = 0;
+                    if (prediction.metrics.smoke === 'no') habits++;
+                    if (prediction.metrics.exercise === 'yes') habits++;
+                    if (prediction.metrics.balancedDiet === 'yes') habits++;
+                    return Math.round((habits / 3) * 100);
+                  })()}%` 
+                }}
+              ></div>
+            </div>
+            <div className="flex justify-between text-[9px] text-[var(--text-muted)] font-bold px-0.5">
+              <span>Exercise: {prediction.metrics.exercise.toUpperCase()}</span>
+              <span>Diet: {prediction.metrics.balancedDiet.toUpperCase()}</span>
+              <span>Non-Smoker: {prediction.metrics.smoke === 'no' ? 'YES' : 'NO'}</span>
+            </div>
+          </div>
+
+          {/* Metric 3: Comparative vital quick badges */}
+          <div className="grid grid-cols-2 gap-3 pt-1 border-t border-[var(--card-border)]">
+            <div className="p-2.5 rounded-xl bg-[var(--bg-color)] border border-[var(--card-border)] flex flex-col justify-between">
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mb-1">Blood Sugar</span>
+              <div className="flex items-center gap-1.5">
+                <span className={`w-2.5 h-2.5 rounded-full ${prediction.metrics.bloodSugar === 'high' ? 'bg-red-500' : 'bg-emerald-500'}`}></span>
+                <span className="text-xs font-extrabold">{prediction.metrics.bloodSugar === 'high' ? 'Elevated Sugar' : 'Normal / Healthy'}</span>
+              </div>
+            </div>
+
+            <div className="p-2.5 rounded-xl bg-[var(--bg-color)] border border-[var(--card-border)] flex flex-col justify-between">
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider mb-1">Blood Pressure</span>
+              <div className="flex items-center gap-1.5">
+                <span className={`w-2.5 h-2.5 rounded-full ${
+                  prediction.metrics.bloodPressure === 'high' ? 'bg-red-500' : prediction.metrics.bloodPressure === 'low' ? 'bg-amber-400' : 'bg-emerald-500'
+                }`}></span>
+                <span className="text-xs font-extrabold">
+                  {prediction.metrics.bloodPressure === 'high' ? 'Elevated BP' : prediction.metrics.bloodPressure === 'low' ? 'Low BP Status' : 'Normal / Healthy'}
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      )}
+
       {/* Simulated PDF download button */}
       <button
         onClick={onDownload}
-        className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-750 text-white font-extrabold text-sm rounded-xl shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-755 text-white font-extrabold text-sm rounded-xl shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
       >
         <FileDown className="h-4.5 w-4.5" />
         <span>Download Wellness Risk Report (PDF)</span>

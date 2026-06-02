@@ -215,7 +215,20 @@ function Predict({ predictions, setPredictions, setPage }) {
         advice: finalAdvice,
         patientName: patientName.trim() || 'Guest User',
         patientId: 'GUEST-' + Math.floor(1000 + Math.random() * 9000),
-        trend: riskScore > 40 ? 'worsening' : 'improving'
+        trend: riskScore > 40 ? 'worsening' : 'improving',
+        metrics: {
+          age,
+          sex,
+          bmi,
+          smoke,
+          exercise,
+          balancedDiet,
+          stressLevel,
+          bloodPressure,
+          bloodSugar,
+          cholesterol,
+          familyHistory
+        }
       }
 
       setResult(newPrediction)

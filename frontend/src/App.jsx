@@ -114,6 +114,13 @@ function App() {
             >
               Fateha Hossain Anushka
             </a>
+            {' • '}
+            <button 
+              onClick={() => setPage('contact')} 
+              className="text-blue-600 dark:text-blue-400 font-extrabold hover:underline ml-1 cursor-pointer focus:outline-none"
+            >
+              Contact Us
+            </button>
           </p>
           <p className="text-xxs sm:text-xs mt-1 text-[var(--text-muted)] opacity-80">
             Intended strictly for health awareness and educational reference. Not a substitute for professional medical diagnostics.

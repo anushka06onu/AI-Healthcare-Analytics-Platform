@@ -83,17 +83,7 @@ function Contact() {
                 </div>
                 <div>
                   <h4 className="text-xxs font-bold text-[var(--text-muted)] uppercase tracking-wider">Email Us</h4>
-                  <p className="text-xs sm:text-sm font-extrabold">support@healthai.vercel.app</p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3.5">
-                <div className="bg-emerald-500/10 text-emerald-500 p-2.5 rounded-xl border border-emerald-500/15">
-                  <Phone className="h-5 w-5" />
-                </div>
-                <div>
-                  <h4 className="text-xxs font-bold text-[var(--text-muted)] uppercase tracking-wider">Call Us</h4>
-                  <p className="text-xs sm:text-sm font-extrabold">+1 (800) 456-7890</p>
+                  <p className="text-xs sm:text-sm font-extrabold">anushkaonu@gmail.com</p>
                 </div>
               </div>
 
@@ -103,7 +93,7 @@ function Contact() {
                 </div>
                 <div>
                   <h4 className="text-xxs font-bold text-[var(--text-muted)] uppercase tracking-wider">Location</h4>
-                  <p className="text-xs sm:text-sm font-extrabold">San Francisco, CA, USA</p>
+                  <p className="text-xs sm:text-sm font-extrabold">Dhaka, Bangladesh</p>
                 </div>
               </div>
             </div>
