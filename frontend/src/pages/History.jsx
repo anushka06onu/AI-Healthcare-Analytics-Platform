@@ -3,8 +3,30 @@ import { Calendar, ShieldAlert, CheckCircle, TrendingUp, ClipboardList } from 'l
 import Card from '../components/Card'
 
 function History({ predictions }) {
-  // Sparkline coordinates for simulated monthly volume trend (280 -> 640)
-  const sparkPoints = "20,150 50,135 80,120 110,105 140,110 170,100 200,95 230,85 260,75 290,80 320,60 350,30"
+  // Chronological sorting (oldest on the left, newest on the right)
+  const chronological = [...predictions].reverse()
+
+  // Generate dynamic sparkline coordinate points based on actual risk scores
+  const getSparklinePoints = () => {
+    if (chronological.length === 0) return "20,135 350,135" // flat healthy base line
+    if (chronological.length === 1) {
+      const y = 145 - (chronological[0].riskScore / 100) * 115
+      return `20,${y} 350,${y}`
+    }
+    return chronological.map((p, idx) => {
+      const x = 20 + (idx / (chronological.length - 1)) * 330
+      const y = 145 - (p.riskScore / 100) * 115
+      return `${x},${y}`
+    }).join(' ')
+  }
+
+  const sparkPoints = getSparklinePoints()
+  const latestY = chronological.length > 0 ? (145 - (chronological[chronological.length - 1].riskScore / 100) * 115) : 135
+
+  // Average trend description
+  const averageRisk = predictions.length > 0 
+    ? Math.round(predictions.reduce((acc, curr) => acc + curr.riskScore, 0) / predictions.length) 
+    : 0
 
   return (
     <div className="space-y-8 py-4 sm:py-6 text-[var(--text-color)]">
@@ -25,9 +47,9 @@ function History({ predictions }) {
           <div className="md:col-span-4 bg-[var(--bg-color)] p-4 rounded-2xl border border-[var(--card-border)] flex flex-col justify-between h-[120px]">
             <div className="flex justify-between items-center mb-1">
               <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Active Health Trend</span>
-              <span className="text-xs font-extrabold text-emerald-500 flex items-center gap-0.5">
+              <span className={`text-xs font-extrabold flex items-center gap-0.5 ${averageRisk > 40 ? 'text-amber-500' : 'text-emerald-500'}`}>
                 <TrendingUp className="h-3 w-3" />
-                <span>Improving</span>
+                <span>Avg: {averageRisk}% Risk</span>
               </span>
             </div>
             
@@ -40,7 +62,7 @@ function History({ predictions }) {
               {/* Trend line */}
               <polyline fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" points={sparkPoints} />
               {/* Highlight endpoint node */}
-              <circle cx="350" cy="30" r="4.5" fill="#10B981" className="pulse-glow" />
+              <circle cx="350" cy={latestY} r="4.5" fill={averageRisk > 40 ? '#F59E0B' : '#10B981'} className="pulse-glow" />
             </svg>
           </div>
         </div>

@@ -144,7 +144,7 @@ function Contact() {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      placeholder="Fateha Hossain Anushka"
+                      placeholder="Demo Name"
                       className={`block w-full px-3.5 py-2.5 text-[var(--text-color)] bg-[var(--card-bg)] border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-semibold text-xs sm:text-sm ${
                         errors.name ? 'border-red-500' : 'border-[var(--card-border)]'
                       }`}
@@ -159,7 +159,7 @@ function Contact() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="fateha@example.com"
+                      placeholder="demo@example.com"
                       className={`block w-full px-3.5 py-2.5 text-[var(--text-color)] bg-[var(--card-bg)] border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 font-semibold text-xs sm:text-sm ${
                         errors.email ? 'border-red-500' : 'border-[var(--card-border)]'
                       }`}

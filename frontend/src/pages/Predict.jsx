@@ -549,7 +549,7 @@ function Predict({ predictions, setPredictions, setPage }) {
   return (
     <div className="space-y-8 py-4 sm:py-6">
       {/* Dynamic Header */}
-      <Card className="p-6">
+      <Card className="p-6 relative z-40">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
           <div className="md:col-span-8">
             <h2 className="text-xl sm:text-2xl font-black text-[var(--text-color)] mb-2 flex items-center gap-2">
