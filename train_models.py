@@ -4,7 +4,6 @@ import joblib
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
 import shap
 
@@ -50,7 +49,7 @@ def preprocess_stroke(df):
     married_map = {'No': 0, 'Yes': 1}
     df['ever_married'] = df['ever_married'].map(married_map).fillna(0).astype(int)
     
-    work_map = {'Government Job': 0, 'Government Job': 0, 'Govt_job': 0, 'Never_worked': 1, 'Private': 2, 'Self-employed': 3, 'children': 4}
+    work_map = {'Government Job': 0, 'Govt_job': 0, 'Never_worked': 1, 'Private': 2, 'Self-employed': 3, 'children': 4}
     df['work_type'] = df['work_type'].map(work_map).fillna(2).astype(int)
     
     residence_map = {'Rural': 0, 'Urban': 1}
@@ -64,17 +63,13 @@ def preprocess_stroke(df):
     return X, y
 
 def preprocess_kidney(df):
-    # Replace raw "?" strings with standard NaNs
     df = df.replace('?', np.nan)
     
-    # Continuous numeric columns (including sg, al, su which are nominal in arff but naturally continuous/ordinal)
     num_cols = ['age', 'bp', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wbcc', 'rbcc', 'sg', 'al', 'su']
     for col in num_cols:
         df[col] = pd.to_numeric(df[col], errors='coerce')
-        # Impute missing values with median
         df[col] = df[col].fillna(df[col].median())
         
-    # Nominal columns to map
     binary_cols = {
         'rbc': {'normal': 0, 'abnormal': 1},
         'pc': {'normal': 0, 'abnormal': 1},
@@ -91,11 +86,9 @@ def preprocess_kidney(df):
     for col, mapping in binary_cols.items():
         df[col] = df[col].str.strip() if df[col].dtype == object else df[col]
         df[col] = df[col].map(mapping)
-        # Impute nominal columns with mode
         mode_val = df[col].mode()[0] if not df[col].mode().empty else 0
         df[col] = df[col].fillna(mode_val).astype(int)
         
-    # Clean classification target
     df['classification'] = df['classification'].str.strip()
     df['target'] = df['classification'].map({'ckd': 1, 'notckd': 0})
     
@@ -104,7 +97,7 @@ def preprocess_kidney(df):
     return X, y
 
 # ------------------------------------------------------------
-# 2. MODEL TRAINING LOOP
+# 2. METRICS GENERATION & SHAP PRE-COMPUTATION
 # ------------------------------------------------------------
 
 datasets = {
@@ -133,23 +126,28 @@ datasets = {
 metrics_summary = {}
 
 for name, config in datasets.items():
-    print(f"\nProcessing {name} dataset...")
+    print(f"\nProcessing {name} dataset using your pre-trained models...")
+    
     # Load dataset
     df = pd.read_csv(config['path'], encoding='utf-8-sig')
     
     # Preprocess
     X, y = config['preprocess'](df)
     
+    # Load pre-trained EMR model and scaler
+    model = joblib.load(f'models/{name}_model.pkl')
+    scaler = joblib.load(f'models/{name}_scaler.pkl')
+    
     # Train-test split
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
-    # Train model (Random Forest Classifier)
-    model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
-    model.fit(X_train, y_train)
+    # Scale X_train and X_test using your pre-trained scaler
+    X_train_scaled = pd.DataFrame(scaler.transform(X_train), columns=X.columns)
+    X_test_scaled = pd.DataFrame(scaler.transform(X_test), columns=X.columns)
     
     # Predict and evaluate
-    y_pred = model.predict(X_test)
-    y_pred_proba = model.predict_proba(X_test)[:, 1]
+    y_pred = model.predict(X_test_scaled)
+    y_pred_proba = model.predict_proba(X_test_scaled)[:, 1]
     
     accuracy = accuracy_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred, zero_division=0)
@@ -157,16 +155,15 @@ for name, config in datasets.items():
     f1 = f1_score(y_test, y_pred, zero_division=0)
     roc_auc = roc_auc_score(y_test, y_pred_proba)
     
-    print(f"Metrics for {name}:")
+    print(f"Metrics for {name} (Pre-trained model):")
     print(f"  Accuracy : {accuracy:.4f}")
     print(f"  Precision: {precision:.4f}")
     print(f"  Recall   : {recall:.4f}")
     print(f"  F1-Score : {f1:.4f}")
     print(f"  ROC-AUC  : {roc_auc:.4f}")
     
-    # Save model and components
-    joblib.dump(model, f'models/{name}_model.joblib')
-    joblib.dump(X.columns.tolist(), f'models/{name}_columns.joblib')
+    # Save column features and raw X_train baseline
+    joblib.dump(list(scaler.feature_names_in_), f'models/{name}_columns.joblib')
     joblib.dump(X_train, f'models/{name}_X_train.joblib')
     
     # Save metrics summary
@@ -180,18 +177,33 @@ for name, config in datasets.items():
         'positive_prevalence': float(y.mean())
     }
     
-    # Generate SHAP values for the test set and pre-save summaries to accelerate Streamlit EAI page
-    print(f"Generating SHAP values for {name}...")
-    explainer = shap.TreeExplainer(model)
-    shap_values = explainer.shap_values(X_test)
+    # Pre-calculate SHAP values for the test set
+    print(f"Pre-calculating SHAP values for {name}...")
+    model_class = model.__class__.__name__
     
-    # Save explainer object
-    joblib.dump(explainer, f'shap_files/{name}_explainer.joblib')
-    joblib.dump(shap_values, f'shap_files/{name}_shap_values.joblib')
-    joblib.dump(X_test, f'shap_files/{name}_X_test.joblib')
+    if "RandomForest" in model_class:
+        explainer = shap.TreeExplainer(model)
+        shap_values = explainer.shap_values(X_test_scaled)
+        
+        # Save explainer components
+        joblib.dump(explainer, f'shap_files/{name}_explainer.joblib')
+        joblib.dump(shap_values, f'shap_files/{name}_shap_values.joblib')
+        joblib.dump(X_test_scaled, f'shap_files/{name}_X_test.joblib')
+    else:
+        # XGBoost models: use KernelExplainer and save the baseline + test sample values
+        test_sample = shap.sample(X_test_scaled, min(100, len(X_test_scaled)))
+        bg_sample = shap.sample(X_train_scaled, min(30, len(X_train_scaled)))
+        
+        explainer = shap.KernelExplainer(model.predict_proba, bg_sample)
+        shap_values = explainer.shap_values(test_sample)
+        
+        # Save pre-computed SHAP matrices. We dump None as explainer to avoid Cython MemoryView serialization crash
+        joblib.dump(None, f'shap_files/{name}_explainer.joblib')
+        joblib.dump(shap_values, f'shap_files/{name}_shap_values.joblib')
+        joblib.dump(test_sample, f'shap_files/{name}_X_test.joblib')
 
 # Save all metrics to JSON
 with open('models/model_metrics.json', 'w') as f:
     json.dump(metrics_summary, f, indent=4)
 
-print("\nModel training, serialization, and SHAP pre-computation completed successfully for all 5 diseases!")
+print("\nSHAP pre-computation and EMR metrics synchronization completed successfully for all 5 pre-trained models!")

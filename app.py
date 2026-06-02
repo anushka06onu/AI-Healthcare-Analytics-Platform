@@ -124,29 +124,52 @@ def load_metrics():
 # Helper: Load saved model components
 @st.cache_resource
 def load_model_components(disease_name):
-    model = joblib.load(f'models/{disease_name}_model.joblib')
-    columns = joblib.load(f'models/{disease_name}_columns.joblib')
+    model = joblib.load(f'models/{disease_name}_model.pkl')
+    scaler = joblib.load(f'models/{disease_name}_scaler.pkl')
+    columns = list(scaler.feature_names_in_)
     X_train = joblib.load(f'models/{disease_name}_X_train.joblib')
     explainer = joblib.load(f'shap_files/{disease_name}_explainer.joblib')
-    return model, columns, X_train, explainer
+    return model, scaler, columns, X_train, explainer
 
 # Helper: Get Robust SHAP values for 1 prediction
-def get_shap_contributions(explainer, X_sample):
-    shap_val_raw = explainer.shap_values(X_sample)
-    if isinstance(shap_val_raw, list):
-        vals = shap_val_raw[1] if len(shap_val_raw) > 1 else shap_val_raw[0]
-    elif isinstance(shap_val_raw, np.ndarray):
-        if len(shap_val_raw.shape) == 3:
-            vals = shap_val_raw[0, :, 1]
-        elif len(shap_val_raw.shape) == 2:
-            vals = shap_val_raw[0]
+def get_shap_contributions(model, scaler, X_sample):
+    cols = list(scaler.feature_names_in_)
+    X_scaled = pd.DataFrame(scaler.transform(X_sample), columns=cols)
+    
+    model_class = model.__class__.__name__
+    
+    if "RandomForest" in model_class:
+        explainer = shap.TreeExplainer(model)
+        shap_val_raw = explainer.shap_values(X_scaled)
+        
+        if isinstance(shap_val_raw, list):
+            vals = shap_val_raw[1] if len(shap_val_raw) > 1 else shap_val_raw[0]
+        elif isinstance(shap_val_raw, np.ndarray):
+            if len(shap_val_raw.shape) == 3:
+                vals = shap_val_raw[0, :, 1]
+            elif len(shap_val_raw.shape) == 2:
+                vals = shap_val_raw[0]
+            else:
+                vals = shap_val_raw
         else:
             vals = shap_val_raw
     else:
-        try:
-            vals = shap_val_raw.values[0]
-        except AttributeError:
-            vals = shap_val_raw[0]
+        # XGBoost models: use robust KernelExplainer locally with zero-vector baseline
+        baseline = pd.DataFrame(np.zeros((1, len(cols))), columns=cols)
+        explainer = shap.KernelExplainer(model.predict_proba, baseline)
+        shap_val_raw = explainer.shap_values(X_scaled)
+        
+        if isinstance(shap_val_raw, list):
+            vals = shap_val_raw[1] if len(shap_val_raw) > 1 else shap_val_raw[0]
+        elif isinstance(shap_val_raw, np.ndarray):
+            if len(shap_val_raw.shape) == 3:
+                vals = shap_val_raw[0, :, 1]
+            elif len(shap_val_raw.shape) == 2:
+                vals = shap_val_raw[0]
+            else:
+                vals = shap_val_raw
+        else:
+            vals = shap_val_raw
             
     if len(np.shape(vals)) == 2:
         vals = vals[0]
@@ -327,7 +350,7 @@ elif "Predictor" in page:
     st.markdown(f"<div class='section-header'>{d_title}</div>", unsafe_allow_html=True)
     
     try:
-        model, columns, X_train, explainer = load_model_components(d_name)
+        model, scaler, columns, X_train, explainer = load_model_components(d_name)
     except FileNotFoundError:
         st.error(f"Saved model components for **{d_name}** not found. Please run the model training script `train_models.py` first to generate models and SHAP data.")
         st.stop()
@@ -510,8 +533,11 @@ elif "Predictor" in page:
             # Map input parameters in correct column order
             input_df = pd.DataFrame([inputs], columns=columns)
             
-            # Predict
-            prob = model.predict_proba(input_df)[0, 1]
+            # Scale clinical input using EMR standard scaler
+            input_scaled = pd.DataFrame(scaler.transform(input_df), columns=columns)
+            
+            # Predict using scaled features
+            prob = model.predict_proba(input_scaled)[0, 1]
             
             # Risk categorization
             if prob < 0.35:
@@ -579,7 +605,7 @@ elif "Predictor" in page:
             
             # Interactive local explanation (SHAP Contributions)
             st.markdown("### 🔍 Local Feature Contributions (SHAP)")
-            shap_contribs = get_shap_contributions(explainer, input_df)
+            shap_contribs = get_shap_contributions(model, scaler, input_df)
             
             shap_df = pd.DataFrame({
                 'Feature': columns,
@@ -624,7 +650,7 @@ elif page == "Explainable AI (SHAP)":
     eai_disease = st.selectbox("Select Disease Diagnostics Model for SHAP Explanations", ["diabetes", "heart", "liver", "stroke", "kidney"])
     
     try:
-        model, columns, X_train, explainer = load_model_components(eai_disease)
+        model, scaler, columns, X_train, explainer = load_model_components(eai_disease)
         shap_values = joblib.load(f'shap_files/{eai_disease}_shap_values.joblib')
         X_test = joblib.load(f'shap_files/{eai_disease}_X_test.joblib')
     except FileNotFoundError:
