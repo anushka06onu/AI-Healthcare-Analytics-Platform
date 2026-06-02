@@ -44,27 +44,46 @@ I developed this platform as a modern, dual-architecture system featuring:
 
 ## 📸 Interface Showcase
 
-Here are the visual representations of the Clini-SHAP Intelligent CDSS platform interfaces:
+Here are the visual representations of the Clini-SHAP Intelligent CDSS platform interfaces and professional certifications:
 
-### 1. Unified Risk Predictor Step-Wizard & Typable Sliders
+### 1. Interactive Landing Page Dashboard (Dark Mode)
+A modern, dark-themed responsive landing page featuring glassmorphic navigation, high-contrast action buttons, and animated visual elements.
+![Landing Page Dark Mode](screenshots/6_landing_page_dark_mode.png)
+
+### 2. Interactive Landing Page Dashboard (Light Mode)
+A clean, light-themed responsive landing page prioritizing readability and sleek modern clinical aesthetics.
+![Landing Page Light Mode](screenshots/7_landing_page_light_mode.png)
+
+### 3. Unified Risk Predictor Step-Wizard & Typable Sliders
 Clinicians can interactively slide or click-to-type numerical vitals inputs, with a customizable clinical dropdown selector.
 ![Step Wizard & Sliders](screenshots/5_typable_sliders_inputs.png)
 
-### 2. Custom Themed Select Dropdown Menu
+### 4. Custom Themed Select Dropdown Menu
 A premium custom-styled popover dropdown replaces native browser dropdown lists.
 ![Themed Select Dropdown](screenshots/1_diagnostics_focus_dropdown.png)
 
-### 3. Full-Width Visual Wellness Dashboard & Risk Indicators
+### 5. Full-Width Visual Wellness Dashboard & Risk Indicators
 A comprehensive visual health evaluation featuring circular dials, BMI trackers, and lifestyle score indicators.
 ![Full-Width Wellness Dashboard](screenshots/4_full_width_wellness_dashboard.png)
 
-### 4. Layperson-Friendly Wellness Contributors & SHAP Attributions
+### 6. Layperson-Friendly Wellness Contributors & SHAP Attributions
 Complex SHAP attributions translated into clear, comforting wellness score protector (-) and driver (+) matrices.
 ![Wellness Score Contributors](screenshots/2_wellness_score_contributors.png)
 
-### 5. High-Fidelity PDF Clinical Report Compilation
+### 7. High-Fidelity PDF Clinical Report Compilation
 Client-side PDF report compilation detailing patient metadata, diagnostics focus, and wellness indicators.
 ![PDF Print Preview](screenshots/3_pdf_print_preview.png)
+
+---
+
+## 🎓 Data Science Professional Certification
+
+The mathematical models, EMR data engineering workflows, and Explainable AI (SHAP) attributions implemented in this platform are backed by certified professional expertise:
+
+*   **IBM Data Science Professional Certificate**: Completed a rigorous, 12-course certification curriculum covering Data Science Methodology, Python for Data Science, Databases and SQL with Python, Data Analysis, Data Visualization, Machine Learning with Python, and Applied Data Science Capstone.
+*   **Credential Verification ID**: Verified at [Coursera Verification Endpoint](https://coursera.org/verify/professional-cert/WWJZILGDM7FR).
+
+![IBM Data Science Professional Certificate](screenshots/8_ibm_data_science_certificate.png)
 
 ---
 
