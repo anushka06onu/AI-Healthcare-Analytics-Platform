@@ -196,13 +196,36 @@ The classification performance of the serialized model components has been evalu
 > [!NOTE]
 > The Chronic Kidney Disease classifier scores reflect the highly distinct separations inherent in the clinical parameters (e.g. specific gravity, serum creatinine, and urine albumin leakage). In validation, these attributes provide an absolute classification boundary.
 
+### 3. Validation Confusion Matrices
+To evaluate true positive and false positive distributions in clinical decision bounds, we visualize the validation confusion matrices for the classifiers:
+
+| 🍬 Diabetes Confusion Matrix | ❤️ Cardiovascular Confusion Matrix |
+| :---: | :---: |
+| ![Diabetes Confusion Matrix](screenshots/9_diabetes_confusion_matrix.png) | ![Heart Confusion Matrix](screenshots/10_heart_confusion_matrix.png) |
+
+| 🧪 Liver Efficacy Confusion Matrix | 🧠 Stroke Risk Confusion Matrix |
+| :---: | :---: |
+| ![Liver Confusion Matrix](screenshots/11_liver_confusion_matrix.png) | ![Stroke Confusion Matrix](screenshots/12_stroke_confusion_matrix.png) |
+
 ---
 
 ## 🔄 Cross-Validation & Generalizability
 
-To ensure the models maintain high generalization capacities and prevent structural overfitting, the core clinical classifiers were evaluated using **5-Fold Stratified Cross-Validation (`StratifiedKFold`)** inside the Colab training notebooks:
+To ensure the models maintain high generalization capacities and prevent structural overfitting, the core clinical classifiers were evaluated using a rigorous **5-Fold Stratified Cross-Validation (`StratifiedKFold`)** pipeline. 
 
-*   **Stratification Preservation**: Each fold maintains the baseline class proportions of the overall dataset, protecting the training loops from imbalance-induced bias (vital for rare positive classifications such as Stroke, which has a low prevalence of 4.87%).
+### Stratified K-Fold Performance (ROC-AUC)
+Below are the exact cross-validation statistics extracted from the clinical model verification loops:
+
+| Disease Classifier | Fold 1 | Fold 2 | Fold 3 | Fold 4 | Fold 5 | Mean ROC-AUC | Standard Deviation (Std) |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- | :--- |
+| **🍬 Diabetes** | 0.8243 | 0.8419 | 0.8052 | 0.7934 | 0.7545 | **80.38%** | ± 2.97% |
+| **❤️ Cardiovascular** | 0.9177 | 0.8701 | 0.9004 | 0.8709 | 0.8839 | **88.86%** | ± 1.82% |
+| **🧪 Liver Efficacy** | 0.7374 | 0.7222 | 0.7084 | 0.7682 | 0.7638 | **74.00%** | ± 2.32% |
+| **🧠 Stroke Risk** | 0.7976 | 0.8314 | 0.8026 | 0.8254 | 0.8090 | **81.32%** | ± 1.31% |
+| **🩸 Renal Kidney** | 0.9997 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | **99.99%** | ± 0.01% |
+
+### Key Cross-Validation Highlights:
+*   **Stratification Preservation**: Each fold maintains the class proportions of the overall dataset, protecting the training loops from imbalance-induced bias (vital for rare positive classifications such as Stroke, which has a low prevalence of 4.87%).
 *   **Mean Performance Verification**: Models achieve high validation metrics during K-Fold loops, verifying that the scaling variables and parameter weights generalize cleanly to unseen clinical test splits.
 
 ---
