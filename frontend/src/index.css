@@ -1,36 +1,114 @@
 @import "tailwindcss";
 
 @theme {
-  --color-health-lightBg: #F8FAFC;
-  --color-health-darkBg: #0F172A;
   --color-health-primary: #2563EB;
   --color-health-accent: #10B981;
   --color-health-warning: #F59E0B;
   --color-health-danger: #EF4444;
-  --color-health-lightCard: #FFFFFF;
+  --color-health-darkBg: #0F172A;
   --color-health-darkCard: #1E293B;
-  --color-health-darkText: #E2E8F0;
   
   --font-sans: 'Outfit', sans-serif;
 }
 
+/* 🎨 Bulletproof Theme Variables Engine */
+:root {
+  --bg-color: #F8FAFC;
+  --text-color: #0F172A;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(226, 232, 240, 0.9);
+  --text-muted: #64748B;
+  --slider-track: #CBD5E1;
+  --slider-thumb: #2563EB;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+.dark {
+  --bg-color: #0F172A;
+  --text-color: #E2E8F0;
+  --card-bg: #1E293B;
+  --card-border: rgba(51, 65, 85, 0.9);
+  --text-muted: #94A3B8;
+  --slider-track: #334155;
+  --slider-thumb: #3B82F6;
+  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
 body {
-  @apply transition-colors duration-300 text-slate-800 dark:text-health-darkText bg-slate-50 dark:bg-health-darkBg;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.25s ease-in-out, color 0.25s ease-in-out;
 }
 
-/* Premium Scrollbars styling */
-::-webkit-scrollbar {
-  width: 6px;
+/* 🎛️ Explicit High-Contrast Custom Range Sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  padding: 4px 0;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+
+/* Webkit (Chrome, Safari, Edge) Runnable Track */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
   height: 6px;
-}
-::-webkit-scrollbar-track {
-  @apply bg-slate-100 dark:bg-slate-900;
-}
-::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-health-primary;
+  cursor: pointer;
+  background: var(--slider-track);
+  border-radius: 9999px;
+  transition: background-color 0.25s ease-in-out;
+  border: none;
 }
 
-/* Glassmorphic preset elements */
+/* Mozilla Firefox Track */
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: var(--slider-track);
+  border-radius: 9999px;
+  transition: background-color 0.25s ease-in-out;
+  border: none;
+}
+
+/* Webkit Thumb Slider */
+input[type="range"]::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  transition: background-color 0.25s ease-in-out, transform 0.15s ease-in-out;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Mozilla Firefox Thumb Slider */
+input[type="range"]::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border: none;
+  border-radius: 50%;
+  background: var(--slider-thumb);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);
+  transition: background-color 0.25s ease-in-out, transform 0.15s ease-in-out;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.15);
+}
+
+/* Glassmorphic Cards overrides */
 .glass-panel {
   @apply bg-white/75 dark:bg-health-darkCard/75 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50;
 }

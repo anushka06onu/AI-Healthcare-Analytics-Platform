@@ -9,42 +9,43 @@ function Predict({ predictions, setPredictions, setPage }) {
   const [isCalculating, setIsCalculating] = useState(false)
   const [result, setResult] = useState(null)
 
-  // 👤 Form Input States - Purged of Mock Placeholders (Blank-by-default for Text fields)
+  // 👤 Form Input States - Purged of EMR IDs & set to blank/normal defaults
   const [patientName, setPatientName] = useState('')
-  const [patientId, setPatientId] = useState('')
-  const [age, setAge] = useState(45)
+  
+  // Coordinated healthy-by-default baselines (lowers startup risk to Low Risk)
+  const [age, setAge] = useState(30)
   const [sex, setSex] = useState('female')
   
   // Shared vitals
-  const [systolicBp, setSystolicBp] = useState(120)
-  const [diastolicBp, setDiastolicBp] = useState(80)
-  const [bodyWeight, setBodyWeight] = useState(25) // BMI
-  const [bloodSugar, setBloodSugar] = useState(100) // Fasting Glucose
+  const [systolicBp, setSystolicBp] = useState(115) // Normal Systolic
+  const [diastolicBp, setDiastolicBp] = useState(75) // Normal Diastolic
+  const [bodyWeight, setBodyWeight] = useState(22) // Normal BMI (18.5 - 24.9)
+  const [bloodSugar, setBloodSugar] = useState(90) // Normal sugar (< 100)
 
   // Diabetes specific
   const [pregnancies, setPregnancies] = useState(0)
-  const [skinFat, setSkinFat] = useState(23)
-  const [insulin, setInsulin] = useState(30)
-  const [pedigree, setPedigree] = useState(0.37)
+  const [skinFat, setSkinFat] = useState(20)
+  const [insulin, setInsulin] = useState(80)
+  const [pedigree, setPedigree] = useState(0.35)
 
   // Heart specific
-  const [chestPain, setChestPain] = useState('typical')
-  const [cholesterol, setCholesterol] = useState(240)
-  const [pulse, setPulse] = useState(153)
-  const [heartStrain, setHeartStrain] = useState(0.8)
-  const [waveSlope, setWaveSlope] = useState('flat')
+  const [chestPain, setChestPain] = useState('asymptomatic') // No Pain by default
+  const [cholesterol, setCholesterol] = useState(180) // Normal chol (< 200)
+  const [pulse, setPulse] = useState(72) // Normal heart rate
+  const [heartStrain, setHeartStrain] = useState(0.0) // No Strain by default
+  const [waveSlope, setWaveSlope] = useState('normal')
   const [blockedVessels, setBlockedVessels] = useState(0)
   const [bloodFlow, setBloodFlow] = useState('normal')
 
   // Liver specific
-  const [totalBilirubin, setTotalBilirubin] = useState(1.0)
-  const [directBilirubin, setDirectBilirubin] = useState(0.3)
-  const [alpEnzyme, setAlpEnzyme] = useState(208)
-  const [altEnzyme, setAltEnzyme] = useState(35)
-  const [astEnzyme, setAstEnzyme] = useState(42)
-  const [proteins, setProteins] = useState(6.6)
-  const [albumin, setAlbumin] = useState(3.1)
-  const [agRatio, setAgRatio] = useState(0.93)
+  const [totalBilirubin, setTotalBilirubin] = useState(0.8) // Normal bilirubin
+  const [directBilirubin, setDirectBilirubin] = useState(0.2)
+  const [alpEnzyme, setAlpEnzyme] = useState(80) // Normal ALP (44 - 147)
+  const [altEnzyme, setAltEnzyme] = useState(25) // Normal ALT (7 - 56)
+  const [astEnzyme, setAstEnzyme] = useState(20) // Normal AST (10 - 40)
+  const [proteins, setProteins] = useState(7.0) // Normal Proteins
+  const [albumin, setAlbumin] = useState(4.2) // Normal Albumin
+  const [agRatio, setAgRatio] = useState(1.2) // Normal A/G Ratio
 
   // Stroke specific
   const [highBpHistory, setHighBpHistory] = useState('no')
@@ -55,159 +56,155 @@ function Predict({ predictions, setPredictions, setPage }) {
   const [smokingHistory, setSmokingHistory] = useState('never')
 
   // Kidney specific
-  const [urineDensity, setUrineDensity] = useState('1.020') // sg
-  const [urineProteinLeak, setUrineProteinLeak] = useState('0') // al
-  const [urineSugarLeak, setUrineSugarLeak] = useState('0') // su
+  const [urineDensity, setUrineDensity] = useState('1.020') // Healthy sg
+  const [urineProteinLeak, setUrineProteinLeak] = useState('0') // Healthy al
+  const [urineSugarLeak, setUrineSugarLeak] = useState('0') // Healthy su
   const [urineRbc, setUrineRbc] = useState('normal')
   const [urinePus, setUrinePus] = useState('normal')
-  const [bloodUrea, setBloodUrea] = useState(36)
-  const [creatinineWaste, setCreatinineWaste] = useState(1.2)
-  const [bloodSodium, setBloodSodium] = useState(138)
-  const [bloodPotassium, setBloodPotassium] = useState(4.4)
-  const [bloodHemoglobin, setBloodHemoglobin] = useState(12.5)
-  const [hematocritPcv, setHematocritPcv] = useState(40)
-  const [wbcCount, setWbcCount] = useState(7800)
+  const [bloodUrea, setBloodUrea] = useState(15) // Healthy Blood Urea (7 - 20)
+  const [creatinineWaste, setCreatinineWaste] = useState(0.8) // Healthy Creatinine (0.6 - 1.2)
+  const [bloodSodium, setBloodSodium] = useState(140) // Healthy Sodium
+  const [bloodPotassium, setBloodPotassium] = useState(4.0) // Healthy Potassium
+  const [bloodHemoglobin, setBloodHemoglobin] = useState(14.0) // Healthy Hemoglobin
+  const [hematocritPcv, setHematocritPcv] = useState(42) // Healthy PCV
+  const [wbcCount, setWbcCount] = useState(7000)
   const [rbcCount, setRbcCount] = useState(4.8)
   const [appetite, setAppetite] = useState('good')
   const [legSwelling, setLegSwelling] = useState('no')
   const [anemiaHistory, setAnemiaHistory] = useState('no')
 
-  // 🚀 Core predictive risk simulation engine
+  // Core risk calculator
   const handleCalculate = (e) => {
     e.preventDefault()
-
-    // Strict clinical validations
-    if (!patientName.trim() || !patientId.trim()) {
-      alert("⚠️ Patient Identification Required:\nPlease enter the Patient Full Name and EMR Registry ID before running diagnostic estimations.")
-      return
-    }
-
     setIsCalculating(true)
 
-    // Simulate model pre-computations and attributions
     setTimeout(() => {
       let riskScore = 0
       let reasons = []
 
+      // Diabetes Assessment Mappings
       if (selectedDisease === 'diabetes') {
-        // Base risk mapping
         if (bloodSugar > 125) {
           riskScore += 45
-          reasons.push("Your blood sugar level is in the diabetes range (above 125 mg/dl).")
+          reasons.push("Your Fasting Blood Sugar is high (above 125 mg/dL), which is a key diabetes marker.")
         } else if (bloodSugar > 100) {
           riskScore += 20
-          reasons.push("Your blood sugar level indicates early signs of prediabetes.")
+          reasons.push("Your Fasting Blood Sugar level is slightly elevated, suggesting prediabetes risks.")
         }
         if (bodyWeight >= 30) {
           riskScore += 25
-          reasons.push("Your body weight index maps as highly obese, causing high insulin stress.")
+          reasons.push("Your Body Weight (BMI) is in the obese range, increasing insulin stress.")
         } else if (bodyWeight >= 25) {
           riskScore += 12
-          reasons.push("Your body weight is slightly above the healthy range.")
+          reasons.push("Your Body Weight is slightly above the standard healthy BMI zone.")
         }
         if (age > 45) {
           riskScore += 15
-          reasons.push("Age above 45 increases metabolic processing decline.")
+          reasons.push("Being over 45 naturally increases metabolic risk parameters.")
         }
         if (insulin > 150) {
           riskScore += 10
-          reasons.push("Elevated 2-Hour insulin levels indicate active cellular resistance.")
+          reasons.push("Elevated 2-Hour insulin readings suggest your body cells resist insulin.")
         }
       } 
       
+      // Heart Disease Assessment Mappings
       else if (selectedDisease === 'heart') {
         if (systolicBp >= 140 || diastolicBp >= 90) {
           riskScore += 30
-          reasons.push("Your resting blood pressure is significantly high, creating constant arterial strain.")
+          reasons.push("Your resting blood pressure is high, creating constant vascular wall strain.")
         } else if (systolicBp >= 130 || diastolicBp >= 80) {
           riskScore += 15
-          reasons.push("Your resting blood pressure is moderately elevated.")
+          reasons.push("Your resting blood pressure is slightly elevated.")
         }
         if (cholesterol > 240) {
           riskScore += 25
-          reasons.push("Your blood cholesterol level is high, increasing artery blockage risks.")
+          reasons.push("Your blood cholesterol level is high, accelerating arterial clogging risks.")
         }
         if (blockedVessels > 0) {
           riskScore += 25
-          reasons.push(`Fluoroscopy scans found ${blockedVessels} main heart blood vessels blocked.`);
+          reasons.push(`Heart scans identify ${blockedVessels} main coronary arteries blocked.`);
         }
         if (heartStrain > 1.5) {
           riskScore += 15
-          reasons.push("ECG readings identify severe heart strain during exercise.")
+          reasons.push("ECG tracking flags moderate heart strain during active workouts.")
         }
         if (age > 50) {
           riskScore += 10
-          reasons.push("Aging increases overall vascular wall stiffening risks.")
+          reasons.push("Blood vessels naturally stiffen slightly as you age.")
         }
       } 
       
+      // Liver Disease Assessment Mappings
       else if (selectedDisease === 'liver') {
-        if (totalBilirubin > 2.0) {
+        if (totalBilirubin > 1.2) {
           riskScore += 35
-          reasons.push("Your liver bile waste (Bilirubin) is high, suggesting bile duct or cellular congestion.")
+          reasons.push("Your bile waste (Bilirubin) is elevated, suggesting biliary duct or cell strain.")
         }
         if (altEnzyme > 56) {
           riskScore += 30
-          reasons.push("Liver cell irritation enzymes (ALT/SGPT) are elevated, pointing to liver inflammation.")
+          reasons.push("Your ALT Liver Irritation Enzyme is high, pointing to liver cell stress.")
         }
         if (albumin < 3.5) {
           riskScore += 20
-          reasons.push("Your liver protein synthesis (Albumin) is below normal, indicating liver cell fatigue.")
+          reasons.push("Your Albumin protein synthesis is below standard, indicating hepatic fatigue.")
         }
         if (agRatio < 0.8) {
           riskScore += 15
-          reasons.push("Your Albumin/Globulin ratio is low, mapping chronic liver stress.")
+          reasons.push("Your Albumin/Globulin ratio is low, mapping chronic hepatic strain.")
         }
       } 
       
+      // Stroke Assessment Mappings
       else if (selectedDisease === 'stroke') {
         if (highBpHistory === 'yes' || systolicBp >= 140) {
           riskScore += 35
-          reasons.push("Active history of chronic high blood pressure significantly impacts vascular perfusion.")
+          reasons.push("A history of high blood pressure is the leading risk factor for cerebral circulation.")
         }
         if (bloodSugar > 140) {
           riskScore += 25
-          reasons.push("Your blood sugar averages are high, which irritates cerebral blood vessel linings.")
+          reasons.push("Elevated sugar levels irritate cerebral blood vessel wall linings.")
         }
         if (heartTroubleHistory === 'yes') {
           riskScore += 20
-          reasons.push("History of cardiac troubles elevates stroke risks from clot formations.")
+          reasons.push("Previous heart trouble histories increase the likelihood of microscopic clot formation.")
         }
         if (smokingHistory === 'smokes') {
           riskScore += 15
-          reasons.push("Active smoking narrows blood vessels and increases plaque rupturing risks.")
+          reasons.push("Active smoking narrows blood vessels and increases plaque rupture risks.")
         }
         if (age > 60) {
           riskScore += 10
-          reasons.push("Vascular walls age and naturally weaken over 60 years.")
+          reasons.push("Brain arteries naturally weaken and lose flexibility over 60.")
         }
       } 
       
+      // Kidney Disease Assessment Mappings
       else if (selectedDisease === 'kidney') {
-        if (creatinineWaste > 1.5) {
+        if (creatinineWaste > 1.2) {
           riskScore += 45
-          reasons.push("Your kidney filtration waste (Creatinine) is high, signaling active kidney filtering decline.")
+          reasons.push("Your Kidney Creatinine Waste is high, indicating a drop in kidney filtration.")
         }
         if (urineProteinLeak !== '0') {
           riskScore += 25
-          reasons.push("Urine protein leak checks identified structural leakage from your kidney filters.")
+          reasons.push("Urine tests show proteins are leaking through your kidney filtration walls.")
         }
         if (urineDensity === '1.005' || urineDensity === '1.010') {
           riskScore += 15
-          reasons.push("Urine specific gravity density is low, meaning your kidneys struggle to concentrate waste.")
+          reasons.push("Urine Specific Gravity is low, indicating kidneys are struggling to concentrate waste.")
         }
-        if (bloodHemoglobin < 11.0) {
+        if (bloodHemoglobin < 12.0) {
           riskScore += 15
-          reasons.push("Low oxygen-carrying hemoglobin (Anemia) is a standard complication of chronic kidney strain.")
+          reasons.push("Low hemoglobin (Anemia) is a standard indicator of chronic renal filtration strain.")
         }
         if (highBpHistory === 'yes' || diastolicBp >= 90) {
           riskScore += 10
-          reasons.push("Unmanaged high blood pressure accelerates micro-vascular kidney damage.")
+          reasons.push("Chronic blood pressure elevations speed up microscopic kidney vascular damages.")
         }
       }
 
-      // bound risk score cleanly
-      riskScore = Math.min(Math.max(riskScore, 5), 98)
+      // Bound risk score
+      riskScore = Math.min(Math.max(riskScore, 6), 98)
       
       let riskLevel = "Low"
       if (riskScore >= 70) riskLevel = "High"
@@ -221,39 +218,39 @@ function Predict({ predictions, setPredictions, setPage }) {
         riskScore,
         riskLevel,
         reasons,
-        patientName,
-        patientId
+        patientName: patientName.trim() || 'Guest User',
+        patientId: 'GUEST-' + Math.floor(1000 + Math.random() * 9000)
       }
 
       setResult(newPrediction)
       setPredictions([newPrediction, ...predictions])
       setIsCalculating(false)
-    }, 1200)
+    }, 1000)
   }
 
-  // simulated PDF Report compiler download
+  // Simulated EMR report compiler PDF download
   const handleDownload = () => {
     if (!result) return
     
     alert(`💾 Clinical PDF Compile Success!\n\n` +
-          `File: clinical_health_risk_report_${result.patientId}.pdf\n` +
-          `Patient: ${result.patientName}\n` +
-          `Clinician: EMR Diagnostics Platform\n` +
+          `File: health_risk_report_${result.patientId}.pdf\n` +
+          `User: ${result.patientName}\n` +
+          `Assessor: HealthAI Assistant\n` +
           `Diagnostic: ${result.disease} (${result.riskLevel} Risk - ${result.riskScore}%)\n\n` +
-          `Saving compiled EMR report locally...`)
+          `Saving your personalized risk report...`)
   }
 
   return (
     <div className="space-y-8 py-4 sm:py-6">
-      {/* Dynamic Header navbar disease focus selector */}
+      {/* Visual Diagnostic Focus selector */}
       <Card className="p-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
           <div className="md:col-span-8">
-            <h2 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white mb-2">
-              🔬 Diagnostics Workspace
+            <h2 className="text-lg sm:text-xl font-extrabold text-[var(--text-color)] mb-2">
+              🔬 Health Risk Checker
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium leading-relaxed">
-              Select your diagnostic focus from the dropdown. Vitals entered in the shared panel automatically map to all active disease calculations.
+            <p className="text-xs sm:text-sm text-[var(--text-muted)] font-medium leading-relaxed">
+              Select the diagnostic focus from the dropdown. Enter your basic health parameters in the panels below. All inputs use plain, jargon-free terminology with normal ranges.
             </p>
           </div>
           <div className="md:col-span-4">
@@ -267,45 +264,29 @@ function Predict({ predictions, setPredictions, setPage }) {
 
       {/* Main Two-Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* LEFT COLUMN: Combined Form */}
+        {/* LEFT COLUMN: Input Form */}
         <form onSubmit={handleCalculate} className="lg:col-span-7 space-y-6">
-          {/* Section 1: Demographics & Identification */}
+          {/* Section 1: About You Profile */}
           <Card className="p-6">
-            <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-              👤 Patient Profile & Identification
+            <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+              👤 About You
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField 
-                label="Patient Full Name"
+                label="Your Name (Optional)"
                 type="text"
                 value={patientName}
                 onChange={setPatientName}
-                reference="Enter Patient Legal Name..."
+                reference="Used solely to personalize your PDF report"
               />
               <InputField 
-                label="EMR Registry ID Number"
-                type="text"
-                value={patientId}
-                onChange={setPatientId}
-                reference="Enter Unique EMR ID..."
-              />
-            </div>
-          </Card>
-
-          {/* Section 2: Shared Vitals */}
-          <Card className="p-6">
-            <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-              🩺 Shared Clinical Vitals
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <InputField 
-                label="Patient Age"
+                label="Your Age"
                 type="slider"
                 min={1}
                 max={110}
                 value={age}
                 onChange={setAge}
-                reference="Standard patient age in years"
+                reference="Age in years"
               />
               <InputField 
                 label="Biological Sex"
@@ -313,8 +294,17 @@ function Predict({ predictions, setPredictions, setPage }) {
                 value={sex}
                 onChange={setSex}
                 options={[{ label: 'Female', value: 'female' }, { label: 'Male', value: 'male' }]}
-                reference="Sex at birth, used for metabolic rates"
+                reference="Used for metabolic baselines"
               />
+            </div>
+          </Card>
+
+          {/* Section 2: Shared Vitals */}
+          <Card className="p-6">
+            <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+              🩺 Body vital indicators
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <InputField 
                 label="Fasting Blood Sugar level"
                 type="slider"
@@ -322,8 +312,8 @@ function Predict({ predictions, setPredictions, setPage }) {
                 max={250}
                 value={bloodSugar}
                 onChange={setBloodSugar}
-                tooltip="Fasting plasma glucose. Higher levels (above 100) are early warning indicators."
-                reference="Healthy: Under 100 mg/dL"
+                tooltip="Your fasting sugar level. Elevated sugar points to prediabetes/diabetes conditions."
+                reference="Healthy standard: Under 100 mg/dL"
               />
               <InputField 
                 label="Body Weight level (BMI)"
@@ -332,28 +322,28 @@ function Predict({ predictions, setPredictions, setPage }) {
                 max={50}
                 value={bodyWeight}
                 onChange={setBodyWeight}
-                tooltip="Obesity ratio based on height and weight. High weight increases vascular stress."
-                reference="Healthy range: 18.5 - 24.9"
+                tooltip="Body weight ratio based on height and weight. High weight increases vascular strain."
+                reference="Healthy standard: 18.5 - 24.9"
               />
               <InputField 
-                label="Resting Upper Blood Pressure (Systolic)"
+                label="Resting Upper Blood Pressure"
                 type="slider"
                 min={80}
                 max={200}
                 value={systolicBp}
                 onChange={setSystolicBp}
-                tooltip="Arterial pressure when heart beats. High upper BP is cardiovascular strain."
-                reference="Healthy: Under 120 mm Hg"
+                tooltip="Arterial wall pressure when heart beats. High upper BP is high cardiovascular strain."
+                reference="Healthy standard: Under 120 mm Hg"
               />
               <InputField 
-                label="Resting Lower Blood Pressure (Diastolic)"
+                label="Resting Lower Blood Pressure"
                 type="slider"
                 min={50}
                 max={120}
                 value={diastolicBp}
                 onChange={setDiastolicBp}
-                tooltip="Arterial pressure when heart rests. High lower BP is general vascular strain."
-                reference="Healthy: Under 80 mm Hg"
+                tooltip="Arterial wall pressure when heart rests. High lower BP is general vascular strain."
+                reference="Healthy standard: Under 80 mm Hg"
               />
             </div>
           </Card>
@@ -361,8 +351,8 @@ function Predict({ predictions, setPredictions, setPage }) {
           {/* Section 3: Conditional Lab parameters based on selected disease */}
           {selectedDisease === 'diabetes' && (
             <Card className="p-6">
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                🧪 Diabetes Laboratory Panel
+              <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+                🧪 Sugar & Diabetes Indicators
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {sex === 'female' && (
@@ -373,7 +363,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                     max={15}
                     value={pregnancies}
                     onChange={setPregnancies}
-                    reference="Pregnancies count (female demographics)"
+                    reference="Female pregnancy history tracking"
                   />
                 )}
                 <InputField 
@@ -384,7 +374,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                   value={skinFat}
                   onChange={setSkinFat}
                   tooltip="Arm skin fold thickness used to estimate overall body fat reserves."
-                  reference="Typical range: 10 - 50 mm"
+                  reference="Typical standard: 10 - 50 mm"
                 />
                 <InputField 
                   label="2-Hour Blood Insulin level"
@@ -393,8 +383,8 @@ function Predict({ predictions, setPredictions, setPage }) {
                   max={600}
                   value={insulin}
                   onChange={setInsulin}
-                  tooltip="2-Hour serum insulin level. High levels map metabolic insulin resistance."
-                  reference="Typical range: 15 - 276 mu U/ml"
+                  tooltip="Insulin response level. High insulin levels map cellular glucose resistance."
+                  reference="Typical standard: 15 - 276 mu U/ml"
                 />
                 <InputField 
                   label="Family History Diabetes Score"
@@ -404,8 +394,8 @@ function Predict({ predictions, setPredictions, setPage }) {
                   step={0.01}
                   value={pedigree}
                   onChange={setPedigree}
-                  tooltip="Pedigree score mapping diabetes occurrences in direct blood relatives."
-                  reference="Typical range: 0.08 - 2.40"
+                  tooltip="Genetic risk scoring mapping diabetes occurrences in direct blood relatives."
+                  reference="Typical standard: 0.08 - 2.40"
                 />
               </div>
             </Card>
@@ -413,8 +403,8 @@ function Predict({ predictions, setPredictions, setPage }) {
 
           {selectedDisease === 'heart' && (
             <Card className="p-6">
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                🧪 Cardio Stress Laboratory Markers
+              <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+                🧪 Heart Activity Indicators
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <InputField 
@@ -424,7 +414,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                   max={500}
                   value={cholesterol}
                   onChange={setCholesterol}
-                  tooltip="Total fatty lipid counts. Over 240 is elevated, causing arterial blockage risk."
+                  tooltip="Fatty lipids counts. Elevated total cholesterol increases cardiovascular strain."
                   reference="Healthy target: Under 200 mg/dL"
                 />
                 <InputField 
@@ -434,29 +424,29 @@ function Predict({ predictions, setPredictions, setPage }) {
                   max={230}
                   value={pulse}
                   onChange={setPulse}
-                  tooltip="Maximum recorded pulse rate during cardio stress activity."
-                  reference="Maximum stress fitness target"
+                  tooltip="Maximum recorded pulse rate during cardio exercise."
+                  reference="Target fitness heart rate"
                 />
                 <InputField 
-                  label="ECG Heart Strain level"
+                  label="Heart Strain level (ST depression)"
                   type="slider"
                   min={0.0}
                   max={8.0}
                   step={0.1}
                   value={heartStrain}
                   onChange={setHeartStrain}
-                  tooltip="ECG stress strain wave depression. Higher levels suggest low cardiac oxygen."
+                  tooltip="ECG wave ST strain depressions. High suggests vascular oxygen deficits."
                   reference="Healthy target: Under 1.0"
                 />
                 <InputField 
-                  label="Blocked Coronary Vessels Count"
+                  label="Blocked Major Coronary Vessels Count"
                   type="slider"
                   min={0}
                   max={4}
                   value={blockedVessels}
                   onChange={setBlockedVessels}
-                  tooltip="Number of main coronary arteries found blocked under fluoroscopy scans."
-                  reference="Healthy target: 0 vessels"
+                  tooltip="Main heart blood vessels found blocked under diagnostic fluoroscopy."
+                  reference="Healthy target: 0 vessels blocked"
                 />
                 <InputField 
                   label="Chest Pain Severity Type"
@@ -464,12 +454,12 @@ function Predict({ predictions, setPredictions, setPage }) {
                   value={chestPain}
                   onChange={setChestPain}
                   options={[
+                    { label: 'No Chest Pain (Asymptomatic)', value: 'asymptomatic' },
                     { label: 'Non-Anginal Muscle Pain', value: 'nonanginal' },
                     { label: 'Typical Heart Angina', value: 'typical' },
-                    { label: 'Atypical Non-Classic Pain', value: 'atypical' },
-                    { label: 'No Chest Pain (Asymptomatic)', value: 'asymptomatic' }
+                    { label: 'Atypical Non-Classic Pain', value: 'atypical' }
                   ]}
-                  reference="Clinical severity chest indicators"
+                  reference="Clinical severity pain mapping"
                 />
                 <InputField 
                   label="Resting Electrocardiogram (ECG)"
@@ -481,7 +471,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                     { label: 'ST-T Wave Abnormality (Heart Strain)', value: 'abnormality' },
                     { label: 'Left Ventricular Hypertrophy (Enlargement)', value: 'hypertrophy' }
                   ]}
-                  reference="Cardio ECG wall thickness indicators"
+                  reference="Cardio wall thickness ECG indicators"
                 />
                 <InputField 
                   label="Heart Blood Flow Scan (Thalassemia)"
@@ -493,7 +483,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                     { label: 'Fixed flow defect (Old muscle damage)', value: 'fixed' },
                     { label: 'Reversible defect (Active blockage risk)', value: 'reversible' }
                   ]}
-                  reference="Thalassemia vascular perfusion scans"
+                  reference="Vascular flow perfusion indicators"
                 />
               </div>
             </Card>
@@ -501,12 +491,12 @@ function Predict({ predictions, setPredictions, setPage }) {
 
           {selectedDisease === 'liver' && (
             <Card className="p-6">
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                🧪 Hepatic Enzymes & Protein Panel
+              <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+                🧪 Liver Enzymes & Protein Panel
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <InputField 
-                  label="Total Bilirubin (Yellow Bile Pigment)"
+                  label="Bile Waste Pigment (Total Bilirubin)"
                   type="slider"
                   min={0.1}
                   max={10.0}
@@ -524,21 +514,21 @@ function Predict({ predictions, setPredictions, setPage }) {
                   step={0.1}
                   value={directBilirubin}
                   onChange={setDirectBilirubin}
-                  tooltip="Processed bile waste. High levels indicate direct hepatocyte injury."
+                  tooltip="Processed bile waste. High levels indicate cellular liver injury."
                   reference="Healthy direct: 0.0 - 0.3 mg/dL"
                 />
                 <InputField 
-                  label="Liver Alkaline Phosphatase (ALP)"
+                  label="Liver Alkaline Enzyme (ALP)"
                   type="slider"
                   min={20}
                   max={500}
                   value={alpEnzyme}
                   onChange={setAlpEnzyme}
-                  tooltip="Liver and bone enzyme. High values indicate biliary duct congestion."
+                  tooltip="Liver and bone enzyme. High values indicate bile duct congestion."
                   reference="Healthy ALP: 44 - 147 IU/L"
                 />
                 <InputField 
-                  label="ALT Liver Irritation Enzyme"
+                  label="ALT Liver Cell Irritation Enzyme"
                   type="slider"
                   min={5}
                   max={300}
@@ -596,7 +586,7 @@ function Predict({ predictions, setPredictions, setPage }) {
 
           {selectedDisease === 'stroke' && (
             <Card className="p-6">
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
+              <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
                 🏥 Medical History & Lifestyle Profile
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -606,7 +596,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                   value={highBpHistory}
                   onChange={setHighBpHistory}
                   options={[{ label: 'No History', value: 'no' }, { label: 'Yes (Active history)', value: 'yes' }]}
-                  reference="Has chronic hypertension been diagnosed?"
+                  reference="Has chronic high blood pressure been diagnosed?"
                 />
                 <InputField 
                   label="Heart Trouble History?"
@@ -627,7 +617,7 @@ function Predict({ predictions, setPredictions, setPage }) {
                     { label: 'Active Smoker', value: 'smokes' },
                     { label: 'Unknown / Not Disclosed', value: 'unknown' }
                   ]}
-                  reference="Cardio and vascular plaque narrow risks"
+                  reference="Vascular narrows and plaque risks"
                 />
                 <InputField 
                   label="Ever Married?"
@@ -665,12 +655,12 @@ function Predict({ predictions, setPredictions, setPage }) {
 
           {selectedDisease === 'kidney' && (
             <Card className="p-6">
-              <h3 className="text-xs sm:text-sm font-extrabold text-slate-800 dark:text-white uppercase tracking-wider mb-4 border-b border-slate-100 dark:border-slate-800/80 pb-2">
-                🧪 Renal Urinalysis & Blood Panel
+              <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider mb-4 border-b border-[var(--card-border)] pb-2">
+                🧪 Urine & Kidney Filtration Indicators
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <InputField 
-                  label="Urine Specific Gravity (Density)"
+                  label="Urine specific gravity (Density)"
                   type="select"
                   value={urineDensity}
                   onChange={setUrineDensity}
@@ -678,10 +668,10 @@ function Predict({ predictions, setPredictions, setPage }) {
                     { label: '1.020 (Healthy concentration)', value: '1.020' },
                     { label: '1.025 (Healthy concentration)', value: '1.025' },
                     { label: '1.015 (Mild dilution)', value: '1.015' },
-                    { label: '1.010 (Dilute urine / filter struggle)', value: '1.010' },
+                    { label: '1.010 (Dilute / filter struggle)', value: '1.010' },
                     { label: '1.005 (Severe filter struggle)', value: '1.005' }
                   ]}
-                  reference="Specific gravity renal density indicators"
+                  reference="Specific gravity renal concentration"
                 />
                 <InputField 
                   label="Urine Protein level (Albumin Leakage)"
@@ -738,14 +728,14 @@ function Predict({ predictions, setPredictions, setPage }) {
                   reference="Healthy range: 7 - 20 mg/dL"
                 />
                 <InputField 
-                  label="Kidney Creatinine Waste level"
+                  label="Kidney Filtration Waste level (Creatinine)"
                   type="slider"
                   min={0.1}
                   max={15.0}
                   step={0.1}
                   value={creatinineWaste}
                   onChange={setCreatinineWaste}
-                  tooltip="Serum Creatinine muscle wear waste. Highly sensitive marker for filtration decline."
+                  tooltip="Creatinine muscle wear waste. Highly sensitive marker for kidney filtering decline."
                   reference="Healthy range: 0.6 - 1.2 mg/dL"
                 />
                 <InputField 
@@ -788,9 +778,9 @@ function Predict({ predictions, setPredictions, setPage }) {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="px-8 py-3.5 bg-blue-600 dark:bg-health-primary hover:bg-blue-700 dark:hover:bg-blue-500 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 transition-all duration-200 w-full sm:w-auto"
+              className="px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-lg shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 hover:scale-[1.01] transition-all duration-200 w-full sm:w-auto cursor-pointer"
             >
-              Run Diagnostic Risk Estimation
+              Check Health Risk Score
             </button>
           </div>
         </form>
