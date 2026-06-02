@@ -52,30 +52,30 @@ function Predict({ predictions, setPredictions, setPage }) {
       }
 
       // Age risk factor across all diseases
-      if (age > 45) {
+      if (age > 45 && age <= 65) {
         riskScore += 10
-        reasons.push(`Your age (${age} years) naturally increases chronic risk baselines slightly.`)
+        reasons.push(`Your current age of ${age} years puts you in a stage of life where metabolic baselines naturally begin to slow down slightly, making standard body systems a bit more sensitive to lifestyle stress factors over time.`)
       } else if (age > 65) {
         riskScore += 22
-        reasons.push(`At ${age} years of age, blood vessels and cellular response rates naturally stiffen.`)
+        reasons.push(`Being ${age} years of age means your body has accumulated years of biological experience. Naturally, cellular repair mechanisms and blood vessels tend to become less elastic over the years, which increases baseline risk indices.`)
       }
 
       // Lifestyle risk factors across all diseases
       if (smoke === 'yes') {
         if (selectedDisease === 'heart' || selectedDisease === 'stroke') {
           riskScore += 28
-          reasons.push("Active smoking narrows blood vessels and increases arterial clogging risks substantially.")
+          reasons.push("Active tobacco smoking introduces carbon monoxide and chemical free radicals that narrow and stiffen your blood vessels. This restricts vital oxygen delivery and substantially speeds up the natural formation of cardiovascular plaques.")
         } else {
           riskScore += 12
-          reasons.push("Smoking exposes cells to free radicals, placing stress on internal organs.")
+          reasons.push("Tobacco smoke exposes your cells to external oxidative stress, which forces your internal organs, blood filters, and cellular pathways to work harder to neutralize free radicals.")
         }
-        advice.push("Consider joining a local smoking cessation program to protect your blood vessels.")
+        advice.push("Consider speaking with a health coach or joining a smoking cessation support program to protect your delicate blood vessels.")
       }
 
       if (exercise === 'no') {
         riskScore += 15
-        reasons.push("Not exercising regularly slows metabolic rates and reduces heart muscle conditioning.")
-        advice.push("Aim for 150 minutes of moderate activity, like brisk walking, per week.")
+        reasons.push("Having a sedentary lifestyle means your heart muscle is not receiving regular aerobic conditioning, and your cellular metabolism is slower. Regular physical movement acts like a natural vacuum, helping clear excess glucose and cholesterol from your blood.")
+        advice.push("Aim for 150 minutes of moderate activity weekly—even starting with simple, brisk 15-minute daily walks can activate vascular protection.")
       } else {
         advice.push("Great job! Maintain your active physical exercise routine.")
       }
@@ -83,18 +83,18 @@ function Predict({ predictions, setPredictions, setPage }) {
       if (balancedDiet === 'no') {
         if (selectedDisease === 'liver' || selectedDisease === 'diabetes') {
           riskScore += 22
-          reasons.push("An unbalanced diet high in processed foods loads cells with fats and sudden sugar spikes.")
+          reasons.push("An unbalanced diet high in ultra-processed sugars and fats causes sudden glucose spikes and forces your body to store excess energy. This directly strains your pancreas's insulin locks and places an extra metabolic burden on your liver filters.")
         } else {
           riskScore += 10
-          reasons.push("Less balanced eating patterns deprive the body of protective antioxidants.")
+          reasons.push("Eating processed foods frequently deprives your body of protective antioxidants and vital plant fibers that naturally buffer blood pressure and sweep cholesterol out of your bloodstream.")
         }
-        advice.push("Focus on fiber-rich whole foods, leafy green vegetables, and lean proteins.")
+        advice.push("Focus on fiber-rich whole foods, leafy green vegetables, and natural ingredients while reducing packaged/processed meals.")
       }
 
       if (stressLevel === 'high') {
         riskScore += 18
-        reasons.push("Severe stress levels trigger hormones like cortisol, which spikes blood pressure and sugars.")
-        advice.push("Incorporate 5-10 minutes of daily mindfulness, deep breathing, or light yoga.")
+        reasons.push("Experiencing high everyday stress triggers a sustained 'fight-or-flight' hormonal response. The constant release of cortisol and adrenaline narrows blood vessels and prompts your liver to release extra sugars into circulation.")
+        advice.push("Incorporate 5 to 10 minutes of daily mindfulness, deep-breathing exercises, or light yoga to quiet your nervous system and lower blood stress.")
       } else if (stressLevel === 'medium') {
         riskScore += 6
       }
@@ -102,36 +102,36 @@ function Predict({ predictions, setPredictions, setPage }) {
       // Family History risk factor across all diseases
       if (familyHistory === 'yes') {
         riskScore += 16
-        reasons.push("A close family history of chronic illness points to a minor genetic predisposition.")
+        reasons.push("Having close biological relatives (parents or siblings) diagnosed with chronic illness points to a minor genetic predisposition. While genes are not destiny, it means your metabolic cellular pathways are naturally more sensitive to environmental and lifestyle habits.")
       }
 
       // Internal Mapping Logic based on selected disease
       if (selectedDisease === 'diabetes') {
         if (bloodSugar === 'high') {
           riskScore += 45
-          reasons.push("Your blood sugar status is high, which is the primary indicator of active prediabetes or diabetes.")
+          reasons.push("Your blood sugar trend is currently high, which is the primary indicator of cellular insulin resistance. This means glucose remains circulating in your bloodstream rather than entering cells for energy, placing high direct strain on your pancreatic health.")
         }
         if (bmi >= 30) {
           riskScore += 20
-          reasons.push(`Your calculated Body Mass Index (BMI: ${bmi}) is in the obese zone, straining cellular insulin cells.`)
+          reasons.push(`Your calculated Body Mass Index (BMI: ${bmi}) is in the obese zone. This excess weight accumulates fat cells around vital organs, creating a strong physical barrier that blocks insulin receptors from absorbing blood sugar, leading to severe insulin resistance.`)
         } else if (bmi >= 25) {
           riskScore += 10
-          reasons.push(`Your body weight level (BMI: ${bmi}) is slightly elevated above standard healthy ranges.`)
+          reasons.push(`Your calculated Body Mass Index (BMI: ${bmi}) is in the overweight range. Even minor excess body weight can create partial resistance in your cellular insulin locks, making it harder for your body to process dietary sugars efficiently.`)
         }
         if (bloodPressure === 'high') {
           riskScore += 12
-          reasons.push("Elevated blood pressure is frequently linked with insulin metabolic resistance.")
+          reasons.push("Elevated blood pressure is strongly linked to overall insulin resistance, as narrowed vessels limit the speed at which insulin can circulate and clear sugars from your tissues.")
         }
       } 
       
       else if (selectedDisease === 'heart') {
         if (bloodPressure === 'high') {
           riskScore += 35
-          reasons.push("High blood pressure puts constant, heavy physical stress on your arterial walls.")
+          reasons.push("High blood pressure puts constant, heavy physical stress on your arterial walls. This continuous physical pressure damages the delicate inner linings of your arteries, making it much easier for fats and plaque to accumulate.")
         }
         if (cholesterol === 'high') {
           riskScore += 25
-          reasons.push("Elevated cholesterol can lead to plaque blockages in your heart blood vessels.")
+          reasons.push("Elevated cholesterol levels mean there is an excess of circulating lipid fats in your bloodstream. Over time, these fats can bind with other substances to build physical plaque barriers inside your coronary arteries, restricting natural oxygenated blood flow.")
         }
         if (bloodSugar === 'high') {
           riskScore += 12
@@ -142,45 +142,45 @@ function Predict({ predictions, setPredictions, setPage }) {
       else if (selectedDisease === 'liver') {
         if (cholesterol === 'high') {
           riskScore += 22
-          reasons.push("High blood lipid levels can lead to excess healthy fat storage inside liver cells.")
+          reasons.push("Elevated blood lipid levels force the liver to filter and process excessive fat particles, which can lead to fat droplets accumulating inside hepatic cells and causing cellular swelling.")
         }
         if (bloodSugar === 'high') {
           riskScore += 15
-          reasons.push("High sugar levels force the liver to convert excess glucose directly into hepatic fat.")
+          reasons.push("High circulating blood sugars prompt the liver to convert excess glucose directly into saturated fats, which are then stored within the liver tissue itself, raising risk indexes.")
         }
         if (bmi >= 30) {
           riskScore += 15
-          reasons.push("Higher body weights are strongly associated with fat accumulation in liver tissues.")
+          reasons.push("A higher weight index (BMI in the obese range) is strongly associated with direct fat accumulation in liver tissues, leading to non-alcoholic cellular irritation.")
         }
       } 
       
       else if (selectedDisease === 'stroke') {
         if (bloodPressure === 'high') {
           riskScore += 40
-          reasons.push("High blood pressure is the leading risk factor, straining delicate cerebral arteries.")
+          reasons.push("High blood pressure is the single most critical driver of stroke risk. It places excessive structural stress on the delicate arteries supplying your brain, making them prone to weakening or clotting.")
         }
         if (cholesterol === 'high') {
           riskScore += 15
-          reasons.push("Elevated cholesterol can build microscopic plaques in pathways leading to the brain.")
+          reasons.push("Elevated cholesterol levels speed up the buildup of plaque in the carotid arteries of your neck, which are the main pathways delivering fresh oxygenated blood directly to your brain.")
         }
         if (bloodSugar === 'high') {
           riskScore += 10
-          reasons.push("Excess blood sugar irritates delicate brain blood vessel wall linings.")
+          reasons.push("Excess blood sugars chemically irritate and weaken the small, sensitive blood vessels in the brain, making them more vulnerable to cellular damage.")
         }
       } 
       
       else if (selectedDisease === 'kidney') {
         if (bloodPressure === 'high') {
           riskScore += 35
-          reasons.push("High blood pressure damages the microscopic, highly sensitive filtering pathways in your kidneys.")
+          reasons.push("High blood pressure damages the microscopic, highly sensitive filtering pathways (nephrons) in your kidneys. Once these delicate filters are scarred by heavy blood pressure, they lose their ability to filter bodily wastes.")
         }
         if (bloodSugar === 'high') {
           riskScore += 30
-          reasons.push("High blood sugars strain kidneys over time by forcing them to filter excessive volumes of blood.")
+          reasons.push("Consistent high blood sugar damages the small blood vessels inside your kidneys. This forces the kidney filters to work in overdrive to process blood, eventually wearing out the delicate tissue.")
         }
         if (bmi >= 30) {
           riskScore += 10
-          reasons.push("Elevated weight indexes require your kidneys to work harder to filter wastes.")
+          reasons.push("Elevated weight indices increase your body's overall metabolic demands, forcing your kidneys to hyper-filter excess fluid volumes to clear metabolic wastes.")
         }
       }
 
@@ -262,293 +262,52 @@ function Predict({ predictions, setPredictions, setPage }) {
           <title>HealthAI_Wellness_Report_${result.patientId}</title>
           <style>
             @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap');
-            body {
-              font-family: 'Outfit', sans-serif;
-              color: #0F172A;
-              background-color: #FFFFFF;
-              padding: 40px;
-              margin: 0;
-              line-height: 1.5;
-            }
-            .header {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              border-bottom: 2px solid #E2E8F0;
-              padding-bottom: 20px;
-              margin-bottom: 30px;
-            }
-            .brand {
-              display: flex;
-              align-items: center;
-              gap: 8px;
-            }
-            .brand-logo {
-              background: #2563EB;
-              color: white;
-              padding: 6px 12px;
-              font-weight: 900;
-              border-radius: 8px;
-              font-size: 16px;
-            }
-            .brand-name {
-              font-size: 22px;
-              font-weight: 900;
-              letter-spacing: -0.5px;
-            }
-            .brand-name span {
-              color: #2563EB;
-            }
-            .doc-id {
-              text-align: right;
-              font-size: 11px;
-              color: #64748B;
-              font-weight: 600;
-            }
-            .doc-id strong {
-              color: #0F172A;
-            }
-            .report-title {
-              font-size: 20px;
-              font-weight: 800;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-              color: #1E293B;
-              margin-bottom: 25px;
-            }
-            .section-grid {
-              display: grid;
-              grid-template-cols: 1fr 1fr;
-              gap: 20px;
-              margin-bottom: 30px;
-            }
-            .card {
-              border: 1px solid #E2E8F0;
-              border-radius: 16px;
-              padding: 20px;
-              background: #F8FAFC;
-            }
-            .card-title {
-              font-size: 12px;
-              font-weight: 800;
-              text-transform: uppercase;
-              letter-spacing: 0.5px;
-              color: #64748B;
-              border-bottom: 1px solid #E2E8F0;
-              padding-bottom: 8px;
-              margin-bottom: 15px;
-            }
-            .vital-row {
-              display: flex;
-              justify-content: space-between;
-              font-size: 13px;
-              margin-bottom: 10px;
-            }
-            .vital-label {
-              font-weight: 600;
-              color: #475569;
-            }
-            .vital-value {
-              font-weight: 800;
-              color: #0F172A;
-            }
-            .score-card {
-              text-align: center;
-              border-radius: 16px;
-              padding: 24px;
-              border: 1px solid ${levelColors.border};
-              background: ${levelColors.bg};
-              margin-bottom: 30px;
-            }
-            .score-label {
-              font-size: 11px;
-              font-weight: 800;
-              text-transform: uppercase;
-              letter-spacing: 1px;
-              color: #475569;
-              display: block;
-              margin-bottom: 8px;
-            }
-            .score-badge {
-              font-size: 32px;
-              font-weight: 900;
-              color: ${levelColors.text};
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              gap: 10px;
-            }
-            .score-circle {
-              font-size: 40px;
-              margin-top: 15px;
-              display: inline-block;
-              font-weight: 900;
-              background: #FFFFFF;
-              border: 1px solid #E2E8F0;
-              padding: 10px 25px;
-              border-radius: 99px;
-              color: #0F172A;
-              box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            }
-            .reasons-list {
-              margin-bottom: 30px;
-            }
-            .reason-item {
-              font-size: 13px;
-              color: #334155;
-              margin-bottom: 10px;
-              display: flex;
-              align-items: flex-start;
-              gap: 8px;
-              font-weight: 500;
-            }
-            .reason-bullet {
-              color: #2563EB;
-              font-weight: 800;
-            }
-            .advice-list {
-              margin-bottom: 40px;
-            }
-            .advice-item {
-              font-size: 13px;
-              color: #334155;
-              margin-bottom: 10px;
-              display: flex;
-              align-items: flex-start;
-              gap: 8px;
-              font-weight: 500;
-            }
-            .advice-bullet {
-              color: #10B981;
-              font-weight: 800;
-            }
-            .disclaimer {
-              border-top: 1px solid #E2E8F0;
-              padding-top: 20px;
-              font-size: 11px;
-              color: #64748B;
-              text-align: center;
-              line-height: 1.6;
-              font-weight: 500;
-            }
-            @media print {
-              body {
-                padding: 20px;
-              }
-            }
+            body { font-family: 'Outfit', sans-serif; color: #0F172A; padding: 40px; margin: 0; }
+            .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #E2E8F0; padding-bottom: 20px; margin-bottom: 30px; }
+            .brand { display: flex; align-items: center; gap: 8px; }
+            .brand-logo { background: #2563EB; color: white; padding: 6px 12px; font-weight: 900; border-radius: 8px; }
+            .brand-name { font-size: 22px; font-weight: 900; }
+            .brand-name span { color: #2563EB; }
+            .report-meta { text-align: right; font-size: 11px; color: #64748B; }
+            .report-title { font-size: 20px; font-weight: 800; text-transform: uppercase; margin-bottom: 25px; }
+            .card { border: 1px solid #E2E8F0; border-radius: 16px; padding: 20px; background: #F8FAFC; margin-bottom: 20px; }
+            .card-title { font-size: 12px; font-weight: 800; text-transform: uppercase; border-bottom: 1px solid #E2E8F0; padding-bottom: 8px; margin-bottom: 15px; }
+            .vital-row { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 10px; }
+            .vital-value { font-weight: 800; }
+            .score-card { text-align: center; border-radius: 16px; padding: 24px; border: 1px solid ${levelColors.border}; background: ${levelColors.bg}; }
+            .score-badge { font-size: 32px; font-weight: 900; color: ${levelColors.text}; }
+            .reason-item { font-size: 13px; margin-bottom: 10px; }
+            .reason-bullet { color: #2563EB; font-weight: 800; }
+            .advice-item { font-size: 13px; margin-bottom: 10px; }
+            .advice-bullet { color: #10B981; font-weight: 800; }
           </style>
         </head>
         <body>
           <div class="header">
-            <div class="brand">
-              <div class="brand-logo">H</div>
-              <div class="brand-name">Health<span>AI</span></div>
-            </div>
-            <div class="doc-id">
-              Report ID: <strong>${result.patientId}</strong><br />
-              Screening Date: <strong>${result.date}</strong><br />
-              Type: <strong>Self-Screening Assessment Report</strong>
-            </div>
+            <div class="brand"><div class="brand-logo">H</div><div class="brand-name">Health<span>AI</span></div></div>
+            <div class="report-meta">Report ID: ${result.patientId}<br />Date: ${result.date}</div>
           </div>
-
-          <div class="report-title">${result.disease} Wellness Risk Assessment Report</div>
-
-          <div class="section-grid">
-            <div class="card">
-              <div class="card-title">👤 User Profile</div>
-              <div class="vital-row">
-                <div class="vital-label">Full Name:</div>
-                <div class="vital-value">${result.patientName}</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">Biological Sex:</div>
-                <div class="vital-value">${sex.toUpperCase()}</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">User Age:</div>
-                <div class="vital-value">${age} years</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">Height / Weight:</div>
-                <div class="vital-value">${height} cm / ${weight} kg</div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-title">🏃 Lifestyle Habits</div>
-              <div class="vital-row">
-                <div class="vital-label">Tobacco Smoker:</div>
-                <div class="vital-value">${smoke.toUpperCase()}</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">Regular Exercise:</div>
-                <div class="vital-value">${exercise.toUpperCase()}</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">Balanced Diet:</div>
-                <div class="vital-value">${balancedDiet.toUpperCase()}</div>
-              </div>
-              <div class="vital-row">
-                <div class="vital-label">Stress level:</div>
-                <div class="vital-value">${stressLevel.toUpperCase()}</div>
-              </div>
-            </div>
-          </div>
-
+          <div class="report-title">${result.disease} Risk Assessment</div>
           <div class="score-card">
-            <span class="score-label">Estimated Risk Classification</span>
-            <div class="score-badge">
-              <span>${result.riskLevel} RISK ZONE</span>
-            </div>
-            <div class="score-circle">
-              ${result.riskScore}%
-            </div>
+            <div class="score-badge">${result.riskLevel} RISK: ${result.riskScore}%</div>
           </div>
-
-          <div class="card" style="margin-bottom: 30px;">
-            <div class="card-title">🔍 Why this risk score?</div>
-            <div class="reasons-list">
-              ${result.reasons.map(r => `
-                <div class="reason-item">
-                  <span class="reason-bullet">•</span>
-                  <span>${r}</span>
-                </div>
-              `).join('')}
-            </div>
+          <div class="card">
+            <div class="card-title">🔍 Why this score?</div>
+            ${result.reasons.map(r => `<div class="reason-item"><span class="reason-bullet">•</span> ${r}</div>`).join('')}
           </div>
-
-          <div class="card" style="margin-bottom: 40px;">
-            <div class="card-title">💡 Recommended Wellness Actions</div>
-            <div class="advice-list">
-              ${result.advice.map(a => `
-                <div class="advice-item">
-                  <span class="advice-bullet">✓</span>
-                  <span>${a}</span>
-                </div>
-              `).join('')}
-            </div>
+          <div class="card">
+            <div class="card-title">💡 Wellness Actions</div>
+            ${result.advice.map(a => `<div class="advice-item"><span class="advice-bullet">✓</span> ${a}</div>`).join('')}
           </div>
-
-          <div class="disclaimer">
-            <strong>MANDATORY WELLNESS DISCLAIMER:</strong><br />
-            This system is not a medical diagnostic tool. It provides health risk awareness using AI models trained on medical datasets. Always consult a doctor for medical decisions. Calculations are statistical risk awareness estimations designed strictly for educational reference and baseline trend tracking.
-          </div>
-
-          <script>
-            window.onload = function() {
-              window.print();
-            }
-          </script>
+          <script>window.onload = function() { window.print(); }</script>
         </body>
       </html>
     `)
-
     printWindow.document.close()
   }
 
   return (
     <div className="space-y-8 py-4 sm:py-6">
-      {/* Dynamic Header */}
       <Card className="p-6 relative z-40">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
           <div className="md:col-span-8">
@@ -569,330 +328,138 @@ function Predict({ predictions, setPredictions, setPage }) {
       </Card>
 
       {/* Main Form + Result Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* LEFT COLUMN: Segmented unified form */}
-        <div className="lg:col-span-7 space-y-6">
-          
-          {/* Visual Step Progress Tracker */}
-          <div className="bg-[var(--card-bg)] border border-[var(--card-border)] p-4 rounded-2xl shadow-sm flex items-center justify-between">
-            {[
-              { nr: 1, label: "Profile" },
-              { nr: 2, label: "Lifestyle" },
-              { nr: 3, label: "Indicators" },
-              { nr: 4, label: "History" }
-            ].map((step) => (
-              <button
-                key={step.nr}
-                onClick={() => setActiveStep(step.nr)}
-                className="flex items-center gap-2 cursor-pointer focus:outline-none"
-              >
-                <div 
-                  className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${
-                    activeStep === step.nr 
-                      ? 'bg-blue-600 text-white scale-110 shadow-md shadow-blue-500/20' 
-                      : activeStep > step.nr 
-                        ? 'bg-emerald-500 text-white'
-                        : 'bg-[var(--bg-color)] border border-[var(--card-border)] text-[var(--text-muted)] hover:bg-slate-100/50'
-                  }`}
+      {result && !isCalculating ? (
+        <div className="animate-fade-in w-full">
+          <ResultBox 
+            prediction={result} 
+            isCalculating={isCalculating} 
+            onDownload={handleDownload}
+            onReevaluate={() => {
+              setResult(null)
+              setActiveStep(1)
+            }}
+          />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="lg:col-span-7 space-y-6">
+            <div className="bg-[var(--card-bg)] border border-[var(--card-border)] p-4 rounded-2xl shadow-sm flex items-center justify-between">
+              {[
+                { nr: 1, label: "Profile" },
+                { nr: 2, label: "Lifestyle" },
+                { nr: 3, label: "Indicators" },
+                { nr: 4, label: "History" }
+              ].map((step) => (
+                <button
+                  key={step.nr}
+                  type="button"
+                  onClick={() => setActiveStep(step.nr)}
+                  className="flex items-center gap-2 cursor-pointer focus:outline-none"
                 >
-                  {step.nr}
-                </div>
-                <span 
-                  className={`hidden sm:inline text-xs font-bold ${
-                    activeStep === step.nr ? 'text-[var(--text-color)]' : 'text-[var(--text-muted)]'
-                  }`}
-                >
-                  {step.label}
-                </span>
-              </button>
-            ))}
+                  <div 
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs font-black transition-all ${
+                      activeStep === step.nr 
+                        ? 'bg-blue-600 text-white scale-110 shadow-md shadow-blue-500/20' 
+                        : activeStep > step.nr 
+                          ? 'bg-emerald-500 text-white'
+                          : 'bg-[var(--bg-color)] border border-[var(--card-border)] text-[var(--text-muted)] hover:bg-slate-100/50'
+                    }`}
+                  >
+                    {step.nr}
+                  </div>
+                  <span 
+                    className={`hidden sm:inline text-xs font-bold ${
+                      activeStep === step.nr ? 'text-[var(--text-color)]' : 'text-[var(--text-muted)]'
+                    }`}
+                  >
+                    {step.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleCalculate} className="space-y-6">
+              {activeStep === 1 && (
+                <Card className="p-6 animate-fade-in">
+                  <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">
+                      👤 STEP 1: Basic Profile Info
+                    </h3>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <InputField label="Your Name (Optional)" type="text" value={patientName} onChange={setPatientName} />
+                    <InputField label="How old are you?" type="slider" min={1} max={110} value={age} onChange={setAge} />
+                    <InputField label="Your Gender" type="select" value={sex} onChange={setSex} options={[{ label: 'Female', value: 'female' }, { label: 'Male', value: 'male' }]} />
+                    <InputField label="Your Height (cm)" type="slider" min={100} max={220} value={height} onChange={setHeight} />
+                    <InputField label="Your Weight (kg)" type="slider" min={30} max={185} value={weight} onChange={setWeight} />
+                  </div>
+                  <div className="flex justify-end pt-4 mt-4 border-t border-[var(--card-border)]">
+                    <button type="button" onClick={() => setActiveStep(2)} className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm rounded-xl cursor-pointer">Continue ➡️</button>
+                  </div>
+                </Card>
+              )}
+
+              {activeStep === 2 && (
+                <Card className="p-6 animate-fade-in">
+                  <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">🏃 STEP 2: Lifestyle Habits</h3>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <InputField label="Do you smoke?" type="select" value={smoke} onChange={setSmoke} options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]} />
+                    <InputField label="Regular Exercise?" type="select" value={exercise} onChange={setExercise} options={[{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }]} />
+                    <InputField label="Balanced Diet?" type="select" value={balancedDiet} onChange={setBalancedDiet} options={[{ label: 'Yes', value: 'yes' }, { label: 'No', value: 'no' }]} />
+                    <InputField label="Stress Level?" type="select" value={stressLevel} onChange={setStressLevel} options={[{ label: 'Low', value: 'low' }, { label: 'Medium', value: 'medium' }, { label: 'High', value: 'high' }]} />
+                  </div>
+                  <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
+                    <button type="button" onClick={() => setActiveStep(1)} className="px-5 py-2.5 bg-slate-100 font-bold text-xs rounded-xl">⬅️ Back</button>
+                    <button type="button" onClick={() => setActiveStep(3)} className="px-5 py-2.5 bg-blue-600 text-white font-extrabold text-xs rounded-xl">Continue ➡️</button>
+                  </div>
+                </Card>
+              )}
+
+              {activeStep === 3 && (
+                <Card className="p-6 animate-fade-in">
+                  <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">🩺 STEP 3: Vitals</h3>
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <InputField label="Blood Pressure" type="select" value={bloodPressure} onChange={setBloodPressure} options={[{ label: 'Normal', value: 'normal' }, { label: 'High', value: 'high' }, { label: 'Low', value: 'low' }]} />
+                    <InputField label="Blood Sugar" type="select" value={bloodSugar} onChange={setBloodSugar} options={[{ label: 'Normal', value: 'normal' }, { label: 'High', value: 'high' }]} />
+                    <InputField label="Cholesterol" type="select" value={cholesterol} onChange={setCholesterol} options={[{ label: 'Normal', value: 'normal' }, { label: 'High', value: 'high' }, { label: 'Unknown', value: 'unknown' }]} />
+                  </div>
+                  <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
+                    <button type="button" onClick={() => setActiveStep(2)} className="px-5 py-2.5 bg-slate-100 font-bold text-xs rounded-xl">⬅️ Back</button>
+                    <button type="button" onClick={() => setActiveStep(4)} className="px-5 py-2.5 bg-blue-600 text-white font-extrabold text-xs rounded-xl">Continue ➡️</button>
+                  </div>
+                </Card>
+              )}
+
+              {activeStep === 4 && (
+                <Card className="p-6 animate-fade-in">
+                  <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
+                    <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">👨‍👩‍👧 STEP 4: Family History</h3>
+                  </div>
+                  <InputField label="Family Chronic History?" type="select" value={familyHistory} onChange={setFamilyHistory} options={[{ label: 'No', value: 'no' }, { label: 'Yes', value: 'yes' }]} />
+                  <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
+                    <button type="button" onClick={() => setActiveStep(3)} className="px-5 py-2.5 bg-slate-100 font-bold text-xs rounded-xl">⬅️ Back</button>
+                    <button type="submit" className="px-7 py-3 bg-emerald-600 text-white font-black text-xs rounded-xl shadow-md">Check Risk Score ✨</button>
+                  </div>
+                </Card>
+              )}
+            </form>
           </div>
 
-          <form onSubmit={handleCalculate} className="space-y-6">
-            
-            {/* STEP 1: Basic Profile */}
-            {activeStep === 1 && (
-              <Card className="p-6 animate-fade-in">
-                <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
-                  <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">
-                    👤 STEP 1: Basic Profile Info
-                  </h3>
-                  <span className="text-xxs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded-md">1 of 4 Steps</span>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <InputField 
-                    label="Your Name (Optional)"
-                    type="text"
-                    value={patientName}
-                    onChange={setPatientName}
-                    reference="Used exclusively to personalize your PDF report"
-                  />
-                  <InputField 
-                    label="How old are you? (Age)"
-                    type="slider"
-                    min={1}
-                    max={110}
-                    value={age}
-                    onChange={setAge}
-                    reference="In years"
-                  />
-                  <InputField 
-                    label="Your Gender"
-                    type="select"
-                    value={sex}
-                    onChange={setSex}
-                    options={[{ label: 'Female', value: 'female' }, { label: 'Male', value: 'male' }]}
-                    reference="Used for metabolic baselines"
-                  />
-                  <InputField 
-                    label="Your Height (Optional)"
-                    type="slider"
-                    min={100}
-                    max={220}
-                    value={height}
-                    onChange={setHeight}
-                    reference="Height in centimeters"
-                  />
-                  <InputField 
-                    label="Your Weight (Optional)"
-                    type="slider"
-                    min={30}
-                    max={185}
-                    value={weight}
-                    onChange={setWeight}
-                    reference="Weight in kilograms"
-                  />
-                </div>
-
-                <div className="flex justify-end pt-4 mt-4 border-t border-[var(--card-border)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(2)}
-                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm rounded-xl cursor-pointer shadow-sm hover:scale-[1.01] transition-all"
-                  >
-                    Continue to Lifestyle ➡️
-                  </button>
-                </div>
-              </Card>
-            )}
-
-            {/* STEP 2: Lifestyle */}
-            {activeStep === 2 && (
-              <Card className="p-6 animate-fade-in">
-                <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
-                  <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">
-                    🏃 STEP 2: Lifestyle Habits
-                  </h3>
-                  <span className="text-xxs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded-md">2 of 4 Steps</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <InputField 
-                    label="Do you smoke tobacco products?"
-                    type="select"
-                    value={smoke}
-                    onChange={setSmoke}
-                    options={[{ label: 'No, I do not smoke', value: 'no' }, { label: 'Yes, I actively smoke', value: 'yes' }]}
-                    reference="Vessels and vascular narrow factor"
-                  />
-                  <InputField 
-                    label="Do you exercise regularly?"
-                    type="select"
-                    value={exercise}
-                    onChange={setExercise}
-                    options={[{ label: 'Yes, I exercise regularly', value: 'yes' }, { label: 'No, I exercise rarely', value: 'no' }]}
-                    tooltip="Active weekly workouts, sports, or fast-paced walking for 150+ minutes."
-                    reference="Metabolism and cardio strength"
-                  />
-                  <InputField 
-                    label="Do you eat a balanced diet?"
-                    type="select"
-                    value={balancedDiet}
-                    onChange={setBalancedDiet}
-                    options={[{ label: 'Yes, balanced whole foods', value: 'yes' }, { label: 'No, high processed/junk foods', value: 'no' }]}
-                    tooltip="Diet rich in natural fibers, vegetables, and low in added processed sugars."
-                    reference="Liver fat and glucose filters factor"
-                  />
-                  <InputField 
-                    label="How would you rate your stress level?"
-                    type="select"
-                    value={stressLevel}
-                    onChange={setStressLevel}
-                    options={[
-                      { label: 'Low stress (Highly manageable)', value: 'low' },
-                      { label: 'Medium stress (Moderate levels)', value: 'medium' },
-                      { label: 'High stress (Significant everyday pressure)', value: 'high' }
-                    ]}
-                    tooltip="High stress spikes hormone releases, raising resting blood pressure."
-                    reference="Vascular and nervous stress indicator"
-                  />
-                </div>
-
-                <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(1)}
-                    className="px-5 py-2.5 bg-[var(--bg-color)] border border-[var(--card-border)] text-[var(--text-color)] hover:bg-slate-100/50 font-bold text-xs sm:text-sm rounded-xl cursor-pointer"
-                  >
-                    ⬅️ Back to Profile
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(3)}
-                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm rounded-xl cursor-pointer shadow-sm hover:scale-[1.01] transition-all"
-                  >
-                    Continue to Vitals ➡️
-                  </button>
-                </div>
-              </Card>
-            )}
-
-            {/* STEP 3: Simple Health Indicators */}
-            {activeStep === 3 && (
-              <Card className="p-6 animate-fade-in">
-                <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
-                  <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">
-                    🩺 STEP 3: Simple Vitals & Indicators
-                  </h3>
-                  <span className="text-xxs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded-md">3 of 4 Steps</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <InputField 
-                    label="Blood Pressure Status"
-                    type="select"
-                    value={bloodPressure}
-                    onChange={setBloodPressure}
-                    options={[
-                      { label: 'Normal / Healthy (Under 120/80)', value: 'normal' },
-                      { label: 'High Blood Pressure Status', value: 'high' },
-                      { label: 'Low Blood Pressure Status', value: 'low' }
-                    ]}
-                    tooltip="Standard pressure zones. High levels strain arterials and renal filter membranes."
-                    reference="Cardio and renal tissue stress"
-                  />
-                  <InputField 
-                    label="Blood Sugar Status"
-                    type="select"
-                    value={bloodSugar}
-                    onChange={setBloodSugar}
-                    options={[
-                      { label: 'Normal / Healthy sugar trends', value: 'normal' },
-                      { label: 'High Blood Sugar Status', value: 'high' }
-                    ]}
-                    tooltip="Glucose presence levels. High readings create glucose cellular resistance."
-                    reference="Diabetes and cell strain marker"
-                  />
-                  <InputField 
-                    label="Cholesterol Awareness Status"
-                    type="select"
-                    value={cholesterol}
-                    onChange={setCholesterol}
-                    options={[
-                      { label: 'Normal / Healthy cholesterol levels', value: 'normal' },
-                      { label: 'High Cholesterol Status', value: 'high' },
-                      { label: 'Unknown / Have not checked recently', value: 'unknown' }
-                    ]}
-                    tooltip="Lipid fats indicator. Elevated levels clog vital cardiac vessels."
-                    reference="Vascular flow and heart risk factor"
-                  />
-                </div>
-
-                <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(2)}
-                    className="px-5 py-2.5 bg-[var(--bg-color)] border border-[var(--card-border)] text-[var(--text-color)] hover:bg-slate-100/50 font-bold text-xs sm:text-sm rounded-xl cursor-pointer"
-                  >
-                    ⬅️ Back to Lifestyle
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(4)}
-                    className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-xs sm:text-sm rounded-xl cursor-pointer shadow-sm hover:scale-[1.01] transition-all"
-                  >
-                    Continue to History ➡️
-                  </button>
-                </div>
-              </Card>
-            )}
-
-            {/* STEP 4: Family History */}
-            {activeStep === 4 && (
-              <Card className="p-6 animate-fade-in">
-                <div className="flex justify-between items-center mb-4 border-b border-[var(--card-border)] pb-2">
-                  <h3 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] uppercase tracking-wider">
-                    👨‍👩‍👧 STEP 4: Family History
-                  </h3>
-                  <span className="text-xxs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded-md">4 of 4 Steps</span>
-                </div>
-
-                <div className="grid grid-cols-1 gap-4">
-                  <InputField 
-                    label="Do any close family members have chronic illnesses?"
-                    type="select"
-                    value={familyHistory}
-                    onChange={setFamilyHistory}
-                    options={[
-                      { label: 'No, no chronic illness in close family', value: 'no' },
-                      { label: 'Yes, close relative (parents, siblings) diagnosed', value: 'yes' }
-                    ]}
-                    tooltip="Diagnoses in direct biological relatives maps genetic susceptibility."
-                    reference="Biological genetic baseline"
-                  />
-                </div>
-
-                <div className="flex justify-between pt-4 mt-4 border-t border-[var(--card-border)]">
-                  <button
-                    type="button"
-                    onClick={() => setActiveStep(3)}
-                    className="px-5 py-2.5 bg-[var(--bg-color)] border border-[var(--card-border)] text-[var(--text-color)] hover:bg-slate-100/50 font-bold text-xs sm:text-sm rounded-xl cursor-pointer"
-                  >
-                    ⬅️ Back to Vitals
-                  </button>
-                  
-                  <button
-                    type="submit"
-                    className="px-7 py-3 bg-gradient-to-r from-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 text-white font-black text-xs sm:text-sm rounded-xl shadow-md hover:scale-[1.02] transition-all duration-200 cursor-pointer"
-                  >
-                    Check Health Risk Score ✨
-                  </button>
-                </div>
-              </Card>
-            )}
-
-          </form>
+          <div className="lg:col-span-5 space-y-6">
+            <Card className="p-6 sticky top-24">
+              <ResultBox 
+                prediction={result} 
+                isCalculating={isCalculating} 
+                onDownload={handleDownload}
+              />
+            </Card>
+          </div>
         </div>
-
-        {/* RIGHT COLUMN: Results box */}
-        <div className="lg:col-span-5 space-y-6">
-          <Card className="p-6 sticky top-24">
-            <ResultBox 
-              prediction={result} 
-              isCalculating={isCalculating} 
-              onDownload={handleDownload}
-            />
-
-            {/* Health suggestions block in result card */}
-            {result && result.advice && result.advice.length > 0 && (
-              <div className="mt-5 pt-5 border-t border-[var(--card-border)] space-y-3">
-                <h4 className="text-xs sm:text-sm font-extrabold text-[var(--text-color)] flex items-center gap-1.5">
-                  <span>💡 Helpful Health Advice</span>
-                </h4>
-                <ul className="space-y-2">
-                  {result.advice.map((adv, idx) => (
-                    <li key={idx} className="text-xs sm:text-sm text-[var(--text-muted)] flex items-start gap-2 leading-relaxed">
-                      <span className="text-emerald-500 font-extrabold">✓</span>
-                      <span>{adv}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </Card>
-        </div>
-      </div>
+      )}
     </div>
   )
 }
