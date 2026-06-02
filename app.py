@@ -168,6 +168,7 @@ with st.sidebar:
             "Heart Disease Predictor",
             "Liver Disease Predictor",
             "Stroke Predictor",
+            "Kidney Disease Predictor",
             "Explainable AI (SHAP)",
             "Analytics & Insights",
             "Recommendations System",
@@ -194,12 +195,13 @@ if page == "Dashboard Overview":
     
     # Model performance cards
     st.markdown("### Active Diagnostics Models")
-    cols = st.columns(4)
+    cols = st.columns(5)
     disease_titles = {
         "diabetes": "Diabetes Diagnostic",
         "heart": "Heart Disease Diagnostic",
         "liver": "Liver Disease Diagnostic",
-        "stroke": "Stroke Predictor"
+        "stroke": "Stroke Predictor",
+        "kidney": "Kidney Disease Diagnostic"
     }
     
     for i, (key, title) in enumerate(disease_titles.items()):
@@ -221,7 +223,7 @@ if page == "Dashboard Overview":
                 <div class='metric-card'>
                     <div class='metric-title'>{title}</div>
                     <div class='metric-value'>N/A</div>
-                    <div class='metric-sub'>Run model training script first.</div>
+                    <div class='metric-sub'>Model not trained.</div>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -272,14 +274,15 @@ if page == "Dashboard Overview":
                 {"Disease": "Diabetes", "Prevalence": metrics['diabetes']['positive_prevalence']},
                 {"Disease": "Heart", "Prevalence": metrics['heart']['positive_prevalence']},
                 {"Disease": "Liver", "Prevalence": metrics['liver']['positive_prevalence']},
-                {"Disease": "Stroke", "Prevalence": metrics['stroke']['positive_prevalence']}
+                {"Disease": "Stroke", "Prevalence": metrics['stroke']['positive_prevalence']},
+                {"Disease": "Kidney", "Prevalence": metrics['kidney']['positive_prevalence']}
             ])
             fig_pie = px.pie(
                 p_df,
                 values='Prevalence',
                 names='Disease',
                 hole=0.4,
-                color_discrete_sequence=['#00f0ff', '#4ade80', '#a78bfa', '#ff9f1a']
+                color_discrete_sequence=['#00f0ff', '#4ade80', '#a78bfa', '#ff9f1a', '#ec4899']
             )
             fig_pie.update_layout(
                 paper_bgcolor='rgba(0,0,0,0)',
@@ -315,7 +318,8 @@ elif "Predictor" in page:
         "Diabetes Predictor": "diabetes",
         "Heart Disease Predictor": "heart",
         "Liver Disease Predictor": "liver",
-        "Stroke Predictor": "stroke"
+        "Stroke Predictor": "stroke",
+        "Kidney Disease Predictor": "kidney"
     }
     d_name = disease_map[page]
     d_title = page.replace("Predictor", "Diagnostic Profiling")
@@ -430,6 +434,73 @@ elif "Predictor" in page:
                 smoking_map = {"Unknown": 0, "formerly smoked": 1, "never smoked": 2, "smokes": 3}
                 inputs['smoking_status'] = smoking_map[smoking_lbl]
                 
+            elif d_name == "kidney":
+                st.markdown("##### 👤 Demographic & Vital Signs")
+                col_dem1, col_dem2 = st.columns(2)
+                with col_dem1:
+                    inputs['age'] = st.slider("Patient Age (Years)", 1, 120, 51)
+                with col_dem2:
+                    inputs['bp'] = st.slider("Blood Pressure (bp) in mm/Hg", 50, 180, 80)
+                    
+                st.markdown("##### 🧪 Urinalysis (Urine Markers)")
+                col_uri1, col_uri2 = st.columns(2)
+                with col_uri1:
+                    sg_lbl = st.selectbox("Specific Gravity (sg)", ["1.005", "1.010", "1.015", "1.020", "1.025"], index=3)
+                    inputs['sg'] = float(sg_lbl)
+                    
+                    al_lbl = st.selectbox("Albumin Level (al)", ["0", "1", "2", "3", "4", "5"], index=1)
+                    inputs['al'] = int(al_lbl)
+                    
+                    su_lbl = st.selectbox("Sugar Level (su)", ["0", "1", "2", "3", "4", "5"], index=0)
+                    inputs['su'] = int(su_lbl)
+                with col_uri2:
+                    rbc_lbl = st.selectbox("Red Blood Cells (rbc)", ["normal", "abnormal"], index=0)
+                    inputs['rbc'] = 0 if rbc_lbl == "normal" else 1
+                    
+                    pc_lbl = st.selectbox("Pus Cell (pc)", ["normal", "abnormal"], index=0)
+                    inputs['pc'] = 0 if pc_lbl == "normal" else 1
+                    
+                    pcc_lbl = st.selectbox("Pus Cell Clumps (pcc)", ["notpresent", "present"], index=0)
+                    inputs['pcc'] = 0 if pcc_lbl == "notpresent" else 1
+                    
+                    ba_lbl = st.selectbox("Bacteria Status (ba)", ["notpresent", "present"], index=0)
+                    inputs['ba'] = 0 if ba_lbl == "notpresent" else 1
+
+                st.markdown("##### 🩸 CBC & Renal Functions Panel")
+                col_bld1, col_bld2 = st.columns(2)
+                with col_bld1:
+                    inputs['bgr'] = st.slider("Blood Glucose Random (bgr) in mg/dl", 20, 500, 121)
+                    inputs['bu'] = st.slider("Blood Urea (bu) in mg/dl", 1, 400, 36)
+                    inputs['sc'] = st.slider("Serum Creatinine (sc) in mg/dl", 0.1, 40.0, 1.2, 0.1)
+                    inputs['sod'] = st.slider("Sodium (sod) in mEq/L", 50, 180, 138)
+                    inputs['pot'] = st.slider("Potassium (pot) in mEq/L", 1.0, 45.0, 4.4, 0.1)
+                with col_bld2:
+                    inputs['hemo'] = st.slider("Hemoglobin (hemo) in gms", 3.0, 20.0, 12.5, 0.1)
+                    inputs['pcv'] = st.slider("Packed Cell Volume (pcv)", 5, 60, 40)
+                    inputs['wbcc'] = st.slider("White Blood Cell Count (wbcc) /cumm", 1000, 30000, 7800, 100)
+                    inputs['rbcc'] = st.slider("Red Blood Cell Count (rbcc) million/cmm", 1.0, 10.0, 4.8, 0.1)
+
+                st.markdown("##### 🏥 Cardiovascular & Clinical Risk History")
+                col_com1, col_com2 = st.columns(2)
+                with col_com1:
+                    htn_lbl = st.selectbox("Hypertension History (htn)", ["No", "Yes"], index=0)
+                    inputs['htn'] = 1 if htn_lbl == "Yes" else 0
+                    
+                    dm_lbl = st.selectbox("Diabetes Mellitus History (dm)", ["No", "Yes"], index=0)
+                    inputs['dm'] = 1 if dm_lbl == "Yes" else 0
+                    
+                    cad_lbl = st.selectbox("Coronary Artery Disease (cad)", ["No", "Yes"], index=0)
+                    inputs['cad'] = 1 if cad_lbl == "Yes" else 0
+                with col_com2:
+                    appet_lbl = st.selectbox("Patient Appetite (appet)", ["good", "poor"], index=0)
+                    inputs['appet'] = 0 if appet_lbl == "good" else 1
+                    
+                    pe_lbl = st.selectbox("Pedal Edema (pe)", ["No", "Yes"], index=0)
+                    inputs['pe'] = 1 if pe_lbl == "Yes" else 0
+                    
+                    ane_lbl = st.selectbox("Anemia History (ane)", ["No", "Yes"], index=0)
+                    inputs['ane'] = 1 if ane_lbl == "Yes" else 0
+                
             submitted = st.form_submit_button("Generate Prediction Diagnostic")
             
     with col_r:
@@ -533,7 +604,7 @@ elif "Predictor" in page:
                 plot_bgcolor='rgba(0,0,0,0)',
                 font=dict(color='#e2e8f0'),
                 margin=dict(l=10, r=10, t=40, b=10),
-                height=300,
+                height=350,
                 xaxis=dict(gridcolor='rgba(255,255,255,0.05)'),
                 yaxis=dict(gridcolor='rgba(255,255,255,0.05)')
             )
@@ -550,7 +621,7 @@ elif page == "Explainable AI (SHAP)":
     st.markdown("<div class='section-header'>🔍 Explainable AI (SHAP Interpretability)</div>", unsafe_allow_html=True)
     st.markdown("Transparency is critical in medical AI models. We implement **SHAP (SHapley Additive exPlanations)** to establish global model accountability and local clinical logic validation.")
     
-    eai_disease = st.selectbox("Select Disease Diagnostics Model for SHAP Explanations", ["diabetes", "heart", "liver", "stroke"])
+    eai_disease = st.selectbox("Select Disease Diagnostics Model for SHAP Explanations", ["diabetes", "heart", "liver", "stroke", "kidney"])
     
     try:
         model, columns, X_train, explainer = load_model_components(eai_disease)
@@ -594,7 +665,7 @@ elif page == "Explainable AI (SHAP)":
             font=dict(color='#e2e8f0'),
             xaxis=dict(title="Mean Absolute SHAP Value", gridcolor='rgba(255,255,255,0.05)'),
             yaxis=dict(gridcolor='rgba(255,255,255,0.05)'),
-            height=400,
+            height=500,
             margin=dict(l=10, r=10, t=10, b=10)
         )
         st.plotly_chart(fig_global, use_container_width=True)
@@ -603,7 +674,7 @@ elif page == "Explainable AI (SHAP)":
         st.markdown("### Standard SHAP Beeswarm Summary Plot (Matplotlib)")
         st.markdown("The SHAP beeswarm plot shows the **directionality** of feature impact. Each dot is a patient test instance. Feature values are colored (red represents high feature values, blue represents low feature values). A positive SHAP value indicates that high levels of that feature increase disease risk classification.")
         
-        fig, ax = plt.subplots(figsize=(10, 6))
+        fig, ax = plt.subplots(figsize=(10, 7))
         # Clear color background for Streamlit dark theme consistency
         fig.patch.set_facecolor('#0a0b10')
         ax.set_facecolor('#0a0b10')
@@ -635,7 +706,7 @@ elif page == "Analytics & Insights":
     
     with tab_insights:
         st.markdown("### Clinical Feature Distributions")
-        ana_disease = st.selectbox("Select Screening Dataset to Analyze", ["diabetes", "heart", "liver", "stroke"])
+        ana_disease = st.selectbox("Select Screening Dataset to Analyze", ["diabetes", "heart", "liver", "stroke", "kidney"])
         
         # Load dataset
         try:
@@ -649,14 +720,17 @@ elif page == "Analytics & Insights":
         with col_dist1:
             st.markdown("#### Patient Cohort Age Distribution")
             # Set target column name
-            t_col = 'Outcome' if 'Outcome' in df_ana.columns else ('target' if 'target' in df_ana.columns else ('Dataset' if 'Dataset' in df_ana.columns else 'stroke'))
+            t_col = 'Outcome' if 'Outcome' in df_ana.columns else ('target' if 'target' in df_ana.columns else ('Dataset' if 'Dataset' in df_ana.columns else ('classification' if 'classification' in df_ana.columns else 'stroke')))
             
             # Age histogram
-            age_col = 'Age' if 'Age' in df_ana.columns else 'age'
+            age_col = 'Age' if 'Age' in df_ana.columns else ('age' if 'age' in df_ana.columns else None)
             if age_col in df_ana.columns:
                 df_ana_plot = df_ana.copy()
                 if t_col == 'Dataset':
                     df_ana_plot['Diagnosis'] = df_ana_plot[t_col].map({1: "Positive", 2: "Negative"})
+                elif t_col == 'classification':
+                    df_ana_plot['classification'] = df_ana_plot['classification'].str.strip()
+                    df_ana_plot['Diagnosis'] = df_ana_plot[t_col].map({"ckd": "Positive", "notckd": "Negative"})
                 else:
                     df_ana_plot['Diagnosis'] = df_ana_plot[t_col].map({1: "Positive", 0: "Negative"})
                     
@@ -681,10 +755,20 @@ elif page == "Analytics & Insights":
                 
         with col_dist2:
             st.markdown("#### Clinical Feature Correlation Map (Matplotlib)")
-            # Numeric columns
-            numeric_cols = df_ana.select_dtypes(include=[np.number]).columns.tolist()
-            # Filter columns with low variance
-            corr = df_ana[numeric_cols].corr()
+            # Filter non-numeric columns
+            numeric_df = df_ana.copy()
+            if 'classification' in numeric_df.columns:
+                numeric_df = numeric_df.drop(columns=['classification'])
+            if 'Dataset' in numeric_df.columns:
+                numeric_df = numeric_df.drop(columns=['Dataset'])
+                
+            # Replace "?" strings with standard NaNs if any
+            numeric_df = numeric_df.replace('?', np.nan)
+            for col in numeric_df.columns:
+                numeric_df[col] = pd.to_numeric(numeric_df[col], errors='coerce')
+                
+            numeric_cols = numeric_df.select_dtypes(include=[np.number]).columns.tolist()
+            corr = numeric_df[numeric_cols].corr()
             
             fig_corr, ax_corr = plt.subplots(figsize=(6, 4.5))
             fig_corr.patch.set_facecolor('#0a0b10')
@@ -708,16 +792,17 @@ elif page == "Analytics & Insights":
         
         # Matrix matching primary risk factors across domains
         cross_df = pd.DataFrame({
-            "Risk Indicator": ["Age (Seniority)", "Systolic/Diastolic BP", "BMI (Obesity)", "Glucose (Hyperglycemia)", "Cholesterol", "Smoking Status"],
+            "Risk Indicator": ["Age (Seniority)", "Systolic/Diastolic BP", "BMI (Obesity)", "Glucose (Hyperglycemia)", "Hemoglobin (Anemia)", "Smoking Status"],
             "Diabetes Diagnostic": ["Moderate (SHAP Rank 3)", "Moderate (SHAP Rank 5)", "High (SHAP Rank 2)", "Critical (SHAP Rank 1)", "N/A", "N/A"],
-            "Heart Disease": ["High (SHAP Rank 2)", "Moderate (SHAP Rank 4)", "N/A", "N/A", "Moderate (SHAP Rank 5)", "N/A"],
+            "Heart Disease": ["High (SHAP Rank 2)", "Moderate (SHAP Rank 4)", "N/A", "N/A", "N/A", "N/A"],
             "Liver Disease": ["Moderate (SHAP Rank 4)", "N/A", "N/A", "N/A", "N/A", "N/A"],
-            "Stroke Predictor": ["Critical (SHAP Rank 1)", "Moderate (SHAP Rank 4)", "Low (SHAP Rank 6)", "High (SHAP Rank 2)", "N/A", "Moderate (SHAP Rank 5)"]
+            "Stroke Predictor": ["Critical (SHAP Rank 1)", "Moderate (SHAP Rank 4)", "Low (SHAP Rank 6)", "High (SHAP Rank 2)", "N/A", "Moderate (SHAP Rank 5)"],
+            "Kidney Diagnostic": ["Low (SHAP Rank 12)", "Moderate (SHAP Rank 5)", "N/A", "Moderate (SHAP Rank 6)", "Critical (SHAP Rank 1)", "N/A"]
         })
         st.table(cross_df)
         
     with tab_trends:
-        st.markdown("### simulated Hospital Screenings & Risk Trends")
+        st.markdown("### Simulated Hospital Screenings & Risk Trends")
         st.markdown("Monthly aggregation tracking screening caseloads and positive detection ratios in the clinical workflow.")
         
         months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -839,6 +924,26 @@ elif page == "Recommendations System":
                 "exercise": ["Maintain active lifestyle with regular aerobic conditioning."],
                 "lifestyle": ["Track stress and prioritize consistent sleep."]
             }
+        },
+        "Kidney": {
+            "High": {
+                "medical": ["Urgent clinical nephrology assessment required.", "Strict blood pressure target control (<130/80 mm/Hg).", "Monitor glomerular filtration rate (eGFR) and serum creatinine panels bi-weekly."],
+                "diet": ["Strict low-sodium DASH diet (limit sodium to <1500mg/day).", "Restrict high protein load dynamically to protect kidney glomeruli.", "Limit high-potassium and high-phosphorus foods (bananas, tomatoes, dairy) as clinically indicated."],
+                "exercise": ["Engage in moderate-to-light low-impact cardiovascular routines.", "Absolutely avoid heavy physical strain or workouts that increase blood pressure sharply."],
+                "lifestyle": ["Absolute strict avoidance of nephrotoxic drugs (especially NSAIDs like Ibuprofen, Naproxen).", "Complete immediate smoking cessation to maximize renal perfusion."]
+            },
+            "Moderate": {
+                "medical": ["Review kidney function biomarkers with a primary physician.", "Track urine albumin and serum creatinine in 3 months."],
+                "diet": ["Limit high-sodium processed foods, maintain balanced protein targets."],
+                "exercise": ["Incorporate 150 minutes of weekly moderate aerobic activity."],
+                "lifestyle": ["Avoid toxic occupational chemicals, stay properly hydrated, and stop NSAID self-medication."]
+            },
+            "Low": {
+                "medical": ["Annual wellness screening including urinalysis and renal panel markers."],
+                "diet": ["Adopt a balanced, whole food, plant-rich Mediterranean-style diet."],
+                "exercise": ["Maintain an active physical conditioning schedule."],
+                "lifestyle": ["Prioritize quality sleep, maintain stable systemic blood pressure."]
+            }
         }
     }
     
@@ -853,7 +958,7 @@ elif page == "Recommendations System":
         st.info("No active diagnostic screenings in the current session. Choose a clinical baseline to explore sample recommendations:")
         sel_col1, sel_col2 = st.columns(2)
         with sel_col1:
-            active_disease = st.selectbox("Disease Profile", ["Diabetes", "Heart", "Liver", "Stroke"])
+            active_disease = st.selectbox("Disease Profile", ["Diabetes", "Heart", "Liver", "Stroke", "Kidney"])
         with sel_col2:
             active_risk = st.selectbox("Risk Classification Level", ["High", "Moderate", "Low"])
             
@@ -1060,7 +1165,6 @@ elif page == "Clinical Report Generator":
             
             pdf.set_font("Helvetica", "", 8)
             for k, val in p['inputs'].items():
-                # Format standard key names nicely
                 disp_k = k.replace("_", " ").title()
                 pdf.cell(70, 5, f" {disp_k}", border=1)
                 pdf.cell(50, 5, f" {val}", border=1, ln=True)

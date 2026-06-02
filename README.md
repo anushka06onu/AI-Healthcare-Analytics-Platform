@@ -19,11 +19,12 @@ A premium, AI-powered healthcare analytics platform for disease prediction, expl
 - EMR Screening log detailing patient name, disease, calculated risk score, and severity classification history.
 
 ### 🔬 Disease Diagnostics Predictors
-- Fully trained predictive random forest classifiers for four primary chronic disorders:
-  - **Diabetes** — 8 parameters (Pregnancies, Glucose, Insulin, etc.) from the Pima Indians dataset.
-  - **Heart Disease** — 13 parameters (chest pain, blood pressure, cholesterol, resting ECG) from the Cleveland dataset.
-  - **Liver Disease** — 10 parameters (bilirubin, SGPT/SGOT, proteins) from the Indian Liver Patient dataset.
-  - **Stroke** — 10 risk factors (hypertension, smoking status, average glucose, BMI, work type) from the stroke cohort.
+Fully trained predictive random forest classifiers for **five** primary chronic disorders:
+- **Diabetes** — 8 parameters (Pregnancies, Glucose, Insulin, etc.) from the Pima Indians dataset.
+- **Heart Disease** — 13 parameters (chest pain, blood pressure, cholesterol, resting ECG) from the Cleveland dataset.
+- **Liver Disease** — 10 parameters (bilirubin, SGPT/SGOT, proteins) from the Indian Liver Patient dataset.
+- **Stroke** — 10 risk factors (hypertension, smoking status, average glucose, BMI, work type) from the stroke cohort.
+- **Chronic Kidney Disease (CKD)** — 24 risk parameters (blood urea, serum creatinine, specific gravity, albumin, pus cells, anemia) from the clinical CKD cohort.
 - Dynamic gauge indicator mapping exact probability percentages.
 - **Real-time Local SHAP Explanations**: Interactive horizontal contribution charts illustrating which specific patient features increased (red) or decreased (green) their risk classification.
 
@@ -71,7 +72,7 @@ cd AI-Healthcare-Analytics-Platform
 ### 2. Install Dependencies
 Ensure Python 3.10+ is installed locally, then run:
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 ### 3. Train Models & Pre-calculate SHAP
@@ -98,7 +99,8 @@ AI-Healthcare-Platform/
 │   ├── diabetes.csv         # Pima Indians Diabetes Dataset
 │   ├── heart.csv            # Cleveland Heart Disease Dataset
 │   ├── liver.csv            # Indian Liver Patient Dataset
-│   └── stroke.csv           # Cerebrovascular Stroke Dataset
+│   ├── stroke.csv           # Cerebrovascular Stroke Dataset
+│   └── kidney.csv           # Chronic Kidney Disease Dataset
 ├── models/
 │   ├── model_metrics.json   # Serialized model metrics for UI
 │   ├── *_model.joblib       # Trained RandomForest models

@@ -17,28 +17,20 @@ os.makedirs('shap_files', exist_ok=True)
 # ------------------------------------------------------------
 
 def preprocess_diabetes(df):
-    # Features: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age
-    # Target: Outcome (0 or 1)
     X = df.drop(columns=['Outcome'])
     y = df['Outcome']
     return X, y
 
 def preprocess_heart(df):
-    # Features: age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal
-    # Target: target (0 or 1)
     X = df.drop(columns=['target'])
     y = df['target']
     return X, y
 
 def preprocess_liver(df):
-    # Fill missing Albumin_and_Globulin_Ratio with column median
     median_ratio = df['Albumin_and_Globulin_Ratio'].median()
     df['Albumin_and_Globulin_Ratio'] = df['Albumin_and_Globulin_Ratio'].fillna(median_ratio)
     
-    # Map Gender: Female -> 0, Male -> 1
     df['Gender'] = df['Gender'].map({'Female': 0, 'Male': 1}).fillna(1).astype(int)
-    
-    # Map Target Dataset: 1 (liver disease) -> 1, 2 (no disease) -> 0
     df['target'] = df['Dataset'].map({1: 1, 2: 0})
     
     X = df.drop(columns=['Dataset', 'target'])
@@ -46,22 +38,19 @@ def preprocess_liver(df):
     return X, y
 
 def preprocess_stroke(df):
-    # Drop ID column
     if 'id' in df.columns:
         df = df.drop(columns=['id'])
         
-    # Impute BMI with median
     median_bmi = df['bmi'].median()
     df['bmi'] = df['bmi'].fillna(median_bmi)
     
-    # Map categorical features to integers
     gender_map = {'Male': 1, 'Female': 0, 'Other': 2}
     df['gender'] = df['gender'].map(gender_map).fillna(0).astype(int)
     
     married_map = {'No': 0, 'Yes': 1}
     df['ever_married'] = df['ever_married'].map(married_map).fillna(0).astype(int)
     
-    work_map = {'Govt_job': 0, 'Never_worked': 1, 'Private': 2, 'Self-employed': 3, 'children': 4}
+    work_map = {'Government Job': 0, 'Government Job': 0, 'Govt_job': 0, 'Never_worked': 1, 'Private': 2, 'Self-employed': 3, 'children': 4}
     df['work_type'] = df['work_type'].map(work_map).fillna(2).astype(int)
     
     residence_map = {'Rural': 0, 'Urban': 1}
@@ -72,6 +61,46 @@ def preprocess_stroke(df):
     
     X = df.drop(columns=['stroke'])
     y = df['stroke']
+    return X, y
+
+def preprocess_kidney(df):
+    # Replace raw "?" strings with standard NaNs
+    df = df.replace('?', np.nan)
+    
+    # Continuous numeric columns (including sg, al, su which are nominal in arff but naturally continuous/ordinal)
+    num_cols = ['age', 'bp', 'bgr', 'bu', 'sc', 'sod', 'pot', 'hemo', 'pcv', 'wbcc', 'rbcc', 'sg', 'al', 'su']
+    for col in num_cols:
+        df[col] = pd.to_numeric(df[col], errors='coerce')
+        # Impute missing values with median
+        df[col] = df[col].fillna(df[col].median())
+        
+    # Nominal columns to map
+    binary_cols = {
+        'rbc': {'normal': 0, 'abnormal': 1},
+        'pc': {'normal': 0, 'abnormal': 1},
+        'pcc': {'notpresent': 0, 'present': 1},
+        'ba': {'notpresent': 0, 'present': 1},
+        'htn': {'no': 0, 'yes': 1},
+        'dm': {'no': 0, 'yes': 1},
+        'cad': {'no': 0, 'yes': 1},
+        'pe': {'no': 0, 'yes': 1},
+        'ane': {'no': 0, 'yes': 1},
+        'appet': {'good': 0, 'poor': 1}
+    }
+    
+    for col, mapping in binary_cols.items():
+        df[col] = df[col].str.strip() if df[col].dtype == object else df[col]
+        df[col] = df[col].map(mapping)
+        # Impute nominal columns with mode
+        mode_val = df[col].mode()[0] if not df[col].mode().empty else 0
+        df[col] = df[col].fillna(mode_val).astype(int)
+        
+    # Clean classification target
+    df['classification'] = df['classification'].str.strip()
+    df['target'] = df['classification'].map({'ckd': 1, 'notckd': 0})
+    
+    X = df.drop(columns=['classification', 'target'])
+    y = df['target']
     return X, y
 
 # ------------------------------------------------------------
@@ -94,6 +123,10 @@ datasets = {
     'stroke': {
         'path': 'data/stroke.csv',
         'preprocess': preprocess_stroke
+    },
+    'kidney': {
+        'path': 'data/kidney.csv',
+        'preprocess': preprocess_kidney
     }
 }
 
@@ -111,7 +144,6 @@ for name, config in datasets.items():
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
     
     # Train model (Random Forest Classifier)
-    # Balanced class weights handles class imbalances (especially stroke)
     model = RandomForestClassifier(n_estimators=100, random_state=42, class_weight='balanced')
     model.fit(X_train, y_train)
     
@@ -162,4 +194,4 @@ for name, config in datasets.items():
 with open('models/model_metrics.json', 'w') as f:
     json.dump(metrics_summary, f, indent=4)
 
-print("\nModel training, serialization, and SHAP pre-computation completed successfully!")
+print("\nModel training, serialization, and SHAP pre-computation completed successfully for all 5 diseases!")
