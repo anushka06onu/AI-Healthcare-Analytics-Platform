@@ -1,4 +1,4 @@
-# 🏥 Clini-SHAP: AI-Powered Multi-Disease Clinical Decision Support System (CDSS)
+# 🏥 Clini-SHAP: Explainable AI Platform for Multi-Disease Risk Prediction
 
 [![GitHub License](https://img.shields.io/github/license/anushka06onu/AI-Healthcare-Analytics-Platform?color=blue&style=flat-square)](LICENSE)
 [![Vercel App](https://img.shields.io/badge/Vercel-Live--App-000000?logo=vercel&logoColor=white&style=flat-square)](https://ai-healthcare-analytics-platform-jt.vercel.app/)
@@ -8,43 +8,65 @@
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-2C8E47?style=flat-square)](https://xgboost.readthedocs.io/)
 [![SHAP](https://img.shields.io/badge/SHAP-Explainable--AI-8A2BE2?style=flat-square)](https://github.com/shap/shap)
 
-An AI-powered Healthcare Risk Prediction Platform that combines machine learning, predictive analytics, high-fidelity visualizations, and explainable insights to support early health risk awareness. This system operates as a Clinical Decision Support System (CDSS), leveraging predictive algorithms calibrated on diverse clinical cohorts to forecast multi-disease risk profiles while providing transparent, layperson-friendly feature attribution charts.
+![Clini-SHAP Dashboard Hero](screenshots/4_full_width_wellness_dashboard.png)
 
-Developed as a highly polished, dual-theme clinical portal, **Clini-SHAP** serves as a robust prototype for graduate admissions, machine learning portfolios, and medical AI research showcases.
+An explainable AI platform that combines machine learning, predictive analytics, visualization, and interpretable insights to support early health risk awareness. This system operates as a Research Decision Support Tool, leveraging predictive algorithms calibrated on diverse clinical cohorts to forecast multi-disease risk profiles while providing transparent, layperson-friendly feature attribution charts.
+
+Developed as a highly polished, dual-theme dashboard portal, **Clini-SHAP** serves as a robust prototype for graduate admissions (e.g. Erasmus Mundus applications), machine learning research portfolios, and healthcare AI showcases.
+
+---
+
+## 🚀 Live Demo
+
+*   **Frontend Web App (React + Vite)**: **[ai-healthcare-analytics-platform-jt.vercel.app](https://ai-healthcare-analytics-platform-jt.vercel.app/)**
+*   **Analytics Dashboard (Streamlit)**: **[share.streamlit.io (Streamlit Cloud)](https://share.streamlit.io/)**
 
 ---
 
 ## 📌 Table of Contents
-1. [Overview & Clinical Motivation](#-overview--clinical-motivation)
-2. [Key System Features](#-key-system-features)
-3. [System Architecture](#-system-architecture)
-4. [Clinical Datasets Registry](#-clinical-datasets-registry)
-5. [Machine Learning Pipeline](#-machine-learning-pipeline)
-6. [Model Architecture Selection](#-model-architecture-selection)
-7. [High-Fidelity Evaluation Metrics](#-high-fidelity-evaluation-metrics)
-8. [Cross-Validation & Generalizability](#-cross-validation--generalizability)
-9. [Transparent Explainable AI (SHAP)](#-transparent-explainable-ai-shap)
-10. [📸 Interface & Screenshot Showcase](#-interface--screenshot-case)
-11. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
-12. [🚀 Usage Instructions](#-usage-instructions)
-13. [📁 Repository Directory Tree](#-repository-directory-tree)
-14. [🔮 Future Research Directions](#-future-research-directions)
-15. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
-16. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
-17. [✍️ Author Profile](#%EF%B8%8F-author-profile)
+1. [Overview & Motivation](#-overview--motivation)
+2. [Research Contributions](#-research-contributions)
+3. [Key System Features](#-key-system-features)
+4. [Tech Stack](#%EF%B8%8F-tech-stack)
+5. [System Architecture](#-system-architecture)
+6. [Clinical Datasets Registry](#-clinical-datasets-registry)
+7. [Machine Learning Pipeline](#-machine-learning-pipeline)
+8. [Model Architecture Selection](#-model-architecture-selection)
+9. [High-Fidelity Evaluation Metrics](#-high-fidelity-evaluation-metrics)
+10. [Cross-Validation & Generalizability](#-cross-validation--generalizability)
+11. [Transparent Explainable AI (SHAP)](#-transparent-explainable-ai-shap)
+12. [📸 Interface & Screenshot Showcase](#-interface--screenshot-showcase)
+13. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
+14. [🚀 Usage Instructions](#-usage-instructions)
+15. [📁 Repository Directory Tree](#-repository-directory-tree)
+16. [🔮 Future Research Directions](#-future-research-directions)
+17. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
+18. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
+19. [✍️ Author Profile](#%EF%B8%8F-author-profile)
 
 ---
 
-## 🔬 Overview & Clinical Motivation
+## 🔬 Overview & Motivation
 
-Early disease detection is a cornerstone of modern preventive medicine. Chronic conditions such as Diabetes, Cardiovascular diseases, Stroke, Liver degradation, and Chronic Kidney Disease account for a substantial percentage of global mortality and economic burdens. In clinical environments, medical datasets (EMRs) are frequently underutilized for real-time risk stratification, leaving subtle physiological trends undetected until patients present with advanced symptom profiles.
+Early disease risk assessment is a cornerstone of modern preventive medicine. Chronic conditions such as Diabetes, Cardiovascular diseases, Stroke, Liver degradation, and Chronic Kidney Disease account for a substantial percentage of global mortality and economic burdens. In medical informatics, raw electronic health records (EHR) frequently lack integrated tools for real-time risk stratification, leaving subtle physiological trends undetected until patients present with advanced symptom profiles.
 
-**Clini-SHAP** addresses this clinical bottleneck by serving as a predictive risk coordinator. By mapping patient vitals and demographic data points in parallel, the platform provides:
+**Clini-SHAP** addresses this challenge by serving as an integrated predictive risk coordinator. By mapping patient vitals and demographic data points in parallel, the platform provides:
 1.  **Multi-Disease Risk Stratification**: Simultaneously processes baseline attributes across five distinct classification pipelines.
-2.  **Mitigation of Clinical Jargon Barriers**: Translates abstract log-odds predictions and SHAP feature attributions into layperson-friendly, reassuring progress cards.
-3.  **Explainable AI (XAI) Accountability**: Ensures that black-box machine learning predictions are mathematically attributable to specific clinical markers, reinforcing clinician trust and patient engagement.
+2.  **Mitigation of Technical Barriers**: Translates abstract log-odds predictions and SHAP feature attributions into layperson-friendly, reassuring progress cards.
+3.  **Explainable AI (XAI) Accountability**: Ensures that black-box machine learning predictions are mathematically attributable to specific physiological markers, reinforcing clinician trust and patient engagement.
 
-> **🚀 Try the Live App on Vercel**: Access the production-grade visual clinical wellness suite directly at **[ai-healthcare-analytics-platform-jt.vercel.app](https://ai-healthcare-analytics-platform-jt.vercel.app/)**!
+---
+
+## 📝 Research Contributions
+
+This project demonstrates:
+*   **Application of Explainable AI (SHAP) in Healthcare Analytics**: Successfully operationalizes game-theoretic feature attributions to translate complex model parameters into patient-centric, interpretable explanation scales.
+*   **Comparative Evaluation of Multiple Machine Learning Models**: Validates performance boundaries across gradient-boosted trees and random forest ensembles on diverse health records.
+*   **Multi-Disease Risk Prediction within a Unified Framework**: Creates a decoupled architectural workflow that routes shared baseline inputs to five parallel diagnostic evaluation pipelines.
+*   **Cross-Validation Based Model Assessment**: Applies 5-fold Stratified Cross-Validation to evaluate model generalizability, specifically addressing severe class imbalances in clinical cohorts.
+*   **User-Centered Health Risk Communication**: Implements a highly accessible UI that translates computer science and clinical statistics into simplified layperson wellness indicators.
+
+*The project was developed as part of a broader interest in machine learning, healthcare AI, and interpretable predictive systems.*
 
 ---
 
@@ -52,11 +74,34 @@ Early disease detection is a cornerstone of modern preventive medicine. Chronic 
 
 *   **Coordinated Patient Diagnostic Suite**: Inputs shared patient demographics (Age, Sex, Diastolic/Systolic Blood Pressure, BMI, Fasting Glucose) exactly once. The system automatically routes inputs to all active diagnostic classification models.
 *   **Dual-Theme Modern Web Shell**: Custom glassmorphic navbar with active clinician profile parameters, a glowing pulse heartbeat, and dynamic support for **☀️ Light Mode** and **🌙 Dark Mode** styles.
-*   **Typable Range Sliders**: Numeric input slider badges double as direct input fields, complete with biological clamps (e.g., Age: 1-110, Height: 100-220cm, Weight: 30-185kg) to eliminate unrealistic clinical parameters.
+*   **Typable Range Sliders**: Numeric input slider badges double as direct input fields, complete with physiological bounds-clamping (e.g., Age: 1-110, Height: 100-220cm, Weight: 30-185kg) to eliminate unrealistic clinical parameters.
 *   **Themed Dropdown Selectors**: Standard browser select dropdown menus are replaced with custom React popover dropdown components complete with search filters and select checkmarks.
 *   **Explainable AI (XAI) Panel**: Live client-side attributions displaying protectors (-) and drivers (+) mapped into standard layperson wellness contributors.
 *   **Interactive EMR PDF Compiler**: Client-side compiled clinical report featuring patient vitals summaries, multi-disease risk indicators, and legal diagnostic disclaimers.
 *   **5-Fold Stratified Cross-Validation**: Validated pipelines that run within Colab notebook templates to ensure high performance and generalizability.
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend & UI
+*   **Framework**: React (v18) + Vite (v5)
+*   **Styling**: Tailwind CSS
+*   **PDF Compiler**: html2pdf.js
+
+### Machine Learning & Analytics
+*   **Core Library**: Scikit-Learn
+*   **Gradient Boosting**: XGBoost
+*   **Interpretability**: SHAP (SHapley Additive exPlanations)
+*   **Data Processing**: Pandas, NumPy
+
+### Visualization & Plotting
+*   **Interactive Charts**: Plotly
+*   **Static Graphics**: Matplotlib, Seaborn
+
+### Deployment
+*   **React App hosting**: Vercel
+*   **Python App hosting**: Streamlit Cloud
 
 ---
 
@@ -73,10 +118,10 @@ graph TD
     end
 
     %% Routing and Preprocessing
-    subgraph Engine ["⚙️ CDSS Core Processing Engine"]
+    subgraph Engine ["⚙️ Core Processing Engine"]
         C["🔄 Shared Parameter Router"]
         D["🧹 Data Imputation & Categorical Mapping"]
-        E["⚖️ Standard Scaler Normalization (EMR Scalers)"]
+        E["⚖️ StandardScaler Normalization (EMR Scalers)"]
     end
 
     %% Classifiers
@@ -131,7 +176,7 @@ The predictive models integrated in this platform are trained and validated on o
 
 ## ⚙️ Machine Learning Pipeline
 
-Every medical record routed through the CDSS engine undergoes a strict, clinical-grade pre-processing and evaluation pipeline to guarantee consistent predictions:
+Every medical record routed through the processing engine undergoes a strict machine learning pre-processing and evaluation pipeline to guarantee consistent predictions:
 
 ```
 [Raw Patient Inputs]
@@ -143,7 +188,7 @@ Every medical record routed through the CDSS engine undergoes a strict, clinical
 [Categorical Encoding]      ──► Labels mapped into binary (0/1) or dense integer categories
          │
          ▼
-[StandardScaler Scaling]    ──► Zero mean, unit variance scaling using EMR standard scalers
+[StandardScaler Scaling]    ──► Zero mean, unit variance scaling using standard scalers
          │
          ▼
 [Model Inference]           ──► Parallel model scoring (probabilities extracted via predict_proba)
@@ -158,7 +203,7 @@ Every medical record routed through the CDSS engine undergoes a strict, clinical
 ### 1. Preprocessing Specifications:
 *   **Missing Value Imputation**: Null variables are imputed using localized cohort statistics to avoid data bias. Continuously measured data (e.g., `Albumin_and_Globulin_Ratio` or `bmi`) are imputed with the median, while categorical entries are imputed using the mode.
 *   **Categorical Mapping**: Multi-class string factors are explicitly encoded into dense ordinal indices to prevent dummy variable expansion from diluting tree structure splits (e.g., work type classifications, smoking status levels).
-*   **Normalization**: Feature distributions are standardized via a custom fitted `StandardScaler` loaded from pre-calibrated EMR objects, applying:
+*   **Normalization**: Feature distributions are standardized via a custom fitted `StandardScaler` loaded from pre-calibrated objects, applying:
     $$z = \frac{x - \mu}{\sigma}$$
     where $\mu$ represents feature mean and $\sigma$ represents standard deviation.
 
@@ -175,7 +220,7 @@ The classifier models saved in the `models/` directory were selected based on st
 
 ## 📊 High-Fidelity Evaluation Metrics
 
-The classification performance of the serialized model components has been evaluated against test validation cohorts. The metrics below represent the precise output parameters derived from the EMR metrics index (`models/model_metrics.json`):
+The classification performance of the serialized model components has been evaluated against test validation cohorts. The metrics below represent the precise output parameters derived from the metrics index (`models/model_metrics.json`):
 
 ### 1. Diagnostic Classification Metrics
 | Target Disease | Classification Model | Accuracy | Precision | Recall | F1-Score |
@@ -186,6 +231,12 @@ The classification performance of the serialized model components has been evalu
 | **🧠 Stroke Risk** | `XGBClassifier` | 78.67% | 12.83% | 58.00% | 21.01% |
 | **🩸 Renal Kidney** | `RandomForestClassifier` | 100.00% | 100.00% | 100.00% | 100.00% |
 
+> [!IMPORTANT]
+> **Stroke Metric Interpretation**: Due to severe class imbalance in the stroke dataset (4.87% positive prevalence), ROC-AUC and recall were prioritized over accuracy alone during model evaluation. The high recall (58.00%) compared to precision (12.83%) ensures maximum capture of high-risk cases in screening contexts.
+
+> [!WARNING]
+> **Chronic Kidney Disease Metric Scrutiny**: The Chronic Kidney Disease dataset exhibits highly separable feature distributions (specifically urine specific gravity, serum creatinine, and urine albumin leakage). Consequently, near-perfect performance was observed during evaluation. Future validation on external cohorts is required to assess real-world generalization.
+
 ### 2. Receiver Operating Characteristic (ROC-AUC) Metrics
 | Target Disease | Receiver Operating Characteristic (ROC-AUC) | Samples Evaluated | Cohort Disease Prevalence |
 | :--- | :--- | :--- | :--- |
@@ -194,9 +245,6 @@ The classification performance of the serialized model components has been evalu
 | **🧪 Liver Efficacy** | **73.78%** | 583 | 71.36% |
 | **🧠 Stroke Risk** | **78.74%** | 5,110 | 4.87% |
 | **🩸 Renal Kidney** | **100.00%** | 397 | 62.47% |
-
-> [!NOTE]
-> The Chronic Kidney Disease classifier scores reflect the highly distinct separations inherent in the clinical parameters (e.g. specific gravity, serum creatinine, and urine albumin leakage). In validation, these attributes provide an absolute classification boundary.
 
 ### 3. Validation Confusion Matrices
 To evaluate true positive and false positive distributions in clinical decision bounds, we visualize the validation confusion matrices for the classifiers:
@@ -249,7 +297,7 @@ In the user dashboard, the numerical SHAP values are dynamically translated into
 
 ## 📸 Interface & Screenshot Showcase
 
-Here is a visual gallery showcasing the highly polished clinical interfaces, wellness dashboards, typable input sliders, and EMR report PDF compilers:
+Here is a visual gallery showcasing the clinical interfaces, wellness dashboards, typable input sliders, and EMR report PDF compilers:
 
 ### 1. Step-Wizard Clinical Risk Predictor & Typable Sliders
 Clinicians can interactively slide or click-to-type numerical vitals inputs, with a customizable clinical dropdown selector.
@@ -280,8 +328,6 @@ A clean, light-themed responsive landing page prioritizing readability and sleek
 ![Landing Page Light Mode](screenshots/7_landing_page_light_mode.png)
 
 ---
-
-
 
 ## 🛠️ Installation & Setup
 
@@ -352,14 +398,18 @@ The Streamlit application contains the global beeswarm plots and cohort analytic
 AI-Healthcare-Platform/
 ├── .streamlit/
 │   └── config.toml          # Streamlit configuration parameters
-├── screenshots/             # Interface screenshots folder
+├── screenshots/             # Interface and Certificate screenshots folder
 │   ├── 1_diagnostics_focus_dropdown.png
 │   ├── 2_wellness_score_contributors.png
 │   ├── 3_pdf_print_preview.png
 │   ├── 4_full_width_wellness_dashboard.png
 │   ├── 5_typable_sliders_inputs.png
 │   ├── 6_landing_page_dark_mode.png
-│   └── 7_landing_page_light_mode.png
+│   ├── 7_landing_page_light_mode.png
+│   ├── 9_diabetes_confusion_matrix.png
+│   ├── 10_heart_confusion_matrix.png
+│   ├── 11_liver_confusion_matrix.png
+│   └── 12_stroke_confusion_matrix.png
 ├── notebooks/               # Jupyter model training notebooks
 │   ├── 01_diabetes_training.ipynb       # Your clinical Diabetes training notebook
 │   ├── 02_heart_training.ipynb          # Your clinical Cardio training notebook
@@ -401,7 +451,7 @@ AI-Healthcare-Platform/
 ## 🔮 Future Research Directions
 
 *   **Deep Learning Incorporations**: Implement dense neural network classifiers (`ANN` / `MLP`) and evaluate performance improvements on large cohort splits.
-*   **Clinical validation trials**: Partner with digital healthcare providers to evaluate generalizability on active EMR records.
+*   **Clinical validation trials**: Partner with digital healthcare providers to evaluate generalizability on active health records.
 *   **Wearable Integration**: Build real-time data streams to update wellness risk dashboards dynamically from smart wearable devices.
 *   **Multilingual Support**: Translate clinical terminology sheets and layperson wellness descriptions into international languages.
 *   **Clinician-Facing Portals**: Establish dual dashboards displaying raw medical statistics for doctors and simplified health indicators for patients.
