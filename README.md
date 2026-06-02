@@ -1,9 +1,10 @@
 # 🏥 Clini-SHAP: AI-Powered Multi-Disease Clinical Decision Support System (CDSS)
 
 [![GitHub License](https://img.shields.io/github/license/anushka06onu/AI-Healthcare-Analytics-Platform?color=blue&style=flat-square)](LICENSE)
+[![Vercel App](https://img.shields.io/badge/Vercel-Live--App-000000?logo=vercel&logoColor=white&style=flat-square)](https://ai-healthcare-analytics-platform-jt.vercel.app/)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?logo=streamlit&logoColor=white&style=flat-square)](https://share.streamlit.io/)
 [![Vite](https://img.shields.io/badge/Vite-5.0+-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.6.1-F7931E?logo=scikit-learn&logoColor=white&style=flat-square)](https://scikit-learn.org/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3.0+-F7931E?logo=scikit-learn&logoColor=white&style=flat-square)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-2C8E47?style=flat-square)](https://xgboost.readthedocs.io/)
 [![SHAP](https://img.shields.io/badge/SHAP-Explainable--AI-8A2BE2?style=flat-square)](https://github.com/shap/shap)
 
@@ -42,6 +43,8 @@ Early disease detection is a cornerstone of modern preventive medicine. Chronic 
 1.  **Multi-Disease Risk Stratification**: Simultaneously processes baseline attributes across five distinct classification pipelines.
 2.  **Mitigation of Clinical Jargon Barriers**: Translates abstract log-odds predictions and SHAP feature attributions into layperson-friendly, reassuring progress cards.
 3.  **Explainable AI (XAI) Accountability**: Ensures that black-box machine learning predictions are mathematically attributable to specific clinical markers, reinforcing clinician trust and patient engagement.
+
+> **🚀 Try the Live App on Vercel**: Access the production-grade visual clinical wellness suite directly at **[ai-healthcare-analytics-platform-jt.vercel.app](https://ai-healthcare-analytics-platform-jt.vercel.app/)**!
 
 ---
 
