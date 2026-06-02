@@ -393,7 +393,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
         </div>
 
         {/* COLUMN 3: Metrics Dashboard & Slider Visualizers */}
-        <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-6 shadow-sm flex flex-col justify-between space-y-6">
+        <div className="bg-[var(--card-bg)] border border-[var(--card-border)] rounded-3xl p-4 sm:p-6 shadow-sm flex flex-col justify-between space-y-6">
           <div className="space-y-4">
             <h4 className="text-sm font-black text-[var(--text-color)] uppercase tracking-wider border-b border-[var(--card-border)] pb-2 flex items-center gap-1.5">
               <Activity className="h-4 w-4 text-emerald-500" />
@@ -419,10 +419,16 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                   style={{ left: `${Math.min(Math.max((metrics.bmi / 45) * 100, 5), 95)}%` }}
                 ></div>
               </div>
-              <div className="flex justify-between text-xxs sm:text-xs text-[var(--text-muted)] font-extrabold uppercase">
-                <span>Underweight</span>
+              <div className="flex justify-between text-[9px] min-[360px]:text-xxs sm:text-xs text-[var(--text-muted)] font-extrabold uppercase tracking-tight">
+                <span>
+                  <span className="inline min-[400px]:hidden">Under</span>
+                  <span className="hidden min-[400px]:inline">Underweight</span>
+                </span>
                 <span>Healthy</span>
-                <span>Overweight</span>
+                <span>
+                  <span className="inline min-[400px]:hidden">Over</span>
+                  <span className="hidden min-[400px]:inline">Overweight</span>
+                </span>
                 <span>Obese</span>
               </div>
             </div>
