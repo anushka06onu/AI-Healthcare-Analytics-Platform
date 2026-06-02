@@ -245,6 +245,13 @@ function Predict({ predictions, setPredictions, setPage }) {
     if (result) {
       setIsCalculating(true)
       const timer = setTimeout(() => {
+        // Calculate BMI internally if height and weight are set
+        let bmi = 22
+        if (height > 0 && weight > 0) {
+          const heightInMeters = height / 100
+          bmi = Math.round((weight / (heightInMeters * heightInMeters)) * 10) / 10
+        }
+
         let riskScore = 15
         const reasons = []
         const advice = ["Schedule routine checkups and baseline panels annually."]
