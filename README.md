@@ -2,7 +2,6 @@
 
 [![GitHub License](https://img.shields.io/github/license/anushka06onu/AI-Healthcare-Analytics-Platform?color=blue&style=flat-square)](LICENSE)
 [![Vercel App](https://img.shields.io/badge/Vercel-Live--App-000000?logo=vercel&logoColor=white&style=flat-square)](https://ai-healthcare-analytics-platform-jt.vercel.app/)
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?logo=streamlit&logoColor=white&style=flat-square)](https://share.streamlit.io/)
 [![Vite](https://img.shields.io/badge/Vite-5.0+-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
 [![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3.0+-F7931E?logo=scikit-learn&logoColor=white&style=flat-square)](https://scikit-learn.org/)
 [![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-2C8E47?style=flat-square)](https://xgboost.readthedocs.io/)
@@ -19,7 +18,6 @@ Developed as a highly polished, dual-theme dashboard portal, **Clini-SHAP** serv
 ## 🚀 Live Demo
 
 *   **Frontend Web App (React + Vite)**: **[ai-healthcare-analytics-platform-jt.vercel.app](https://ai-healthcare-analytics-platform-jt.vercel.app/)**
-*   **Analytics Dashboard (Streamlit)**: **[share.streamlit.io (Streamlit Cloud)](https://share.streamlit.io/)**
 
 ---
 
@@ -101,7 +99,6 @@ This project demonstrates:
 
 ### Deployment
 *   **React App hosting**: Vercel
-*   **Python App hosting**: Streamlit Cloud
 
 ---
 
@@ -143,8 +140,7 @@ graph TD
     %% Output Interfaces
     subgraph Out ["📋 Unified Output & Reporting Layers"]
         I1["🖥️ React SPA Dashboard (Wellness score Contributors)"]
-        I2["📊 Streamlit CDSS Portal (Cohort beeswarm graphs)"]
-        I3["📄 FPDF2 / html2pdf.js Compiler (Clinical PDF Reports)"]
+        I2["📄 FPDF2 / html2pdf.js Compiler (Clinical PDF Reports)"]
     end
 
     A --> C
@@ -350,30 +346,6 @@ The React SPA contains the premium full-width wellness report interfaces and int
 
 ---
 
-### Part 2: Streamlit Backend Setup (Clinical Analytics App)
-The Streamlit application contains the global beeswarm plots and cohort analytic dashboards.
-
-1.  **Return to root directory and install OpenMP (macOS only)**:
-    Required by the XGBoost C++ engine:
-    ```bash
-    brew install libomp
-    ```
-2.  **Install Python requirements**:
-    ```bash
-    pip3 install -r requirements.txt
-    ```
-3.  **Validate pre-trained weights and pre-compute SHAP values**:
-    ```bash
-    python3 train_models.py
-    ```
-4.  **Launch the Streamlit Server**:
-    ```bash
-    streamlit run app.py
-    ```
-5.  Open **`http://localhost:8501`** in your browser.
-
----
-
 ## 🚀 Usage Instructions
 
 ### Running a Risk Assessment in the React Dashboard:
@@ -396,9 +368,7 @@ The Streamlit application contains the global beeswarm plots and cohort analytic
 
 ```
 AI-Healthcare-Platform/
-├── .streamlit/
-│   └── config.toml          # Streamlit configuration parameters
-├── screenshots/             # Interface and Certificate screenshots folder
+├── screenshots/             # Interface screenshots folder
 │   ├── 1_diagnostics_focus_dropdown.png
 │   ├── 2_wellness_score_contributors.png
 │   ├── 3_pdf_print_preview.png
@@ -440,9 +410,6 @@ AI-Healthcare-Platform/
 │   ├── src/                 # Source components, pages, styling assets
 │   ├── package.json         # Node manifest
 │   └── vite.config.js       # Vite build configurations
-├── requirements.txt         # Locked Python libraries
-├── train_models.py          # EMR verification & SHAP pipeline script
-├── app.py                   # Streamlit clinical dashboard entry point
 └── README.md                # Project documentation (This file)
 ```
 
