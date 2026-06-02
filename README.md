@@ -1,84 +1,264 @@
-# 🏥 AI Healthcare Analytics Platform (Clini-SHAP)
+# 🏥 Clini-SHAP: AI-Powered Multi-Disease Clinical Decision Support System (CDSS)
 
-Welcome to **Clini-SHAP**—a premium, clinical-grade decision support platform built to execute disease diagnostics risk scoring, showcase Explainable AI (**SHAP** interpretability) through layperson-friendly visuals, analyze clinical cohort trends, and generate structured Electronic Medical Record (EMR) reports.
+[![GitHub License](https://img.shields.io/github/license/anushka06onu/AI-Healthcare-Analytics-Platform?color=blue&style=flat-square)](LICENSE)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Deployed-FF4B4B?logo=streamlit&logoColor=white&style=flat-square)](https://share.streamlit.io/)
+[![Vite](https://img.shields.io/badge/Vite-5.0+-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.6.1-F7931E?logo=scikit-learn&logoColor=white&style=flat-square)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-2C8E47?style=flat-square)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/SHAP-Explainable--AI-8A2BE2?style=flat-square)](https://github.com/shap/shap)
 
-I developed this platform as a modern, dual-architecture system featuring:
-1. **Vite + React Frontend**: A premium, visual clinical dashboard with full-width widgets, typable range sliders, theme-matching custom dropdown selectors, and automated multi-disease risk calculators.
-2. **Streamlit Backend & Diagnostic Suite**: A stand-alone, customizable clinical application serving as an alternative dashboard, complete with data loaders, SHAP beeswarm visualizations, and cohort analytics.
+An AI-powered Healthcare Risk Prediction Platform that combines machine learning, predictive analytics, high-fidelity visualizations, and explainable insights to support early health risk awareness. This system operates as a Clinical Decision Support System (CDSS), leveraging predictive algorithms calibrated on diverse clinical cohorts to forecast multi-disease risk profiles while providing transparent, layperson-friendly feature attribution charts.
 
----
-
-## 🌟 Core Features & Implementation Walkthrough
-
-### 🔬 1. Coordinated Patient Diagnostic Suite (Unified EMR)
-*   **Single-Entry Patient Profile**: Clinicians enter patient baseline vitals (Age, Sex, Diastolic/Systolic Blood Pressure, BMI, Fasting Glucose) **exactly once** in a single consolidated panel. Shared inputs are automatically mapped and fed into all active diagnostic models.
-*   **Dynamic Active Diagnostics Toggles**: In the sidebar drawer, clinicians can toggle **ON or OFF** specific disease diagnostic evaluations on the fly.
-*   **Conditional Lab Panels**: Specific lab tests (e.g. bilirubin, creatinine, specific gravity, pus cells, insulin) automatically render **only** for diseases that are active, keeping the workspace completely clean and targeted.
-*   **Parallel Diagnostics Cards**: Running diagnostic evaluations executes scaling pipelines, ML predictions, and SHAP waterfall chart attributions for all active diseases side-by-side.
-*   **customizable Clinician Profile**: Clinicians can dynamically input their own names. The system displays this active Clinician Name in the main EMR header and prints it cleanly in compiled PDF reports.
-
-### 🎨 2. Premium UI & Dual Theme Engine
-*   **Stand-alone Web Shell**: Custom-designed a glassmorphic **Top Header Navbar** with the clinic logo, active clinician session, and a glowing connection heartbeat.
-*   **Interactive Light & Dark Modes**: Overhauled all styles and text elements to support a beautiful **☀️ Light Mode** and a robust **🌙 Dark Mode** toggle that dynamically swaps the entire canvas styling on the fly.
-*   **Theme-Synchronized Visualizations**: All Plotly gauges, histograms, and SHAP Beeswarm summary charts automatically swap background templates, font colors, and gridline scales when toggling themes.
-*   **Typable Range Sliders**: Numeric input indicators function as click-to-type inputs with bounds-clamping (e.g., Age 1-110, Height 50-220cm, Weight 5-185kg) to prevent unrealistic clinical entries.
-*   **Themed Dropdown Selectors**: Native browser dropdown lists are replaced with a premium custom-styled React popover select component matching the clinical dashboard.
-
-### 🧠 3. Explainable AI Center (SHAP) & Layman Wellness Dashboard
-*   **Clinical to Layperson Translation**: Complex SHAP attributions are translated into clear, comforting **Wellness Score Contributors** using protector (green) vs. driver (red) indicators.
-*   **Global Feature Importance**: High-fidelity horizontal bar charts detailing the mean absolute SHAP value impact across the validation cohort.
-*   **SHAP Beeswarm Summary Plots**: Theme-synchronized beeswarm plots illustrating the directionality of clinical feature attributions (red representing high feature values, blue representing low feature values).
-
-### 📈 4. Cohort Analytics & Trends
-*   **Cohort Insights**: Plotly age histograms colored by diagnosis, alongside Pearson feature correlation matrices.
-*   **Risk Factor Comparative Matrix**: Synthesized ranking mapping key risk factors across all 5 disease classifiers.
-*   **Trend Analytics**: Line charts showing simulated month-on-month workflow screening volume and detection rates.
-
-### 💡 5. Dynamic Care Advisor (Multi-Disease Tracking)
-*   Built a personalized recommendation system that dynamically maps the latest EMR screening risk to quadrants: **Clinical Medical Management**, **Dietary Guidelines**, **Physical Activity**, and **Lifestyle Monitoring**, flagged with priority badges (Critical, Important, Suggested). Renders tabs for **all** high-risk active findings identified during active screenings.
-
-### 📄 6. EMR Report Generator
-*   Coded a professional EMR PDF compiler that compiles patient details, clinician case notes, selected risk results, observed parameters, and a rigorous legal disclaimer into a printable EMR diagnostics report.
+Developed as a highly polished, dual-theme clinical portal, **Clini-SHAP** serves as a robust prototype for graduate admissions, machine learning portfolios, and medical AI research showcases.
 
 ---
 
-## 📸 Interface Showcase
+## 📌 Table of Contents
+1. [Overview & Clinical Motivation](#-overview--clinical-motivation)
+2. [Key System Features](#-key-system-features)
+3. [System Architecture](#-system-architecture)
+4. [Clinical Datasets Registry](#-clinical-datasets-registry)
+5. [Machine Learning Pipeline](#-machine-learning-pipeline)
+6. [Model Architecture Selection](#-model-architecture-selection)
+7. [High-Fidelity Evaluation Metrics](#-high-fidelity-evaluation-metrics)
+8. [Cross-Validation & Generalizability](#-cross-validation--generalizability)
+9. [Transparent Explainable AI (SHAP)](#-transparent-explainable-ai-shap)
+10. [📸 Interface & Screenshot Showcase](#-interface--screenshot-case)
+11. [🎓 Professional Data Science Certification](#-professional-data-science-certification)
+12. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
+13. [🚀 Usage Instructions](#-usage-instructions)
+14. [📁 Repository Directory Tree](#-repository-directory-tree)
+15. [🔮 Future Research Directions](#-future-research-directions)
+16. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
+17. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
+18. [✍️ Author Profile](#%EF%B8%8F-author-profile)
 
-Here are the visual representations of the Clini-SHAP Intelligent CDSS platform interfaces and professional certifications:
+---
 
-### 1. Interactive Landing Page Dashboard (Dark Mode)
-A modern, dark-themed responsive landing page featuring glassmorphic navigation, high-contrast action buttons, and animated visual elements.
-![Landing Page Dark Mode](screenshots/6_landing_page_dark_mode.png)
+## 🔬 Overview & Clinical Motivation
 
-### 2. Interactive Landing Page Dashboard (Light Mode)
-A clean, light-themed responsive landing page prioritizing readability and sleek modern clinical aesthetics.
-![Landing Page Light Mode](screenshots/7_landing_page_light_mode.png)
+Early disease detection is a cornerstone of modern preventive medicine. Chronic conditions such as Diabetes, Cardiovascular diseases, Stroke, Liver degradation, and Chronic Kidney Disease account for a substantial percentage of global mortality and economic burdens. In clinical environments, medical datasets (EMRs) are frequently underutilized for real-time risk stratification, leaving subtle physiological trends undetected until patients present with advanced symptom profiles.
 
-### 3. Unified Risk Predictor Step-Wizard & Typable Sliders
+**Clini-SHAP** addresses this clinical bottleneck by serving as a predictive risk coordinator. By mapping patient vitals and demographic data points in parallel, the platform provides:
+1.  **Multi-Disease Risk Stratification**: Simultaneously processes baseline attributes across five distinct classification pipelines.
+2.  **Mitigation of Clinical Jargon Barriers**: Translates abstract log-odds predictions and SHAP feature attributions into layperson-friendly, reassuring progress cards.
+3.  **Explainable AI (XAI) Accountability**: Ensures that black-box machine learning predictions are mathematically attributable to specific clinical markers, reinforcing clinician trust and patient engagement.
+
+---
+
+## 🌟 Key System Features
+
+*   **Coordinated Patient Diagnostic Suite**: Inputs shared patient demographics (Age, Sex, Diastolic/Systolic Blood Pressure, BMI, Fasting Glucose) exactly once. The system automatically routes inputs to all active diagnostic classification models.
+*   **Dual-Theme Modern Web Shell**: Custom glassmorphic navbar with active clinician profile parameters, a glowing pulse heartbeat, and dynamic support for **☀️ Light Mode** and **🌙 Dark Mode** styles.
+*   **Typable Range Sliders**: Numeric input slider badges double as direct input fields, complete with biological clamps (e.g., Age: 1-110, Height: 100-220cm, Weight: 30-185kg) to eliminate unrealistic clinical parameters.
+*   **Themed Dropdown Selectors**: Standard browser select dropdown menus are replaced with custom React popover dropdown components complete with search filters and select checkmarks.
+*   **Explainable AI (XAI) Panel**: Live client-side attributions displaying protectors (-) and drivers (+) mapped into standard layperson wellness contributors.
+*   **Interactive EMR PDF Compiler**: Client-side compiled clinical report featuring patient vitals summaries, multi-disease risk indicators, and legal diagnostic disclaimers.
+*   **5-Fold Stratified Cross-Validation**: Validated pipelines that run within Colab notebook templates to ensure high performance and generalizability.
+
+---
+
+## 📐 System Architecture
+
+The following diagram illustrates the flow of EMR clinical parameters from clinician input through processing, machine learning prediction, SHAP attribution, and multi-interface reporting:
+
+```mermaid
+graph TD
+    %% User Input
+    subgraph UI ["🌐 Clinician Interface Layer"]
+        A["👤 Patient Profile & Vitals (Age, Sex, BP, BMI, Glucose)"]
+        B["🧪 Conditional Laboratory Panels (Bilirubin, Creatinine, Specific Gravity)"]
+    end
+
+    %% Routing and Preprocessing
+    subgraph Engine ["⚙️ CDSS Core Processing Engine"]
+        C["🔄 Shared Parameter Router"]
+        D["🧹 Data Imputation & Categorical Mapping"]
+        E["⚖️ Standard Scaler Normalization (EMR Scalers)"]
+    end
+
+    %% Classifiers
+    subgraph Models ["🤖 Machine Learning Classifiers"]
+        F1["🍬 XGBoost Classifier (Diabetes)"]
+        F2["❤️ XGBoost Classifier (Cardio)"]
+        F3["🧪 XGBoost Classifier (Hepatic)"]
+        F4["🧠 XGBoost Classifier (Stroke)"]
+        F5["🩸 Random Forest Classifier (Renal)"]
+    end
+
+    %% Explainability
+    subgraph XAI ["🧠 Interpretability Engine (SHAP)"]
+        G1["📊 TreeExplainer (Random Forest)"]
+        G2["📊 KernelExplainer (XGBoost Models)"]
+        H["🟢 Protectors vs 🔴 Drivers Attribution Matrix"]
+    end
+
+    %% Output Interfaces
+    subgraph Out ["📋 Unified Output & Reporting Layers"]
+        I1["🖥️ React SPA Dashboard (Wellness score Contributors)"]
+        I2["📊 Streamlit CDSS Portal (Cohort beeswarm graphs)"]
+        I3["📄 FPDF2 / html2pdf.js Compiler (Clinical PDF Reports)"]
+    end
+
+    A --> C
+    B --> C
+    C --> D
+    D --> E
+    E --> F1 & F2 & F3 & F4 & F5
+    F1 & F2 & F3 & F4 & F5 --> G1 & G2
+    G1 & G2 --> H
+    F1 & F2 & F3 & F4 & F5 --> I1 & I2 & I3
+    H --> I1 & I2
+```
+
+---
+
+## 📂 Clinical Datasets Registry
+
+The predictive models integrated in this platform are trained and validated on officially recognized clinical research cohorts. The table below registers the datasets used and their research purposes:
+
+| Target Disease | Primary Research Dataset | Clinical Purpose | Direct Repository Endpoint | Alternative Endpoint |
+| :--- | :--- | :--- | :--- | :--- |
+| **🍬 Diabetes** | Pima Indians Diabetes Database | Stratifying diabetic risk markers in high-incidence demographics | [UCI Repository](https://archive.ics.uci.edu/dataset/21/pima+indians+diabetes) | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) |
+| **❤️ Cardiovascular** | Cleveland Clinical Heart Disease Dataset | Mapping chest pain types, ST wave segment slopes, and arterial blockage | [UCI Repository](https://archive.ics.uci.edu/dataset/45/heart+disease) | [Kaggle Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) |
+| **🧪 Liver Efficacy** | Indian Liver Patient Dataset (ILPD) | Tracking hepatic enzyme secretion patterns (ALT, AST, ALP) and protein ratios | [UCI Repository](https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset) | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/indian-liver-patient-records) |
+| **🧠 Stroke Risk** | Cerebrovascular Stroke Prediction Dataset | Mapping lifestyle risk habits (smoking, marriage status, employment) and glucose | [Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) | [Kaggle Direct](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) |
+| **🩸 Renal Kidney** | Chronic Kidney Disease Database | Analyzing physical properties of urine (specific gravity, leakage) and blood nitrogen | [UCI Repository](https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease) | [Kaggle Dataset](https://www.kaggle.com/datasets/mansoorgoku/ckdisease) |
+
+---
+
+## ⚙️ Machine Learning Pipeline
+
+Every medical record routed through the CDSS engine undergoes a strict, clinical-grade pre-processing and evaluation pipeline to guarantee consistent predictions:
+
+```
+[Raw Patient Inputs]
+         │
+         ▼
+[Missing Value Imputation]  ──► Medians imputed for continuous variables; modes for categories
+         │
+         ▼
+[Categorical Encoding]      ──► Labels mapped into binary (0/1) or dense integer categories
+         │
+         ▼
+[StandardScaler Scaling]    ──► Zero mean, unit variance scaling using EMR standard scalers
+         │
+         ▼
+[Model Inference]           ──► Parallel model scoring (probabilities extracted via predict_proba)
+         │
+         ▼
+[SHAP Explanations]         ──► Explainer matrices calculated; local contributions evaluated
+         │
+         ▼
+[Formatted Output]          ──► Risk scores, lay explanations, and PDF compile streams
+```
+
+### 1. Preprocessing Specifications:
+*   **Missing Value Imputation**: Null variables are imputed using localized cohort statistics to avoid data bias. Continuously measured data (e.g., `Albumin_and_Globulin_Ratio` or `bmi`) are imputed with the median, while categorical entries are imputed using the mode.
+*   **Categorical Mapping**: Multi-class string factors are explicitly encoded into dense ordinal indices to prevent dummy variable expansion from diluting tree structure splits (e.g., work type classifications, smoking status levels).
+*   **Normalization**: Feature distributions are standardized via a custom fitted `StandardScaler` loaded from pre-calibrated EMR objects, applying:
+    $$z = \frac{x - \mu}{\sigma}$$
+    where $\mu$ represents feature mean and $\sigma$ represents standard deviation.
+
+---
+
+## 🤖 Model Architecture Selection
+
+The classifier models saved in the `models/` directory were selected based on structural compatibility with the observed data sizes and clinical attribute formats:
+
+*   **XGBoost Classifiers (`XGBClassifier`)**: Employed for **Diabetes**, **Heart Disease**, **Liver Disease**, and **Stroke Risk**. Gradient boosting trees demonstrate superior capability in identifying non-linear feature interactions and high-correlation boundaries in mixed categorical-continuous clinical cohorts.
+*   **Random Forest Classifiers (`RandomForestClassifier`)**: Selected for **Chronic Kidney Disease (Renal)**. Evaluates physical urinalysis flags and blood hematology boundaries via parallel tree voting ensembles, which are highly resilient to sparse missing cells.
+
+---
+
+## 📊 High-Fidelity Evaluation Metrics
+
+The classification performance of the serialized model components has been evaluated against test validation cohorts. The metrics below represent the precise output parameters derived from the EMR metrics index (`models/model_metrics.json`):
+
+### 1. Diagnostic Classification Metrics
+| Target Disease | Classification Model | Accuracy | Precision | Recall | F1-Score |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **🍬 Diabetes** | `XGBClassifier` | 75.97% | 66.67% | 62.96% | 64.76% |
+| **❤️ Cardiovascular** | `XGBClassifier` | 83.61% | 76.47% | 92.86% | 83.87% |
+| **🧪 Liver Efficacy** | `XGBClassifier` | 69.23% | 73.27% | 89.16% | 80.43% |
+| **🧠 Stroke Risk** | `XGBClassifier` | 78.67% | 12.83% | 58.00% | 21.01% |
+| **🩸 Renal Kidney** | `RandomForestClassifier` | 100.00% | 100.00% | 100.00% | 100.00% |
+
+### 2. Receiver Operating Characteristic (ROC-AUC) Metrics
+| Target Disease | Receiver Operating Characteristic (ROC-AUC) | Samples Evaluated | Cohort Disease Prevalence |
+| :--- | :--- | :--- | :--- |
+| **🍬 Diabetes** | **81.78%** | 768 | 34.90% |
+| **❤️ Cardiovascular** | **92.75%** | 303 | 45.87% |
+| **🧪 Liver Efficacy** | **73.78%** | 583 | 71.36% |
+| **🧠 Stroke Risk** | **78.74%** | 5,110 | 4.87% |
+| **🩸 Renal Kidney** | **100.00%** | 397 | 62.47% |
+
+> [!NOTE]
+> The Chronic Kidney Disease classifier scores reflect the highly distinct separations inherent in the clinical parameters (e.g. specific gravity, serum creatinine, and urine albumin leakage). In validation, these attributes provide an absolute classification boundary.
+
+---
+
+## 🔄 Cross-Validation & Generalizability
+
+To ensure the models maintain high generalization capacities and prevent structural overfitting, the core clinical classifiers were evaluated using **5-Fold Stratified Cross-Validation (`StratifiedKFold`)** inside the Colab training notebooks:
+
+*   **Stratification Preservation**: Each fold maintains the baseline class proportions of the overall dataset, protecting the training loops from imbalance-induced bias (vital for rare positive classifications such as Stroke, which has a low prevalence of 4.87%).
+*   **Mean Performance Verification**: Models achieve high validation metrics during K-Fold loops, verifying that the scaling variables and parameter weights generalize cleanly to unseen clinical test splits.
+
+---
+
+## 🧠 Transparent Explainable AI (SHAP)
+
+A primary barrier to implementing machine learning models in modern clinical workflows is the "black-box" dilemma. Clini-SHAP overcomes this by integrating **SHAP (SHapley Additive exPlanations)**, mapping local prediction values to standard game-theory attribution variables.
+
+### 1. Attribution Methodologies:
+*   **KernelExplainer**: Applied to XGBoost models. Evaluates local risk score shifts relative to an empirical training baseline.
+*   **TreeExplainer**: Applied to the Chronic Kidney Disease Random Forest model. Evaluates paths of tree leaf allocations to deliver fast feature attributions.
+
+### 2. Visual Layer Mapping (Protectors vs. Drivers):
+In the user dashboard, the numerical SHAP values are dynamically translated into layperson-friendly visual categories:
+*   **🟢 Wellness Protectors (Negative SHAP values)**: Clinical parameters that lower the estimated risk score relative to the baseline (e.g., active exercise regimens, balanced dietary habits, normal blood sugar readings).
+*   **🔴 Risk Drivers (Positive SHAP values)**: Clinical parameters that increase the estimated risk score relative to the baseline (e.g., genetic predispositions, advanced age, high arterial pressures, elevated body mass index values).
+
+---
+
+## 📸 Interface & Screenshot Showcase
+
+Here is a visual gallery showcasing the highly polished clinical interfaces, wellness dashboards, typable input sliders, and EMR report PDF compilers:
+
+### 1. Step-Wizard Clinical Risk Predictor & Typable Sliders
 Clinicians can interactively slide or click-to-type numerical vitals inputs, with a customizable clinical dropdown selector.
 ![Step Wizard & Sliders](screenshots/5_typable_sliders_inputs.png)
 
-### 4. Custom Themed Select Dropdown Menu
+### 2. Custom Themed Select Dropdown Menu
 A premium custom-styled popover dropdown replaces native browser dropdown lists.
 ![Themed Select Dropdown](screenshots/1_diagnostics_focus_dropdown.png)
 
-### 5. Full-Width Visual Wellness Dashboard & Risk Indicators
+### 3. Full-Width Visual Wellness Dashboard & Risk Indicators
 A comprehensive visual health evaluation featuring circular dials, BMI trackers, and lifestyle score indicators.
 ![Full-Width Wellness Dashboard](screenshots/4_full_width_wellness_dashboard.png)
 
-### 6. Layperson-Friendly Wellness Contributors & SHAP Attributions
+### 4. Layperson-Friendly Wellness Contributors & SHAP Attributions
 Complex SHAP attributions translated into clear, comforting wellness score protector (-) and driver (+) matrices.
 ![Wellness Score Contributors](screenshots/2_wellness_score_contributors.png)
 
-### 7. High-Fidelity PDF Clinical Report Compilation
+### 5. High-Fidelity PDF Clinical Report Compilation
 Client-side PDF report compilation detailing patient metadata, diagnostics focus, and wellness indicators.
 ![PDF Print Preview](screenshots/3_pdf_print_preview.png)
 
+### 6. Interactive Landing Page Dashboard (Dark Mode)
+A modern, dark-themed responsive landing page featuring glassmorphic navigation, high-contrast action buttons, and animated visual elements.
+![Landing Page Dark Mode](screenshots/6_landing_page_dark_mode.png)
+
+### 7. Interactive Landing Page Dashboard (Light Mode)
+A clean, light-themed responsive landing page prioritizing readability and sleek modern clinical aesthetics.
+![Landing Page Light Mode](screenshots/7_landing_page_light_mode.png)
+
 ---
 
-## 🎓 Data Science Professional Certification
+## 🎓 Professional Data Science Certification
 
-The mathematical models, EMR data engineering workflows, and Explainable AI (SHAP) attributions implemented in this platform are backed by certified professional expertise:
+The mathematical models, EMR data engineering workflows, and Explainable AI (SHAP) attributions implemented in this platform are backed by certified professional data science expertise:
 
 *   **IBM Data Science Professional Certificate**: Completed a rigorous, 12-course certification curriculum covering Data Science Methodology, Python for Data Science, Databases and SQL with Python, Data Analysis, Data Visualization, Machine Learning with Python, and Applied Data Science Capstone.
 *   **Credential Verification ID**: Verified at [Coursera Verification Endpoint](https://coursera.org/verify/professional-cert/WWJZILGDM7FR).
@@ -87,67 +267,16 @@ The mathematical models, EMR data engineering workflows, and Explainable AI (SHA
 
 ---
 
-## 🔬 Deep-Dive: Clinical Classifiers & Datasets Used
+## 🛠️ Installation & Setup
 
-The platform coordinates **5 specialized machine learning models** trained on diverse, validated medical cohorts. Below are the details and official repository links for each dataset:
-
-| Target Disease | Model Architecture | Core Predictive Features | Primary Dataset Link | Alternate Dataset Link |
-| :--- | :--- | :--- | :--- | :--- |
-| **🍬 Diabetes** | `XGBClassifier` | Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Diabetes Pedigree Function, Age | [UCI Diabetes Dataset](https://archive.ics.uci.edu/dataset/21/pima+indians+diabetes) | [Kaggle Pima Indians Database](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) |
-| **❤️ Cardiovascular** | `XGBClassifier` | Age, Sex, Chest Pain (CP), Resting Blood Pressure, Cholesterol, Fasting Blood Sugar, Resting ECG, Max Heart Rate, Exercise Angina, Oldpeak, ST Slope, Blocked Vessels (CA), Thalassemia Flow | [UCI Heart Disease Dataset](https://archive.ics.uci.edu/dataset/45/heart+disease) | [Kaggle Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) |
-| **🧪 Liver Efficacy** | `XGBClassifier` | Age, Sex, Total Bilirubin, Direct Bilirubin, Alkaline Phosphotase, Alamine Aminotransferase, Aspartate Aminotransferase, Total Proteins, Albumin, Albumin/Globulin Ratio | [UCI ILPD Liver Dataset](https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset) | [Kaggle Indian Liver Patient Records](https://www.kaggle.com/datasets/uciml/indian-liver-patient-records) |
-| **🧠 Stroke Risk** | `XGBClassifier` | Gender, Age, Hypertension, Heart Disease, Ever Married, Work Type, Residence Type, Avg Glucose Level, BMI, Smoking Status | [Kaggle Stroke Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) | [Cerebrovascular Stroke Records](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) |
-| **🩸 Renal Kidney** | `RandomForestClassifier` | Age, Blood Pressure, Urine Specific Gravity, Urine Albumin/Sugar Leakage, Pus Cells, RBC, Pus Cell Clumps, Bacteria, Blood Glucose, Blood Urea, Serum Creatinine, Sodium, Potassium, Hemoglobin, PCV, WBC, RBC Counts | [UCI Chronic Kidney Disease](https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease) | [Kaggle Chronic Kidney Disease](https://www.kaggle.com/datasets/mansoorgoku/ckdisease) |
-
----
-
-## 📓 Google Colab Notebooks: Downloadable Model Training
-
-The `notebooks/` directory contains both your **uploaded clinical training notebooks** and the **lightweight Google Colab templates**. These notebooks walk through the model training process step-by-step, covering exploratory data analysis (EDA), EMR preprocessing, train-test splits, model classification training (`XGBClassifier` and `RandomForestClassifier`), SHAP interpretability calibration, and model export operations.
-
-### 📂 Your Uploaded Clinical Training Notebooks:
-*   [01_diabetes_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/01_diabetes_training.ipynb)
-*   [02_heart_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/02_heart_training.ipynb)
-*   [03_liver_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/03_liver_training.ipynb)
-*   [04_stroke_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/04_stroke_training.ipynb)
-*   [05_kidney_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/05_kidney_training.ipynb)
-
-### 📂 Google Colab Lightweight Model Training Templates:
-*   [1_diabetes_model_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/1_diabetes_model_training.ipynb)
-*   [2_heart_disease_model_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/2_heart_disease_model_training.ipynb)
-*   [3_liver_disease_model_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/3_liver_disease_model_training.ipynb)
-*   [4_stroke_risk_model_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/4_stroke_risk_model_training.ipynb)
-*   [5_kidney_disease_model_training.ipynb](file:///Users/fatehahossainanushka/Documents/AI-Healthcare-Analytics-Platform/notebooks/5_kidney_disease_model_training.ipynb)
-
-> [!TIP]
-> To run these notebooks, upload them directly to [Google Colab](https://colab.research.google.com/), enable a GPU accelerator (if desired), and run all cells. They are fully self-contained and pre-configured!
-
----
-
-## 🛠️ Technology Stack Used
-
-| Layer | Technology | Purpose |
-| :--- | :--- | :--- |
-| **Frontend Framework** | [React + Vite](https://vitejs.dev/) | High-performance visual UI rendering on port 5173 |
-| **App Shell (Alternative)** | [Streamlit](https://streamlit.io/) | Stand-alone Python clinical dashboard on port 8501/8502 |
-| **Machine Learning** | [XGBoost](https://xgboost.readthedocs.io/), [scikit-learn](https://scikit-learn.org/) | Pre-trained classifiers (`XGBClassifier`, `RandomForestClassifier`) |
-| **Model Interpretability** | [SHAP](https://github.com/shap/shap) | Clinical local waterfall attributions and global beeswarm plots |
-| **Visualizations** | [Plotly](https://plotly.com/), [Matplotlib](https://matplotlib.org/), [Seaborn](https://seaborn.pydata.org/) | Dynamic medical and statistical graphs |
-| **PDF Compiler** | [FPDF2](https://github.com/pyfpdf/fpdf2), [html2pdf.js](https://html2pdf.js.org/) | Client-side EMR clinical report PDF generation |
-| **Data Processing** | [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/) | Continuous scaling and tabular EMR preprocessing |
-
----
-
-## 🚀 How to Run the Project on Localhost
-
-### Part 1: Running the Vite + React Frontend (Recommended)
-The React frontend offers the premium, modern layout with typable sliders and a layperson-friendly dashboard.
+### Part 1: Vite + React Frontend Setup (Visual Wellness Dashboard)
+The React SPA contains the premium full-width wellness report interfaces and interactive input sliders.
 
 1.  **Navigate to the Frontend Directory**:
     ```bash
     cd frontend
     ```
-2.  **Install Node Dependencies**:
+2.  **Install Node Modules**:
     ```bash
     npm install
     ```
@@ -155,45 +284,68 @@ The React frontend offers the premium, modern layout with typable sliders and a 
     ```bash
     npm run dev
     ```
-4.  Open **`http://localhost:5173`** in your browser to experience the clinical wellness suite!
+4.  Open **`http://localhost:5173`** in your browser.
 
 ---
 
-### Part 2: Running the Streamlit Backend & Analytics alternative
-The Streamlit app serves the cohort insight histograms, Pearson correlations, and raw SHAP beeswarm graphs.
+### Part 2: Streamlit Backend Setup (Clinical Analytics App)
+The Streamlit application contains the global beeswarm plots and cohort analytic dashboards.
 
-1.  **Return to Root Directory**:
-    ```bash
-    cd ..
-    ```
-2.  **Install System-level XGBoost Requirements (macOS only)**:
-    Ensure OpenMP is active for high-performance predictions:
+1.  **Return to root directory and install OpenMP (macOS only)**:
+    Required by the XGBoost C++ engine:
     ```bash
     brew install libomp
     ```
-3.  **Install Python Libraries**:
+2.  **Install Python requirements**:
     ```bash
     pip3 install -r requirements.txt
     ```
-4.  **Run the Pre-computation & Metric Verification Pipeline**:
+3.  **Validate pre-trained weights and pre-compute SHAP values**:
     ```bash
     python3 train_models.py
     ```
-5.  **Launch the Streamlit Server**:
+4.  **Launch the Streamlit Server**:
     ```bash
     streamlit run app.py
     ```
-6.  Open **`http://localhost:8501`** (or `http://localhost:8502`) in your browser.
+5.  Open **`http://localhost:8501`** in your browser.
 
 ---
 
-## 📁 Project Directory Structure
+## 🚀 Usage Instructions
+
+### Running a Risk Assessment in the React Dashboard:
+1.  Navigate to **`http://localhost:5173`**.
+2.  Select a diagnostics evaluation target (e.g. *Diabetes Assessment*) from the custom themed select list.
+3.  Proceed through the Step Wizard:
+    *   **Profile**: Input patient name, gender, age, height, and weight. Click directly on the numerical displays next to the sliders to type custom values.
+    *   **Lifestyle**: Set smoking status, diet status, exercise frequency, and sleep habits.
+    *   **Indicators**: Toggle active parameters (e.g., blood pressure scales, fasting glucose values).
+4.  View the visual **Wellness Dashboard**:
+    *   Review the Risk percentage dial and its clinical layman interpretation.
+    *   Examine the visual **Wellness Score Contributors** list to identify protecting factors (-) and driving factors (+).
+    *   Analyze your segmented **Body Mass Index (BMI)** tracking indicator.
+5.  Click **"Download PDF Report"** to print or compile a high-fidelity clinical report.
+6.  Change the disease focus from the top dropdown list; the dashboard will instantly auto-recalculate risk scores for the new disease without resetting your variables.
+
+---
+
+## 📁 Repository Directory Tree
 
 ```
 AI-Healthcare-Platform/
 ├── .streamlit/
-│   └── config.toml          # Streamlit standard configuration file
-├── notebooks/
+│   └── config.toml          # Streamlit configuration parameters
+├── screenshots/             # Interface and Certificate screenshots folder
+│   ├── 1_diagnostics_focus_dropdown.png
+│   ├── 2_wellness_score_contributors.png
+│   ├── 3_pdf_print_preview.png
+│   ├── 4_full_width_wellness_dashboard.png
+│   ├── 5_typable_sliders_inputs.png
+│   ├── 6_landing_page_dark_mode.png
+│   ├── 7_landing_page_light_mode.png
+│   └── 8_ibm_data_science_certificate.png
+├── notebooks/               # Jupyter model training notebooks
 │   ├── 01_diabetes_training.ipynb       # Your clinical Diabetes training notebook
 │   ├── 02_heart_training.ipynb          # Your clinical Cardio training notebook
 │   ├── 03_liver_training.ipynb          # Your clinical Liver training notebook
@@ -204,29 +356,26 @@ AI-Healthcare-Platform/
 │   ├── 3_liver_disease_model_training.ipynb  # Liver template XGBoost trainer
 │   ├── 4_stroke_risk_model_training.ipynb  # Stroke template XGBoost trainer
 │   └── 5_kidney_disease_model_training.ipynb  # Kidney template RF trainer
-├── data/
+├── data/                    # Validated research datasets
 │   ├── diabetes.csv         # Pima Indians Diabetes Dataset
 │   ├── heart.csv            # Cleveland Heart Disease Dataset
 │   ├── liver.csv            # Indian Liver Patient Dataset
 │   ├── stroke.csv           # Cerebrovascular Stroke Dataset
 │   └── kidney.csv           # Chronic Kidney Disease Dataset
-├── models/
-│   ├── model_metrics.json   # EMR metrics cache
-│   ├── *_model.pkl          # Pre-trained models
-│   ├── *_scaler.pkl         # Pre-trained StandardScalers
+├── models/                  # Serialized classifiers & metric parameters
+│   ├── model_metrics.json   # Validated performance values
+│   ├── *_model.pkl          # Serialized classifiers (XGBoost / RF)
+│   ├── *_scaler.pkl         # Serialized StandardScalers
 │   ├── *_X_train.joblib     # Preprocessed baseline train references
 │   └── *_columns.joblib     # Feature name maps
-├── shap_files/
-│   ├── *_shap_values.joblib # Pre-computed test set SHAP arrays
-│   └── *_X_test.joblib      # Validation test samples
-├── frontend/
-│   ├── src/                 # React UI Components and Pages
-│   │   ├── components/      # InputField, ResultBox, FooterContactForm
-│   │   ├── pages/           # Predict, Dashboard, CareAdvisor
-│   │   └── App.jsx          # Main application router and state coordinator
-│   ├── package.json         # Node package configuration
+├── shap_files/              # Pre-calculated SHAP matrices
+│   ├── *_shap_values.joblib # Serialized SHAP values
+│   └── *_X_test.joblib      # Test validation baseline samples
+├── frontend/                # Vite + React Client SPA
+│   ├── src/                 # Source components, pages, styling assets
+│   ├── package.json         # Node manifest
 │   └── vite.config.js       # Vite build configurations
-├── requirements.txt         # Python libraries
+├── requirements.txt         # Locked Python libraries
 ├── train_models.py          # EMR verification & SHAP pipeline script
 ├── app.py                   # Streamlit clinical dashboard entry point
 └── README.md                # Project documentation (This file)
@@ -234,32 +383,25 @@ AI-Healthcare-Platform/
 
 ---
 
-## 🛡️ Streamlit Cloud Deployment Guidelines
-To deploy the Streamlit application to Streamlit Cloud for instant public access:
-1.  **Commit and Push All Local Changes**:
-    Ensure your git repository is pushed to your remote GitHub branch:
-    ```bash
-    git add .
-    ```
-    ```bash
-    git commit -m "feat: integrate notebooks and professional developer documentation"
-    ```
-    ```bash
-    git push origin main
-    ```
-2.  **Connect to Streamlit Cloud**:
-    *   Navigate to [Streamlit Share](https://share.streamlit.io/).
-    *   Sign in with your GitHub account.
-    *   Click **"Create app"**.
-3.  **Configure Deployment**:
-    *   **Repository**: Select your repository (e.g., `anushka06onu/AI-Healthcare-Analytics-Platform`).
-    *   **Branch**: Select your deployment branch (e.g., `main`).
-    *   **Main file path**: Set to **`app.py`**.
-4.  Click **"Deploy!"**. Streamlit Cloud will automatically build your python environment using `requirements.txt` and launch your clinical application.
+## 🔮 Future Research Directions
+
+*   **Deep Learning Incorporations**: Implement dense neural network classifiers (`ANN` / `MLP`) and evaluate performance improvements on large cohort splits.
+*   **Clinical validation trials**: Partner with digital healthcare providers to evaluate generalizability on active EMR records.
+*   **Wearable Integration**: Build real-time data streams to update wellness risk dashboards dynamically from smart wearable devices.
+*   **Multilingual Support**: Translate clinical terminology sheets and layperson wellness descriptions into international languages.
+*   **Clinician-Facing Portals**: Establish dual dashboards displaying raw medical statistics for doctors and simplified health indicators for patients.
 
 ---
 
-## ⚠️ EMR Clinical Disclaimer
+## ⚠️ Clinical Limitations & Generalization Concerns
+
+*   **Dataset Limitations**: Clinical training data is derived from specific demographic research cohorts. Consequently, models may show demographic bias and lower generalizability in underrepresented clinical groups.
+*   **Generalization Concerns**: While Stratified 5-Fold Cross-Validation has been applied, these models have not been evaluated in active clinical trials. Model classifications represent statistical probabilities and must be verified by laboratory tests.
+*   **Scope of Application**: Designed strictly for clinical research, data exploration, and analytics validation.
+
+---
+
+## 🛡️ EMR Clinical Disclaimer
 
 > **This platform was built for clinical research, data exploration, and analytics validation.**
 > The models integrated within this application are predictive classifiers designed to serve strictly as analytical decision support tools. They **MUST NOT** be used as a standalone diagnostic substitute or alternative for professional clinical consultation, bedside diagnostic physical evaluation, or direct laboratory verification by a licensed physician.
