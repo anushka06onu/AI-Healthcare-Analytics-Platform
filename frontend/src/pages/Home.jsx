@@ -7,27 +7,33 @@ function Home({ setPage }) {
   const features = [
     {
       icon: Activity,
-      title: "Multi-Disease Risk Scoring",
-      desc: "Instant risk estimation across 5 chronic categories including Heart and Kidney.",
+      title: "Multi-Disease Prediction System",
+      desc: "Instant risk estimation across 5 chronic health categories using a single unified dashboard.",
       color: "text-blue-500 bg-blue-500/10 border-blue-500/20"
     },
     {
       icon: ShieldCheck,
-      title: "100% Layperson Wording",
-      desc: "All clinical indicators explained in plain everyday words without medical jargon.",
+      title: "Simple Health Analysis",
+      desc: "Layman-friendly scanning that takes your basic habits and indicators to compute clear safety metrics.",
       color: "text-emerald-500 bg-emerald-500/10 border-emerald-500/20"
     },
     {
       icon: TrendingUp,
-      title: "Diagnostics History Logs",
-      desc: "Log your results over time and track your health improvement trends automatically.",
+      title: "Risk History Tracking",
+      desc: "Record previous wellness predictions during your session and trace your improvement trends.",
       color: "text-purple-500 bg-purple-500/10 border-purple-500/20"
     },
     {
       icon: FileText,
-      title: "Simulated Wellness Reports",
-      desc: "Compile patient details and care advisors directly into a printable wellness report.",
+      title: "Download Report (PDF Mock)",
+      desc: "Compile your calculated risk scores and customized daily tips into a printable wellness summary.",
       color: "text-amber-500 bg-amber-500/10 border-amber-500/20"
+    },
+    {
+      icon: Brain,
+      title: "AI-Based Explanation System",
+      desc: "Our interactive assistant answers 'Why this risk score?' using friendly everyday words.",
+      color: "text-rose-500 bg-rose-500/10 border-rose-500/20"
     }
   ]
 
@@ -127,7 +133,7 @@ function Home({ setPage }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {features.map((f, idx) => {
             const Icon = f.icon
             return (

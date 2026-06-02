@@ -3,11 +3,11 @@ import { Heart, Activity, Brain, ShieldAlert, Droplet } from 'lucide-react'
 
 function DiseaseSelector({ selectedDisease, setSelectedDisease }) {
   const diseases = [
-    { id: 'diabetes', label: 'Diabetes', icon: Activity, desc: 'Assess blood sugar levels and body weights.' },
-    { id: 'heart', label: 'Heart Disease', icon: Heart, desc: 'Evaluate blood pressure strain and total cholesterol.' },
-    { id: 'liver', label: 'Liver Disease', icon: Droplet, desc: 'Monitor yellow bile pigments and liver cell activity.' },
-    { id: 'stroke', label: 'Stroke', icon: Brain, desc: 'Evaluate average sugar, body weights, and chronic histories.' },
-    { id: 'kidney', label: 'Kidney Disease', icon: ShieldAlert, desc: 'Scan filtration waste, urine proteins, and cell counts.' },
+    { id: 'diabetes', label: 'Diabetes', icon: Activity, desc: 'Assess lifestyle habits, sugar trends, and body mass indicators.' },
+    { id: 'heart', label: 'Heart Disease', icon: Heart, desc: 'Evaluate physical activity, blood pressure status, and cholesterol awareness.' },
+    { id: 'liver', label: 'Liver Disease', icon: Droplet, desc: 'Monitor balanced diet intake, lifestyle habits, and metabolic parameters.' },
+    { id: 'stroke', label: 'Stroke', icon: Brain, desc: 'Evaluate age factors, blood pressure status, and smoking habits.' },
+    { id: 'kidney', label: 'Kidney Disease', icon: ShieldAlert, desc: 'Scan blood pressure status, family history, and lifestyle indicators.' },
   ]
 
   const activeDiseaseObj = diseases.find((d) => d.id === selectedDisease) || diseases[0]

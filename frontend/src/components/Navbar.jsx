@@ -7,9 +7,9 @@ function Navbar({ activePage, setPage, darkMode, setDarkMode }) {
   // Layperson friendly tab navigation list
   const navItems = [
     { id: 'home', label: 'Dashboard' },
-    { id: 'predict', label: 'Risk Checker' },
+    { id: 'predict', label: 'Predict' },
     { id: 'history', label: 'History' },
-    { id: 'about', label: 'About AI' },
+    { id: 'about', label: 'About' },
   ]
 
   const handleNavClick = (pageId) => {
@@ -70,7 +70,7 @@ function Navbar({ activePage, setPage, darkMode, setDarkMode }) {
               <div className="bg-slate-100 dark:bg-slate-800 p-1.5 rounded-full text-[var(--text-muted)]">
                 <User className="h-4.5 w-4.5" />
               </div>
-              <span className="text-xs font-extrabold text-[var(--text-color)]">My Health Portal</span>
+              <span className="text-xs font-extrabold text-[var(--text-color)]">Guest User</span>
             </div>
           </div>
 
@@ -117,8 +117,8 @@ function Navbar({ activePage, setPage, darkMode, setDarkMode }) {
             })}
             
             <div className="border-t border-[var(--card-border)] mt-2 pt-3 px-4 flex items-center justify-between">
-              <span className="text-xs font-semibold text-[var(--text-muted)]">My Active Session</span>
-              <span className="text-xs font-extrabold text-blue-600">My Health Portal</span>
+              <span className="text-xs font-semibold text-[var(--text-muted)]">Active Profile</span>
+              <span className="text-xs font-extrabold text-blue-600">Guest User</span>
             </div>
           </div>
         </div>

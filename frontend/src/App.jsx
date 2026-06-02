@@ -67,7 +67,7 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-health-darkBg transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-[var(--bg-color)] text-[var(--text-color)] transition-colors duration-300">
       {/* Sticky Responsive Header Navbar */}
       <Navbar 
         activePage={page} 
@@ -99,10 +99,10 @@ function App() {
       </div>
 
       {/* Premium Clinical styled Footer */}
-      <footer className="bg-white dark:bg-health-darkCard border-t border-slate-200 dark:border-slate-800 py-6 text-center transition-colors shadow-inner">
-        <div className="max-w-7xl mx-auto px-4 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+      <footer className="bg-[var(--card-bg)] border-t border-[var(--card-border)] py-6 text-center transition-colors shadow-inner">
+        <div className="max-w-7xl mx-auto px-4 text-xs sm:text-sm text-[var(--text-muted)]">
           <p className="font-medium">© 2026 HealthAI Platform | Dynamic Awareness & Health Risk Estimation</p>
-          <p className="text-xxs sm:text-xs mt-1 text-slate-400 dark:text-slate-500">
+          <p className="text-xxs sm:text-xs mt-1 text-[var(--text-muted)] opacity-80">
             Intended strictly for health awareness and educational reference. Not a substitute for professional medical diagnostics.
           </p>
         </div>

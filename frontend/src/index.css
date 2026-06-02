@@ -1,37 +1,39 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-health-primary: #2563EB;
   --color-health-accent: #10B981;
   --color-health-warning: #F59E0B;
   --color-health-danger: #EF4444;
-  --color-health-darkBg: #0F172A;
-  --color-health-darkCard: #1E293B;
+  --color-health-darkBg: #0B132B;
+  --color-health-darkCard: #1C2541;
   
   --font-sans: 'Outfit', sans-serif;
 }
 
 /* 🎨 Bulletproof Theme Variables Engine */
 :root {
-  --bg-color: #F8FAFC;
+  --bg-color: #F0F4F8; /* Soft blue-white background */
   --text-color: #0F172A;
   --card-bg: #FFFFFF;
-  --card-border: rgba(226, 232, 240, 0.9);
-  --text-muted: #64748B;
-  --slider-track: #CBD5E1;
+  --card-border: rgba(219, 234, 254, 0.8); /* Elegant blue tint border */
+  --text-muted: #475569;
+  --slider-track: #E2E8F0;
   --slider-thumb: #2563EB;
-  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.04), 0 8px 20px -6px rgba(37, 99, 235, 0.04);
 }
 
 .dark {
-  --bg-color: #0F172A;
-  --text-color: #E2E8F0;
-  --card-bg: #1E293B;
-  --card-border: rgba(51, 65, 85, 0.9);
+  --bg-color: #0B132B; /* Deep navy background */
+  --text-color: #F1F5F9;
+  --card-bg: #1C2541; /* Deep navy card background */
+  --card-border: rgba(30, 41, 59, 0.7);
   --text-muted: #94A3B8;
-  --slider-track: #334155;
-  --slider-thumb: #3B82F6;
-  --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+  --slider-track: #3A506B;
+  --slider-thumb: #38BDF8;
+  --shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.4), 0 10px 25px -10px rgba(0, 0, 0, 0.4);
 }
 
 body {

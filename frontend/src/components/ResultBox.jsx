@@ -76,7 +76,7 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
     <div className="space-y-5 animate-fade-in">
       {/* Title */}
       <h3 className="text-sm sm:text-base font-extrabold text-[var(--text-color)] flex items-center gap-2">
-        <span>📊 Diagnostics Risk Report</span>
+        <span>📊 Health Risk Report</span>
         <span className="text-xs bg-[var(--bg-color)] border border-[var(--card-border)] py-0.5 px-2 rounded-md text-[var(--text-muted)] font-semibold uppercase tracking-wider">
           {disease}
         </span>
@@ -85,7 +85,7 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
       {/* Risk classification Card */}
       <div className={`p-6 rounded-2xl border ${theme.bg} ${theme.border} text-center shadow-md ${theme.shadow} transition-all duration-300`}>
         <span className="text-xs font-bold text-[var(--text-muted)] uppercase tracking-wider block mb-1">
-          Calculated Risk level
+          Estimated Risk level
         </span>
         
         <div className={`text-3xl sm:text-4xl font-extrabold flex items-center justify-center gap-2 ${theme.color}`}>
@@ -101,7 +101,7 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
         </div>
 
         <p className="text-xxs sm:text-xs mt-3 text-[var(--text-muted)] font-medium">
-          Calculated on the validation screening reference database.
+          Calculations based on typical lifestyle and vitals indicators.
         </p>
       </div>
 
@@ -122,7 +122,7 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
           </ul>
         ) : (
           <p className="text-xs sm:text-sm text-[var(--text-muted)] italic">
-            Your patient metrics are fully aligned with typical normal ranges.
+            Your entered metrics are fully aligned with standard healthy averages.
           </p>
         )}
       </div>
@@ -130,10 +130,10 @@ function ResultBox({ prediction, isCalculating, onDownload }) {
       {/* Simulated PDF download button */}
       <button
         onClick={onDownload}
-        className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-700 text-white font-extrabold text-sm rounded-xl shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
+        className="w-full flex items-center justify-center gap-2 py-3 bg-blue-600 hover:bg-blue-750 text-white font-extrabold text-sm rounded-xl shadow-md shadow-blue-500/10 hover:shadow-blue-500/25 active:translate-y-0.5 hover:scale-[1.01] transition-all duration-200 cursor-pointer"
       >
         <FileDown className="h-4.5 w-4.5" />
-        <span>Download EMR Diagnostics Report (PDF)</span>
+        <span>Download Wellness Risk Report (PDF)</span>
       </button>
     </div>
   )
