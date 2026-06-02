@@ -118,7 +118,7 @@ The predictive models integrated in this platform are trained and validated on o
 
 | Target Disease | Primary Research Dataset | Clinical Purpose | Direct Repository Endpoint | Alternative Endpoint |
 | :--- | :--- | :--- | :--- | :--- |
-| **🍬 Diabetes** | Pima Indians Diabetes Database | Stratifying diabetic risk markers in high-incidence demographics | [UCI Repository](https://archive.ics.uci.edu/dataset/21/pima+indians+diabetes) | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) |
+| **🍬 Diabetes** | Pima Indians Diabetes Database | Stratifying diabetic risk markers in high-incidence demographics | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) | [OpenML Dataset](https://www.openml.org/d/37) |
 | **❤️ Cardiovascular** | Cleveland Clinical Heart Disease Dataset | Mapping chest pain types, ST wave segment slopes, and arterial blockage | [UCI Repository](https://archive.ics.uci.edu/dataset/45/heart+disease) | [Kaggle Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) |
 | **🧪 Liver Efficacy** | Indian Liver Patient Dataset (ILPD) | Tracking hepatic enzyme secretion patterns (ALT, AST, ALP) and protein ratios | [UCI Repository](https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset) | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/indian-liver-patient-records) |
 | **🧠 Stroke Risk** | Cerebrovascular Stroke Prediction Dataset | Mapping lifestyle risk habits (smoking, marriage status, employment) and glucose | [Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) | [Kaggle Direct](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) |
