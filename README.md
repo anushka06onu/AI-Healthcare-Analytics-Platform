@@ -1,442 +1,404 @@
-# 🏥 Clini-SHAP: Explainable AI Platform for Multi-Disease Risk Prediction
+# Clini-SHAP: Explainable Healthcare Risk Analytics
 
-[![GitHub License](https://img.shields.io/github/license/anushka06onu/AI-Healthcare-Analytics-Platform?color=blue&style=flat-square)](LICENSE)
-[![Vercel App](https://img.shields.io/badge/Vercel-Live--App-000000?logo=vercel&logoColor=white&style=flat-square)](https://ai-healthcare-analytics-platform-jt.vercel.app/)
-[![Vite](https://img.shields.io/badge/Vite-5.0+-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.3.0+-F7931E?logo=scikit-learn&logoColor=white&style=flat-square)](https://scikit-learn.org/)
-[![XGBoost](https://img.shields.io/badge/XGBoost-2.0+-2C8E47?style=flat-square)](https://xgboost.readthedocs.io/)
-[![SHAP](https://img.shields.io/badge/SHAP-Explainable--AI-8A2BE2?style=flat-square)](https://github.com/shap/shap)
+> A research-oriented collection of multi-disease machine-learning experiments with an interactive health-risk communication prototype.
 
-![Clini-SHAP Dashboard Hero](screenshots/4_full_width_wellness_dashboard.png)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-Frontend-646CFF?logo=vite&logoColor=white)](https://vite.dev/)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-ML-F7931E?logo=scikitlearn&logoColor=white)](https://scikit-learn.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-Models-1D5C3F)](https://xgboost.readthedocs.io/)
+[![SHAP](https://img.shields.io/badge/SHAP-Explainability-7B2CBF)](https://shap.readthedocs.io/)
+[![Live Demo](https://img.shields.io/badge/Live-UI%20Demo-000000?logo=vercel&logoColor=white)](https://ai-healthcare-analytics-platform-jt.vercel.app/)
 
-An explainable AI platform that combines machine learning, predictive analytics, visualization, and interpretable insights to support early health risk awareness. This system operates as a Research Decision Support Tool, leveraging predictive algorithms calibrated on diverse clinical cohorts to forecast multi-disease risk profiles while providing transparent, layperson-friendly feature attribution charts.
+![Clini-SHAP interface](screenshots/4_full_width_wellness_dashboard.png)
 
+## Overview
 
----
+Clini-SHAP explores interpretable machine learning for five public healthcare classification datasets:
 
-## 🚀 Live Demo
+- diabetes;
+- heart disease;
+- liver disease;
+- stroke; and
+- chronic kidney disease.
 
-*   **Frontend Web App (React + Vite)**: **[ai-healthcare-analytics-platform-jt.vercel.app](https://ai-healthcare-analytics-platform-jt.vercel.app/)**
+The repository contains two distinct components:
 
----
+1. **Offline machine-learning experiments** implemented in Jupyter notebooks, including preprocessing, model training, holdout evaluation, cross-validation, and SHAP analysis.
+2. **A deployed React interface prototype** that demonstrates how health-risk information, contributing factors, history, and downloadable reports could be communicated to a user.
 
-## 📌 Table of Contents
-1. [Overview & Motivation](#-overview--motivation)
-2. [Research Contributions](#-research-contributions)
-3. [Key System Features](#-key-system-features)
-4. [Tech Stack](#%EF%B8%8F-tech-stack)
-5. [System Architecture](#-system-architecture)
-6. [Clinical Datasets Registry](#-clinical-datasets-registry)
-7. [Machine Learning Pipeline](#-machine-learning-pipeline)
-8. [Model Architecture Selection](#-model-architecture-selection)
-9. [High-Fidelity Evaluation Metrics](#-high-fidelity-evaluation-metrics)
-10. [Cross-Validation & Generalizability](#-cross-validation--generalizability)
-11. [Transparent Explainable AI (SHAP)](#-transparent-explainable-ai-shap)
-12. [📸 Interface & Screenshot Showcase](#-interface--screenshot-showcase)
-13. [🛠️ Installation & Setup](#%EF%B8%8F-installation--setup)
-14. [🚀 Usage Instructions](#-usage-instructions)
-15. [📁 Repository Directory Tree](#-repository-directory-tree)
-16. [🔮 Future Research Directions](#-future-research-directions)
-17. [⚠️ Clinical Limitations & Generalization Concerns](#%EF%B8%8F-clinical-limitations--generalization-concerns)
-18. [🛡️ EMR Clinical Disclaimer](#%EF%B8%8F-emr-clinical-disclaimer)
-19. [✍️ Author Profile](#%EF%B8%8F-author-profile)
+### Current Integration Status
+
+> **Important:** The deployed React application currently uses transparent, manually defined demonstration rules. It does not load the serialized Python models or calculate live SHAP values. The trained models and SHAP artifacts are available in this repository as offline research outputs. Connecting them through a backend inference API is planned work.
+
+Clini-SHAP is an academic software prototype. It is not a medical device, diagnostic system, or substitute for professional medical assessment.
 
 ---
 
-## 🔬 Overview & Motivation
+## Project Goals
 
-Early disease risk assessment is a cornerstone of modern preventive medicine. Chronic conditions such as Diabetes, Cardiovascular diseases, Stroke, Liver degradation, and Chronic Kidney Disease account for a substantial percentage of global mortality and economic burdens. In medical informatics, raw electronic health records (EHR) frequently lack integrated tools for real-time risk stratification, leaving subtle physiological trends undetected until patients present with advanced symptom profiles.
+The project investigates three related questions:
 
-**Clini-SHAP** addresses this challenge by serving as an integrated predictive risk coordinator. By mapping patient vitals and demographic data points in parallel, the platform provides:
-1.  **Multi-Disease Risk Stratification**: Simultaneously processes baseline attributes across five distinct classification pipelines.
-2.  **Mitigation of Technical Barriers**: Translates abstract log-odds predictions and SHAP feature attributions into layperson-friendly, reassuring progress cards.
-3.  **Explainable AI (XAI) Accountability**: Ensures that black-box machine learning predictions are mathematically attributable to specific physiological markers, reinforcing clinician trust and patient engagement.
-
----
-
-## 📝 Research Contributions
-
-This project demonstrates:
-*   **Application of Explainable AI (SHAP) in Healthcare Analytics**: Successfully operationalizes game-theoretic feature attributions to translate complex model parameters into patient-centric, interpretable explanation scales.
-*   **Comparative Evaluation of Multiple Machine Learning Models**: Validates performance boundaries across gradient-boosted trees and random forest ensembles on diverse health records.
-*   **Multi-Disease Risk Prediction within a Unified Framework**: Creates a decoupled architectural workflow that routes shared baseline inputs to five parallel diagnostic evaluation pipelines.
-*   **Cross-Validation Based Model Assessment**: Applies 5-fold Stratified Cross-Validation to evaluate model generalizability, specifically addressing severe class imbalances in clinical cohorts.
-*   **User-Centered Health Risk Communication**: Implements a highly accessible UI that translates computer science and clinical statistics into simplified layperson wellness indicators.
-
-*The project was developed as part of a broader interest in machine learning, healthcare AI, and interpretable predictive systems.*
+1. How do standard tabular machine-learning models perform across several small public healthcare datasets?
+2. How can SHAP help inspect the features associated with individual and aggregate model outputs?
+3. How can risk information be presented through an accessible interface without hiding uncertainty or model limitations?
 
 ---
 
-## 🌟 Key System Features
+## Repository at a Glance
 
-*   **Coordinated Patient Diagnostic Suite**: Inputs shared patient demographics (Age, Sex, Diastolic/Systolic Blood Pressure, BMI, Fasting Glucose) exactly once. The system automatically routes inputs to all active diagnostic classification models.
-*   **Dual-Theme Modern Web Shell**: Custom glassmorphic navbar with active clinician profile parameters, a glowing pulse heartbeat, and dynamic support for **☀️ Light Mode** and **🌙 Dark Mode** styles.
-*   **Typable Range Sliders**: Numeric input slider badges double as direct input fields, complete with physiological bounds-clamping (e.g., Age: 1-110, Height: 100-220cm, Weight: 30-185kg) to eliminate unrealistic clinical parameters.
-*   **Themed Dropdown Selectors**: Standard browser select dropdown menus are replaced with custom React popover dropdown components complete with search filters and select checkmarks.
-*   **Explainable AI (XAI) Panel**: Live client-side attributions displaying protectors (-) and drivers (+) mapped into standard layperson wellness contributors.
-*   **Interactive EMR PDF Compiler**: Client-side compiled clinical report featuring patient vitals summaries, multi-disease risk indicators, and legal diagnostic disclaimers.
-*   **5-Fold Stratified Cross-Validation**: Validated pipelines that run within Colab notebook templates to ensure high performance and generalizability.
-
----
-
-## 🛠️ Tech Stack
-
-### Frontend & UI
-*   **Framework**: React (v18) + Vite (v5)
-*   **Styling**: Tailwind CSS
-*   **PDF Compiler**: html2pdf.js
-
-### Machine Learning & Analytics
-*   **Core Library**: Scikit-Learn
-*   **Gradient Boosting**: XGBoost
-*   **Interpretability**: SHAP (SHapley Additive exPlanations)
-*   **Data Processing**: Pandas, NumPy
-
-### Visualization & Plotting
-*   **Interactive Charts**: Plotly
-*   **Static Graphics**: Matplotlib, Seaborn
-
-### Deployment
-*   **React App hosting**: Vercel
+| Component | What is implemented | Current status |
+|---|---|---|
+| Dataset preparation | Cleaning, encoding, imputation, scaling, and class handling in notebooks | Implemented offline |
+| Model training | XGBoost and Random Forest experiments | Implemented offline |
+| Evaluation | Holdout metrics, confusion matrices, ROC-AUC, and cross-validation | Implemented offline |
+| Explainability | SHAP computation and serialized explanation artifacts | Implemented offline |
+| Web interface | Multi-step input, risk communication, history, themes, and report export | Deployed prototype |
+| Live model inference | Browser-to-Python model API | Not yet implemented |
+| Live local SHAP | Per-request SHAP values returned by an API | Not yet implemented |
+| Clinical validation | External or prospective clinical evaluation | Not performed |
 
 ---
 
-## 📐 System Architecture
+## System Architecture
 
-The following diagram illustrates the flow of EMR clinical parameters from clinician input through processing, machine learning prediction, SHAP attribution, and multi-interface reporting:
+The current repository contains an offline research pipeline and a separate frontend demonstration layer.
 
 ```mermaid
-graph TD
-    %% User Input
-    subgraph UI ["🌐 Clinician Interface Layer"]
-        A["👤 Patient Profile & Vitals (Age, Sex, BP, BMI, Glucose)"]
-        B["🧪 Conditional Laboratory Panels (Bilirubin, Creatinine, Specific Gravity)"]
+flowchart TB
+    subgraph Offline[Offline ML Research Pipeline]
+        A[Public Healthcare Datasets] --> B[Cleaning and Preprocessing]
+        B --> C[Train and Test Partition]
+        C --> D[XGBoost and Random Forest Models]
+        D --> E[Holdout and Cross-Validation Metrics]
+        D --> F[SHAP Analysis]
+        D --> G[Serialized Model Artifacts]
+        F --> H[Serialized SHAP Artifacts]
     end
 
-    %% Routing and Preprocessing
-    subgraph Engine ["⚙️ Core Processing Engine"]
-        C["🔄 Shared Parameter Router"]
-        D["🧹 Data Imputation & Categorical Mapping"]
-        E["⚖️ StandardScaler Normalization (EMR Scalers)"]
+    subgraph Demo[Deployed Interface Prototype]
+        I[User Inputs] --> J[Transparent Demonstration Rules]
+        J --> K[Risk Communication Dashboard]
+        K --> L[History and Downloadable Report]
     end
 
-    %% Classifiers
-    subgraph Models ["🤖 Machine Learning Classifiers"]
-        F1["🍬 XGBoost Classifier (Diabetes)"]
-        F2["❤️ XGBoost Classifier (Cardio)"]
-        F3["🧪 XGBoost Classifier (Hepatic)"]
-        F4["🧠 XGBoost Classifier (Stroke)"]
-        F5["🩸 Random Forest Classifier (Renal)"]
-    end
+    G -. planned FastAPI integration .-> M[Inference API]
+    H -. planned local explanation integration .-> M
+    M -. planned JSON response .-> K
+```
 
-    %% Explainability
-    subgraph XAI ["🧠 Interpretability Engine (SHAP)"]
-        G1["📊 TreeExplainer (Random Forest)"]
-        G2["📊 KernelExplainer (XGBoost Models)"]
-        H["🟢 Protectors vs 🔴 Drivers Attribution Matrix"]
-    end
+### Target Architecture
 
-    %% Output Interfaces
-    subgraph Out ["📋 Unified Output & Reporting Layers"]
-        I1["🖥️ React SPA Dashboard (Wellness score Contributors)"]
-        I2["📄 FPDF2 / html2pdf.js Compiler (Clinical PDF Reports)"]
-    end
+The next engineering milestone is to replace the browser-side demonstration rules with a tested inference service:
 
-    A --> C
-    B --> C
-    C --> D
-    D --> E
-    E --> F1 & F2 & F3 & F4 & F5
-    F1 & F2 & F3 & F4 & F5 --> G1 & G2
-    G1 & G2 --> H
-    F1 & F2 & F3 & F4 & F5 --> I1 & I2 & I3
-    H --> I1 & I2
+```text
+React form
+   |
+   v
+FastAPI schema validation
+   |
+   v
+Disease-specific preprocessing pipeline
+   |
+   +--> Serialized model --> calibrated probability
+   |
+   `--> SHAP explainer --> local feature contributions
+   |
+   v
+Versioned JSON response
+   |
+   v
+React result and explanation views
 ```
 
 ---
 
-## 📂 Clinical Datasets Registry
+## Datasets
 
-The predictive models integrated in this platform are trained and validated on officially recognized clinical research cohorts. The table below registers the datasets used and their research purposes:
+The experiments use five established public tabular datasets. Each dataset represents a separate cohort, feature schema, target definition, and modeling problem. Predictions must therefore be interpreted independently rather than as a unified clinical record.
 
-| Target Disease | Primary Research Dataset | Clinical Purpose | Direct Repository Endpoint | Alternative Endpoint |
-| :--- | :--- | :--- | :--- | :--- |
-| **🍬 Diabetes** | Pima Indians Diabetes Database | Stratifying diabetic risk markers in high-incidence demographics | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database) | [OpenML Dataset](https://www.openml.org/d/37) |
-| **❤️ Cardiovascular** | Cleveland Clinical Heart Disease Dataset | Mapping chest pain types, ST wave segment slopes, and arterial blockage | [UCI Repository](https://archive.ics.uci.edu/dataset/45/heart+disease) | [Kaggle Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset) |
-| **🧪 Liver Efficacy** | Indian Liver Patient Dataset (ILPD) | Tracking hepatic enzyme secretion patterns (ALT, AST, ALP) and protein ratios | [UCI Repository](https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset) | [Kaggle Dataset](https://www.kaggle.com/datasets/uciml/indian-liver-patient-records) |
-| **🧠 Stroke Risk** | Cerebrovascular Stroke Prediction Dataset | Mapping lifestyle risk habits (smoking, marriage status, employment) and glucose | [Kaggle Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) | [Kaggle Direct](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) |
-| **🩸 Renal Kidney** | Chronic Kidney Disease Database | Analyzing physical properties of urine (specific gravity, leakage) and blood nitrogen | [UCI Repository](https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease) | [Kaggle Dataset](https://www.kaggle.com/datasets/mansoorgoku/ckdisease) |
+| Task | Dataset | Records in repository | Source |
+|---|---|---:|---|
+| Diabetes classification | Pima Indians Diabetes Database | 768 | [OpenML](https://www.openml.org/d/37) |
+| Heart-disease classification | Cleveland Heart Disease dataset | 303 | [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/45/heart+disease) |
+| Liver-disease classification | Indian Liver Patient Dataset | 583 | [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/225/ilpd+indian+liver+patient+dataset) |
+| Stroke classification | Stroke Prediction Dataset | 5,110 | [Kaggle](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset) |
+| Chronic-kidney-disease classification | Chronic Kidney Disease dataset | 397 | [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/336/chronic+kidney+disease) |
+
+### Data Limitations
+
+- The datasets are small, retrospective, and collected from different populations.
+- Their features, labels, sampling procedures, and prevalence differ.
+- A model trained on one cohort must not be assumed to generalize to another population.
+- Dataset rows are not a substitute for longitudinal electronic health records.
+- No external clinical cohort or prospective study has been used.
 
 ---
 
-## ⚙️ Machine Learning Pipeline
+## Machine-Learning Workflow
 
-Every medical record routed through the processing engine undergoes a strict machine learning pre-processing and evaluation pipeline to guarantee consistent predictions:
+The disease-specific notebooks generally follow this workflow:
 
+```text
+Raw dataset
+   |
+   v
+Missing-value handling
+   |
+   v
+Categorical encoding
+   |
+   v
+Stratified train/test split
+   |
+   v
+Training-set preprocessing and class handling
+   |
+   v
+XGBoost or Random Forest classifier
+   |
+   +--> Holdout predictions and probabilities
+   +--> Classification metrics and confusion matrix
+   +--> Stratified cross-validation
+   `--> SHAP feature-attribution analysis
 ```
-[Raw Patient Inputs]
-         │
-         ▼
-[Missing Value Imputation]  ──► Medians imputed for continuous variables; modes for categories
-         │
-         ▼
-[Categorical Encoding]      ──► Labels mapped into binary (0/1) or dense integer categories
-         │
-         ▼
-[StandardScaler Scaling]    ──► Zero mean, unit variance scaling using standard scalers
-         │
-         ▼
-[Model Inference]           ──► Parallel model scoring (probabilities extracted via predict_proba)
-         │
-         ▼
-[SHAP Explanations]         ──► Explainer matrices calculated; local contributions evaluated
-         │
-         ▼
-[Formatted Output]          ──► Risk scores, lay explanations, and PDF compile streams
+
+### Models
+
+| Task | Serialized model |
+|---|---|
+| Diabetes | XGBoost classifier |
+| Heart disease | XGBoost classifier |
+| Liver disease | XGBoost classifier |
+| Stroke | XGBoost classifier |
+| Chronic kidney disease | Random Forest classifier |
+
+The repository also retains fitted scalers, feature-column definitions, selected training references, test samples, and SHAP outputs for reproducibility and inspection.
+
+---
+
+## Evaluation Snapshot
+
+The following values are recorded in `models/model_metrics.json` and describe the current disease-specific holdout experiments.
+
+| Task | Accuracy | Precision | Recall | F1-score | ROC-AUC |
+|---|---:|---:|---:|---:|---:|
+| Diabetes | 0.760 | 0.667 | 0.630 | 0.648 | 0.818 |
+| Heart disease | 0.836 | 0.765 | 0.929 | 0.839 | 0.927 |
+| Liver disease | 0.692 | 0.733 | 0.892 | 0.804 | 0.738 |
+| Stroke | 0.787 | 0.128 | 0.580 | 0.210 | 0.787 |
+| Chronic kidney disease | 1.000 | 1.000 | 1.000 | 1.000 | 1.000 |
+
+### Responsible Interpretation
+
+- The stroke dataset has low positive-class prevalence. Its accuracy is therefore not sufficient for judging usefulness, while its low precision and F1-score show substantial limitations.
+- The perfect kidney-disease result should be treated as a warning to investigate dataset separability, preprocessing leakage, duplicate records, feature-target shortcuts, and external generalization—not as proof of perfect clinical prediction.
+- Holdout and cross-validation results are internal validation only.
+- None of these values establish clinical safety, treatment benefit, or real-world diagnostic performance.
+
+### Confusion Matrices
+
+| Diabetes | Heart disease |
+|---|---|
+| ![Diabetes confusion matrix](screenshots/9_diabetes_confusion_matrix.png) | ![Heart confusion matrix](screenshots/10_heart_confusion_matrix.png) |
+
+| Liver disease | Stroke |
+|---|---|
+| ![Liver confusion matrix](screenshots/11_liver_confusion_matrix.png) | ![Stroke confusion matrix](screenshots/12_stroke_confusion_matrix.png) |
+
+---
+
+## Explainability
+
+The offline notebooks use SHAP to inspect feature contributions:
+
+- `KernelExplainer` is used in several XGBoost experiments.
+- `TreeExplainer` is used for the Random Forest kidney model.
+- SHAP matrices and selected test samples are stored under `shap_files/`.
+
+SHAP explains a model's behavior relative to its reference data. It does not establish causality, prove that a feature medically caused an outcome, or validate the underlying model.
+
+### Frontend Explanation Status
+
+The deployed interface currently visualizes manually assigned demonstration contributions. These values are not produced by the serialized SHAP explainers and must not be described as live SHAP results.
+
+---
+
+## Interface Prototype
+
+The deployed React application demonstrates:
+
+- a responsive multi-step input workflow;
+- disease-focused input sections;
+- light and dark themes;
+- risk-level visualization;
+- contributor cards;
+- local browser history;
+- printable/downloadable reports; and
+- explicit non-diagnostic disclaimers.
+
+**Live interface:** [https://ai-healthcare-analytics-platform-jt.vercel.app/](https://ai-healthcare-analytics-platform-jt.vercel.app/)
+
+### Screenshots
+
+#### Landing page
+
+![Landing page](screenshots/7_landing_page_light_mode.png)
+
+#### Input workflow
+
+![Input workflow](screenshots/5_typable_sliders_inputs.png)
+
+#### Result dashboard
+
+![Result dashboard](screenshots/4_full_width_wellness_dashboard.png)
+
+#### Report preview
+
+![Report preview](screenshots/3_pdf_print_preview.png)
+
+---
+
+## Technology Stack
+
+| Area | Technologies |
+|---|---|
+| Data analysis | Python, Pandas, NumPy |
+| Machine learning | scikit-learn, XGBoost |
+| Explainability | SHAP |
+| Experimentation | Jupyter Notebook, Matplotlib, Seaborn |
+| Frontend | React, JavaScript, Vite |
+| Styling and interaction | Tailwind CSS, Framer Motion, Lucide React |
+| Deployment | Vercel |
+| Planned inference layer | FastAPI, Pydantic |
+
+---
+
+## Repository Structure
+
+```text
+AI-Healthcare-Analytics-Platform/
+|-- data/                         # Five public tabular datasets
+|-- models/                       # Models, scalers, columns, metrics, references
+|-- notebooks/                    # Training and evaluation experiments
+|-- shap_files/                   # Offline SHAP artifacts and test references
+|-- screenshots/                  # Interface and evaluation images
+|-- frontend/
+|   |-- public/                   # Static browser assets
+|   |-- src/
+|   |   |-- components/           # Reusable interface components
+|   |   |-- pages/                # Home, prediction, history, about, contact
+|   |   |-- App.jsx               # Routing and application shell
+|   |   `-- main.jsx              # React entry point
+|   |-- package.json
+|   `-- vite.config.js
+`-- README.md
 ```
 
-### 1. Preprocessing Specifications:
-*   **Missing Value Imputation**: Null variables are imputed using localized cohort statistics to avoid data bias. Continuously measured data (e.g., `Albumin_and_Globulin_Ratio` or `bmi`) are imputed with the median, while categorical entries are imputed using the mode.
-*   **Categorical Mapping**: Multi-class string factors are explicitly encoded into dense ordinal indices to prevent dummy variable expansion from diluting tree structure splits (e.g., work type classifications, smoking status levels).
-*   **Normalization**: Feature distributions are standardized via a custom fitted `StandardScaler` loaded from pre-calibrated objects, applying:
-    $$z = \frac{x - \mu}{\sigma}$$
-    where $\mu$ represents feature mean and $\sigma$ represents standard deviation.
+The tree intentionally uses ASCII characters so it renders correctly across GitHub and different text encodings.
 
 ---
 
-## 🤖 Model Architecture Selection
+## Run the Frontend
 
-The classifier models saved in the `models/` directory were selected based on structural compatibility with the observed data sizes and clinical attribute formats:
+### Requirements
 
-*   **XGBoost Classifiers (`XGBClassifier`)**: Employed for **Diabetes**, **Heart Disease**, **Liver Disease**, and **Stroke Risk**. Gradient boosting trees demonstrate superior capability in identifying non-linear feature interactions and high-correlation boundaries in mixed categorical-continuous clinical cohorts.
-*   **Random Forest Classifiers (`RandomForestClassifier`)**: Selected for **Chronic Kidney Disease (Renal)**. Evaluates physical urinalysis flags and blood hematology boundaries via parallel tree voting ensembles, which are highly resilient to sparse missing cells.
+- Node.js 18 or newer
+- npm
 
----
+### Installation
 
-## 📊 High-Fidelity Evaluation Metrics
-
-The classification performance of the serialized model components has been evaluated against test validation cohorts. The metrics below represent the precise output parameters derived from the metrics index (`models/model_metrics.json`):
-
-### 1. Diagnostic Classification Metrics
-| Target Disease | Classification Model | Accuracy | Precision | Recall | F1-Score |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **🍬 Diabetes** | `XGBClassifier` | 75.97% | 66.67% | 62.96% | 64.76% |
-| **❤️ Cardiovascular** | `XGBClassifier` | 83.61% | 76.47% | 92.86% | 83.87% |
-| **🧪 Liver Efficacy** | `XGBClassifier` | 69.23% | 73.27% | 89.16% | 80.43% |
-| **🧠 Stroke Risk** | `XGBClassifier` | 78.67% | 12.83% | 58.00% | 21.01% |
-| **🩸 Renal Kidney** | `RandomForestClassifier` | 100.00% | 100.00% | 100.00% | 100.00% |
-
-> [!IMPORTANT]
-> **Stroke Metric Interpretation**: Due to severe class imbalance in the stroke dataset (4.87% positive prevalence), ROC-AUC and recall were prioritized over accuracy alone during model evaluation. The high recall (58.00%) compared to precision (12.83%) ensures maximum capture of high-risk cases in screening contexts.
-
-> [!WARNING]
-> **Chronic Kidney Disease Metric Scrutiny**: The Chronic Kidney Disease dataset exhibits highly separable feature distributions (specifically urine specific gravity, serum creatinine, and urine albumin leakage). Consequently, near-perfect performance was observed during evaluation. Future validation on external cohorts is required to assess real-world generalization.
-
-### 2. Receiver Operating Characteristic (ROC-AUC) Metrics
-| Target Disease | Receiver Operating Characteristic (ROC-AUC) | Samples Evaluated | Cohort Disease Prevalence |
-| :--- | :--- | :--- | :--- |
-| **🍬 Diabetes** | **81.78%** | 768 | 34.90% |
-| **❤️ Cardiovascular** | **92.75%** | 303 | 45.87% |
-| **🧪 Liver Efficacy** | **73.78%** | 583 | 71.36% |
-| **🧠 Stroke Risk** | **78.74%** | 5,110 | 4.87% |
-| **🩸 Renal Kidney** | **100.00%** | 397 | 62.47% |
-
-### 3. Validation Confusion Matrices
-To evaluate true positive and false positive distributions in clinical decision bounds, we visualize the validation confusion matrices for the classifiers:
-
-| 🍬 Diabetes Confusion Matrix | ❤️ Cardiovascular Confusion Matrix |
-| :---: | :---: |
-| ![Diabetes Confusion Matrix](screenshots/9_diabetes_confusion_matrix.png) | ![Heart Confusion Matrix](screenshots/10_heart_confusion_matrix.png) |
-
-| 🧪 Liver Efficacy Confusion Matrix | 🧠 Stroke Risk Confusion Matrix |
-| :---: | :---: |
-| ![Liver Confusion Matrix](screenshots/11_liver_confusion_matrix.png) | ![Stroke Confusion Matrix](screenshots/12_stroke_confusion_matrix.png) |
-
----
-
-## 🔄 Cross-Validation & Generalizability
-
-To ensure the models maintain high generalization capacities and prevent structural overfitting, the core clinical classifiers were evaluated using a rigorous **5-Fold Stratified Cross-Validation (`StratifiedKFold`)** pipeline. 
-
-### Stratified K-Fold Performance (ROC-AUC)
-Below are the exact cross-validation statistics extracted from the clinical model verification loops:
-
-| Disease Classifier | Fold 1 | Fold 2 | Fold 3 | Fold 4 | Fold 5 | Mean ROC-AUC | Standard Deviation (Std) |
-| :--- | :---: | :---: | :---: | :---: | :---: | :--- | :--- |
-| **🍬 Diabetes** | 0.8243 | 0.8419 | 0.8052 | 0.7934 | 0.7545 | **80.38%** | ± 2.97% |
-| **❤️ Cardiovascular** | 0.9177 | 0.8701 | 0.9004 | 0.8709 | 0.8839 | **88.86%** | ± 1.82% |
-| **🧪 Liver Efficacy** | 0.7374 | 0.7222 | 0.7084 | 0.7682 | 0.7638 | **74.00%** | ± 2.32% |
-| **🧠 Stroke Risk** | 0.7976 | 0.8314 | 0.8026 | 0.8254 | 0.8090 | **81.32%** | ± 1.31% |
-| **🩸 Renal Kidney** | 0.9997 | 1.0000 | 1.0000 | 1.0000 | 1.0000 | **99.99%** | ± 0.01% |
-
-### Key Cross-Validation Highlights:
-*   **Stratification Preservation**: Each fold maintains the class proportions of the overall dataset, protecting the training loops from imbalance-induced bias (vital for rare positive classifications such as Stroke, which has a low prevalence of 4.87%).
-*   **Mean Performance Verification**: Models achieve high validation metrics during K-Fold loops, verifying that the scaling variables and parameter weights generalize cleanly to unseen clinical test splits.
-
----
-
-## 🧠 Transparent Explainable AI (SHAP)
-
-A primary barrier to implementing machine learning models in modern clinical workflows is the "black-box" dilemma. Clini-SHAP overcomes this by integrating **SHAP (SHapley Additive exPlanations)**, mapping local prediction values to standard game-theory attribution variables.
-
-### 1. Attribution Methodologies:
-*   **KernelExplainer**: Applied to XGBoost models. Evaluates local risk score shifts relative to an empirical training baseline.
-*   **TreeExplainer**: Applied to the Chronic Kidney Disease Random Forest model. Evaluates paths of tree leaf allocations to deliver fast feature attributions.
-
-### 2. Visual Layer Mapping (Protectors vs. Drivers):
-In the user dashboard, the numerical SHAP values are dynamically translated into layperson-friendly visual categories:
-*   **🟢 Wellness Protectors (Negative SHAP values)**: Clinical parameters that lower the estimated risk score relative to the baseline (e.g., active exercise regimens, balanced dietary habits, normal blood sugar readings).
-*   **🔴 Risk Drivers (Positive SHAP values)**: Clinical parameters that increase the estimated risk score relative to the baseline (e.g., genetic predispositions, advanced age, high arterial pressures, elevated body mass index values).
-
----
-
-## 📸 Interface & Screenshot Showcase
-
-Here is a visual gallery showcasing the clinical interfaces, wellness dashboards, typable input sliders, and EMR report PDF compilers:
-
-### 1. Step-Wizard Clinical Risk Predictor & Typable Sliders
-Clinicians can interactively slide or click-to-type numerical vitals inputs, with a customizable clinical dropdown selector.
-![Step Wizard & Sliders](screenshots/5_typable_sliders_inputs.png)
-
-### 2. Custom Themed Select Dropdown Menu
-A premium custom-styled popover dropdown replaces native browser dropdown lists.
-![Themed Select Dropdown](screenshots/1_diagnostics_focus_dropdown.png)
-
-### 3. Full-Width Visual Wellness Dashboard & Risk Indicators
-A comprehensive visual health evaluation featuring circular dials, BMI trackers, and lifestyle score indicators.
-![Full-Width Wellness Dashboard](screenshots/4_full_width_wellness_dashboard.png)
-
-### 4. Layperson-Friendly Wellness Contributors & SHAP Attributions
-Complex SHAP attributions translated into clear, comforting wellness score protector (-) and driver (+) matrices.
-![Wellness Score Contributors](screenshots/2_wellness_score_contributors.png)
-
-### 5. High-Fidelity PDF Clinical Report Compilation
-Client-side PDF report compilation detailing patient metadata, diagnostics focus, and wellness indicators.
-![PDF Print Preview](screenshots/3_pdf_print_preview.png)
-
-### 6. Interactive Landing Page Dashboard (Dark Mode)
-A modern, dark-themed responsive landing page featuring glassmorphic navigation, high-contrast action buttons, and animated visual elements.
-![Landing Page Dark Mode](screenshots/6_landing_page_dark_mode.png)
-
-### 7. Interactive Landing Page Dashboard (Light Mode)
-A clean, light-themed responsive landing page prioritizing readability and sleek modern clinical aesthetics.
-![Landing Page Light Mode](screenshots/7_landing_page_light_mode.png)
-
----
-
-## 🛠️ Installation & Setup
-
-### Part 1: Vite + React Frontend Setup (Visual Wellness Dashboard)
-The React SPA contains the premium full-width wellness report interfaces and interactive input sliders.
-
-1.  **Navigate to the Frontend Directory**:
-    ```bash
-    cd frontend
-    ```
-2.  **Install Node Modules**:
-    ```bash
-    npm install
-    ```
-3.  **Launch the Development Server**:
-    ```bash
-    npm run dev
-    ```
-4.  Open **`http://localhost:5173`** in your browser.
-
----
-
-## 🚀 Usage Instructions
-
-### Running a Risk Assessment in the React Dashboard:
-1.  Navigate to **`http://localhost:5173`**.
-2.  Select a diagnostics evaluation target (e.g. *Diabetes Assessment*) from the custom themed select list.
-3.  Proceed through the Step Wizard:
-    *   **Profile**: Input patient name, gender, age, height, and weight. Click directly on the numerical displays next to the sliders to type custom values.
-    *   **Lifestyle**: Set smoking status, diet status, exercise frequency, and sleep habits.
-    *   **Indicators**: Toggle active parameters (e.g., blood pressure scales, fasting glucose values).
-4.  View the visual **Wellness Dashboard**:
-    *   Review the Risk percentage dial and its clinical layman interpretation.
-    *   Examine the visual **Wellness Score Contributors** list to identify protecting factors (-) and driving factors (+).
-    *   Analyze your segmented **Body Mass Index (BMI)** tracking indicator.
-5.  Click **"Download PDF Report"** to print or compile a high-fidelity clinical report.
-6.  Change the disease focus from the top dropdown list; the dashboard will instantly auto-recalculate risk scores for the new disease without resetting your variables.
-
----
-
-## 📁 Repository Directory Tree
-
+```bash
+git clone https://github.com/anushka06onu/AI-Healthcare-Analytics-Platform.git
+cd AI-Healthcare-Analytics-Platform/frontend
+npm install
+npm run dev
 ```
-AI-Healthcare-Platform/
-├── screenshots/             # Interface screenshots folder
-│   ├── 1_diagnostics_focus_dropdown.png
-│   ├── 2_wellness_score_contributors.png
-│   ├── 3_pdf_print_preview.png
-│   ├── 4_full_width_wellness_dashboard.png
-│   ├── 5_typable_sliders_inputs.png
-│   ├── 6_landing_page_dark_mode.png
-│   ├── 7_landing_page_light_mode.png
-│   ├── 9_diabetes_confusion_matrix.png
-│   ├── 10_heart_confusion_matrix.png
-│   ├── 11_liver_confusion_matrix.png
-│   └── 12_stroke_confusion_matrix.png
-├── notebooks/               # Jupyter model training notebooks
-│   ├── 01_diabetes_training.ipynb       # Your clinical Diabetes training notebook
-│   ├── 02_heart_training.ipynb          # Your clinical Cardio training notebook
-│   ├── 03_liver_training.ipynb          # Your clinical Liver training notebook
-│   ├── 04_stroke_training.ipynb         # Your clinical Stroke training notebook
-│   ├── 05_kidney_training.ipynb         # Your clinical Kidney training notebook
-│   ├── 1_diabetes_model_training.ipynb  # Diabetes template XGBoost trainer
-│   ├── 2_heart_disease_model_training.ipynb  # Cardio template XGBoost trainer
-│   ├── 3_liver_disease_model_training.ipynb  # Liver template XGBoost trainer
-│   ├── 4_stroke_risk_model_training.ipynb  # Stroke template XGBoost trainer
-│   └── 5_kidney_disease_model_training.ipynb  # Kidney template RF trainer
-├── data/                    # Validated research datasets
-│   ├── diabetes.csv         # Pima Indians Diabetes Dataset
-│   ├── heart.csv            # Cleveland Heart Disease Dataset
-│   ├── liver.csv            # Indian Liver Patient Dataset
-│   ├── stroke.csv           # Cerebrovascular Stroke Dataset
-│   └── kidney.csv           # Chronic Kidney Disease Dataset
-├── models/                  # Serialized classifiers & metric parameters
-│   ├── model_metrics.json   # Validated performance values
-│   ├── *_model.pkl          # Serialized classifiers (XGBoost / RF)
-│   ├── *_scaler.pkl         # Serialized StandardScalers
-│   ├── *_X_train.joblib     # Preprocessed baseline train references
-│   └── *_columns.joblib     # Feature name maps
-├── shap_files/              # Pre-calculated SHAP matrices
-│   ├── *_shap_values.joblib # Serialized SHAP values
-│   └── *_X_test.joblib      # Test validation baseline samples
-├── frontend/                # Vite + React Client SPA
-│   ├── src/                 # Source components, pages, styling assets
-│   ├── package.json         # Node manifest
-│   └── vite.config.js       # Vite build configurations
-└── README.md                # Project documentation (This file)
+
+Open the local URL printed by Vite, normally:
+
+```text
+http://localhost:5173
+```
+
+### Production Build
+
+```bash
+npm run build
+npm run preview
 ```
 
 ---
 
-## 🔮 Future Research Directions
+## Reproduce the ML Experiments
 
-*   **Deep Learning Incorporations**: Implement dense neural network classifiers (`ANN` / `MLP`) and evaluate performance improvements on large cohort splits.
-*   **Clinical validation trials**: Partner with digital healthcare providers to evaluate generalizability on active health records.
-*   **Wearable Integration**: Build real-time data streams to update wellness risk dashboards dynamically from smart wearable devices.
-*   **Multilingual Support**: Translate clinical terminology sheets and layperson wellness descriptions into international languages.
-*   **Clinician-Facing Portals**: Establish dual dashboards displaying raw medical statistics for doctors and simplified health indicators for patients.
+The current model workflows are notebook-based. Open the relevant notebook in Jupyter or Google Colab and run its cells in order.
 
----
+```text
+notebooks/01_diabetes_training.ipynb
+notebooks/02_heart_training.ipynb
+notebooks/03_liver_training.ipynb
+notebooks/04_stroke_training.ipynb
+notebooks/05_kidney_training.ipynb
+```
 
-## ⚠️ Clinical Limitations & Generalization Concerns
-
-*   **Dataset Limitations**: Clinical training data is derived from specific demographic research cohorts. Consequently, models may show demographic bias and lower generalizability in underrepresented clinical groups.
-*   **Generalization Concerns**: While Stratified 5-Fold Cross-Validation has been applied, these models have not been evaluated in active clinical trials. Model classifications represent statistical probabilities and must be verified by laboratory tests.
-*   **Scope of Application**: Designed strictly for clinical research, data exploration, and analytics validation.
+Some older or alternative notebook versions are also retained. For a production-quality repository, these should eventually be consolidated into one canonical notebook or Python pipeline per disease.
 
 ---
 
-## 🛡️ EMR Clinical Disclaimer
+## Recommended Next Milestone
 
-> **This platform was built for clinical research, data exploration, and analytics validation.**
-> The models integrated within this application are predictive classifiers designed to serve strictly as analytical decision support tools. They **MUST NOT** be used as a standalone diagnostic substitute or alternative for professional clinical consultation, bedside diagnostic physical evaluation, or direct laboratory verification by a licensed physician.
+The highest-value improvement is genuine end-to-end inference—not another disease model or another interface page.
+
+- [ ] Create a FastAPI backend with one versioned prediction endpoint per disease.
+- [ ] Move preprocessing and each classifier into a single serialized scikit-learn pipeline.
+- [ ] Validate request schemas and return clear errors for missing or invalid fields.
+- [ ] Return model probabilities rather than manually constructed browser scores.
+- [ ] Calculate local SHAP contributions for the submitted record.
+- [ ] Display the model version, dataset, threshold, and explanation method in every result.
+- [ ] Add probability calibration and calibration plots.
+- [ ] Add automated tests using fixed example records.
+- [ ] Consolidate duplicate notebooks and create a reproducible training script.
+- [ ] Add an open-source license only after selecting terms appropriate for the data and project.
 
 ---
 
-Built by Fateha Hossain Anushka
+## Safety, Privacy, and Intended Use
+
+Clini-SHAP is intended for education, research demonstration, and software-engineering exploration.
+
+It must not be used to:
+
+- diagnose or exclude a disease;
+- recommend or replace treatment;
+- determine whether urgent care is required;
+- process identifiable patient information without appropriate governance; or
+- represent internal validation as clinical validation.
+
+The deployed prototype should be tested only with fictional or non-identifiable demonstration inputs. Users should consult qualified healthcare professionals for medical concerns.
+
+---
+
+## What This Project Demonstrates
+
+- Working with heterogeneous public healthcare datasets.
+- Building disease-specific tabular classification experiments.
+- Evaluating imbalanced classification beyond accuracy alone.
+- Applying model-interpretability methods and documenting their limits.
+- Preserving trained models and experimental evidence.
+- Designing an accessible multi-page React application.
+- Recognizing the difference between an ML experiment, a user-interface prototype, and a clinically validated product.
+
+---
+
+## Author
+
+**Fateha Hossain Anushka**  
+Computer Science and Engineering  
+Interests: healthcare AI, explainable machine learning, intelligent software systems, and responsible data-driven applications
+
+---
+
+## Acknowledgements
+
+This project uses public datasets and open-source tools provided by their respective maintainers. Dataset links are included above for provenance and reproducibility.
+
