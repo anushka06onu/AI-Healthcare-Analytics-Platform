@@ -7,8 +7,8 @@ function Home({ setPage }) {
   const features = [
     {
       icon: Activity,
-      title: "Multi-Disease Prediction System",
-      desc: "Instant risk estimation across 5 chronic health categories using a single unified dashboard.",
+      title: "Multi-Disease Interface Demonstration",
+      desc: "Illustrative rule-based scores across five example categories; trained-model inference is not connected.",
       color: "text-blue-500 bg-blue-500/10 border-blue-500/20"
     },
     {
@@ -31,8 +31,8 @@ function Home({ setPage }) {
     },
     {
       icon: Brain,
-      title: "AI-Based Explanation System",
-      desc: "Our interactive assistant answers 'Why this risk score?' using friendly everyday words.",
+      title: "Illustrative Contribution Charts",
+      desc: "Manually assigned contributions explain the demonstration rules; these are not live SHAP values.",
       color: "text-rose-500 bg-rose-500/10 border-rose-500/20"
     }
   ]
@@ -45,7 +45,7 @@ function Home({ setPage }) {
     },
     {
       q: "How does the AI assistant estimate my health risk?",
-      a: "The assistant matches your entered baseline metrics (e.g. age, blood pressure, sugar ranges) against verified medical research patterns. By analyzing correlations, it calculates a risk percentage pointing to how closely your metrics align with typical healthy vs high-risk groups."
+      a: "This deployed interface uses manually defined demonstration rules. It does not load the repository's trained models or SHAP explainers. Its score is not a validated estimate of disease probability."
     },
     {
       q: "Is my personal information uploaded to the cloud or saved?",

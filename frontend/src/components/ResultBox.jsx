@@ -35,10 +35,10 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
           <Activity className="h-6 w-6" />
         </div>
         <h4 className="font-black text-sm sm:text-base text-[var(--text-color)] uppercase tracking-wider">
-          Diagnostic System Ready
+          Rule-Based Demo Ready
         </h4>
         <p className="text-xs text-[var(--text-muted)] mt-2 max-w-xs leading-relaxed font-semibold">
-          Answer the questions in the step-by-step wizard on the left. The system will dynamically generate a full-width wellness report with visual SHAP charts.
+          Use fictional inputs in the wizard to explore illustrative scores and manually assigned contribution charts. No model or SHAP inference runs in this interface.
         </p>
       </div>
     )
@@ -293,14 +293,14 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
                   />
                 </svg>
                 <div className="absolute text-center">
-                  <div className="text-3xl font-black text-[var(--text-color)] leading-none">{riskScore}%</div>
+                  <div className="text-3xl font-black text-[var(--text-color)] leading-none">{riskScore}/100</div>
                   <div className="text-xs text-[var(--text-muted)] font-black uppercase tracking-wider mt-1">Est. Risk</div>
                 </div>
               </div>
 
               <div className={`mt-4 text-base sm:text-lg font-black flex items-center gap-1.5 ${theme.color}`}>
                 <IconComponent className="h-5 w-5" />
-                <span>{riskLevel} Risk Zone</span>
+                <span>{riskLevel} Demo Score Band</span>
               </div>
             </div>
           </div>
@@ -485,7 +485,7 @@ function ResultBox({ prediction, isCalculating, onDownload, onReevaluate }) {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 leading-relaxed font-semibold">
           <div className="space-y-4">
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-              Your wellness risk score of <strong className="text-blue-600">{riskScore}%</strong> is a statistical estimation calculated based on your personal health indicators and daily routine habits. It is designed to raise wellness awareness by comparing your parameters against chronic healthcare baseline research.
+              Your demonstration score of <strong className="text-blue-600">{riskScore}/100</strong> comes from manually defined rules. It is not a disease probability, a trained-model prediction, or a medical assessment.
             </p>
             <p className="text-sm text-[var(--text-muted)] leading-relaxed">
               Below are the specific physiological and lifestyle drivers behind your report. Each indicator outlines exactly how it interacts with your body's cells, heart, and metabolic filter systems in simple, everyday words.
