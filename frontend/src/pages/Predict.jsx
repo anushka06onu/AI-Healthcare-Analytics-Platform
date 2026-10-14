@@ -573,6 +573,7 @@ function Predict({ predictions, setPredictions, setPage }) {
           </style>
         </head>
         <body>
+          <p style="border: 1px solid #d97706; padding: 12px;">Educational rule-based demonstration. Scores are arbitrary demo points, not disease probabilities. Charts show manually assigned contributions, not SHAP. This report is not a medical assessment.</p>
           <div class="header">
             <div class="brand"><div class="brand-logo">H</div><div class="brand-name">Health<span>AI</span></div></div>
             <div class="report-meta">Report ID: ${result.patientId}<br />Date: ${result.date}</div>
@@ -582,9 +583,9 @@ function Predict({ predictions, setPredictions, setPage }) {
           
           <!-- 1. Visual Speedometer/Progress Card -->
           <div class="score-card">
-            <div class="score-label">Estimated Health Risk Level</div>
-            <div class="score-badge">${result.riskScore}%</div>
-            <div class="score-level">${result.riskLevel} Risk Zone</div>
+            <div class="score-label">Rule-Based Demonstration Score</div>
+            <div class="score-badge">${result.riskScore}/100</div>
+            <div class="score-level">${result.riskLevel} Demo Score Band</div>
             <div class="progress-bar-container">
               <div class="progress-bar-fill" style="width: ${result.riskScore}%; background-color: ${levelColors.text};"></div>
             </div>
