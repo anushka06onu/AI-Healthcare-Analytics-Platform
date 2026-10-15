@@ -10,36 +10,8 @@ function App() {
   const [page, setPage] = useState('home')
   const [darkMode, setDarkMode] = useState(false)
   
-  // Historical screening logs initialized with clean, realistic baseline cases
-  const [predictions, setPredictions] = useState([
-    {
-      id: 1,
-      date: '2026-05-18',
-      disease: 'Heart Disease',
-      riskScore: 24,
-      riskLevel: 'Low',
-      trend: 'improving',
-      clinician: 'Self Screened'
-    },
-    {
-      id: 2,
-      date: '2026-05-24',
-      disease: 'Diabetes',
-      riskScore: 58,
-      riskLevel: 'Medium',
-      trend: 'worsening',
-      clinician: 'Self Screened'
-    },
-    {
-      id: 3,
-      date: '2026-06-01',
-      disease: 'Kidney Disease',
-      riskScore: 12,
-      riskLevel: 'Low',
-      trend: 'improving',
-      clinician: 'Self Screened'
-    }
-  ])
+  // History starts empty; only explicit demo calculations are added.
+  const [predictions, setPredictions] = useState([])
 
   // Synchronize dynamic dark mode state with document class list
   useEffect(() => {
@@ -79,6 +51,7 @@ function App() {
 
       {/* Main Pages Canvas Content */}
       <main className="flex-grow pt-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full pb-12">
+        <p role="note" className="mb-6 rounded-xl border border-amber-400 p-4 text-sm">Educational interface demo: scores use manually defined rules, not the trained Python models. Contribution charts are illustrative, not SHAP. Use fictional inputs; scores are not disease probabilities or medical assessments.</p>
         {page === 'home' && <Home setPage={setPage} />}
         {page === 'predict' && (
           <Predict 

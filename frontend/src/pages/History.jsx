@@ -36,20 +36,20 @@ function History({ predictions }) {
           <div className="md:col-span-8 space-y-2">
             <h2 className="text-lg sm:text-xl font-extrabold text-[var(--text-color)] flex items-center gap-2">
               <ClipboardList className="h-5 w-5 text-blue-600 dark:text-health-primary" />
-              <span>Wellness Screening History</span>
+              <span>Demonstration Calculation History</span>
             </h2>
             <p className="text-xs sm:text-sm text-[var(--text-muted)] font-medium leading-relaxed">
-              Track your previous health risk evaluations compiled during this session. Use these trends to monitor your active lifestyle progress.
+              View rule-based demonstration calculations from this session. These are not clinical screening records or measures of health progress.
             </p>
           </div>
           
           {/* Custom SVG Sparkline Caseload Ticker */}
           <div className="md:col-span-4 bg-[var(--bg-color)] p-4 rounded-2xl border border-[var(--card-border)] flex flex-col justify-between h-[120px]">
             <div className="flex justify-between items-center mb-1">
-              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Active Health Trend</span>
+              <span className="text-[10px] font-bold text-[var(--text-muted)] uppercase tracking-wider">Demo Score Summary</span>
               <span className={`text-xs font-extrabold flex items-center gap-0.5 ${averageRisk > 40 ? 'text-amber-500' : 'text-emerald-500'}`}>
                 <TrendingUp className="h-3 w-3" />
-                <span>Avg: {averageRisk}% Risk</span>
+                <span>Average demo points: {averageRisk}/100</span>
               </span>
             </div>
             
@@ -98,7 +98,7 @@ function History({ predictions }) {
                     </div>
                     <div>
                       <h4 className="font-extrabold text-sm sm:text-base text-[var(--text-color)] flex items-center gap-2">
-                        <span>{p.disease} Risk Assessment</span>
+                        <span>{p.disease} Demo Calculation</span>
                         {p.patientName && (
                           <span className="text-xxs font-bold bg-blue-600/10 text-blue-600 px-2 py-0.5 rounded">
                             User: {p.patientName}
@@ -115,8 +115,8 @@ function History({ predictions }) {
                   <div className="flex items-center justify-between sm:justify-end gap-6 border-t sm:border-t-0 border-[var(--card-border)] pt-3 sm:pt-0">
                     {/* Risk severity badge */}
                     <div className={`border py-1 px-3 rounded-xl flex items-center gap-1.5 ${levelStyles}`}>
-                      <span className="text-xs font-extrabold">{p.riskLevel} Risk</span>
-                      <span className="text-xxs font-semibold">({p.riskScore}%)</span>
+                      <span className="text-xs font-extrabold">{p.riskLevel} Demo Band</span>
+                      <span className="text-xxs font-semibold">({p.riskScore}/100)</span>
                     </div>
 
                     {/* Progress Trend Badge */}
